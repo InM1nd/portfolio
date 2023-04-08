@@ -32,7 +32,13 @@
   		text-transform: uppercase;
   		text-align: center;
       	color: $primary-text-color;
+
+		  &:hover {
+			color: $hover-btn-color;
+		  }
 	}
+
+	
 
 	
 }

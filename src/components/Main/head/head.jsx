@@ -17,33 +17,20 @@ const Head = () => {
   }, []);
 
   const Sketch = (p) => {
-    // let angle = 0;
+
+    let t=0;
 
     p.setup = () => {
       p.createCanvas(2000, 1000, p.WEBGL).parent(myRef.current);
       
     };
 
-    // p.draw = () => {
-    //   p.background(200,0,0,0);
-    //   p.noStroke();
-    //   p.lights();
-
-    //   angle += 0.005;
-
-      
-    //   p.push();
-    //   p.rotateY(angle);
-    //   p.rotateZ(angle);
-    //   p.rotateX(angle);
-    //   p.box(200);
-    //   p.pop();
-    // };
+   
 
     p.draw = () => {
   
   p.normalMaterial();
-  p.fill(222, 222, 222);
+  p.fill(1, 1, 250);
   p.background(250,0,0,0);
   p.rotateY(p.frameCount * 0.01);
 

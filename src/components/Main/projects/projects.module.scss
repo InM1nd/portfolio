@@ -33,6 +33,10 @@
         &:not(:last-child) {
 			margin-right: 25px;
 		  } 
+
+        &:hover {
+            border-color: $hover-btn-color;
+          }
     }
 
     .projects_filter_btn{
