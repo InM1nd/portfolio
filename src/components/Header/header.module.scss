@@ -5,22 +5,26 @@
 	padding: 20px 40px;
 	display: flex;
 	align-items: center;
+	text-align: center;
 	justify-content: center;
 	background-color: $main-background-color;
 
 	.nav{
 		display: flex;
-		justify-content: end;
+		flex-direction: row;
+		justify-content: center;
 	}
 	
 	.nav_item{
+		display: flex;
+  		align-items: center;
 		&:not(:last-child) {
 			margin-right: 70px;
 		  }
 	}
 
 	.nav_menu_logo{
-		height: 100px;
+		height: 100%;
 	}
 
 	.nav_menu_btn{
@@ -30,7 +34,9 @@
   		line-height: calc(14 / 12);
   		text-decoration: none;
   		text-transform: uppercase;
-  		text-align: center;
+
+		width: 100%;
+		text-align: center;
       	color: $primary-text-color;
 
 		  &:hover {
