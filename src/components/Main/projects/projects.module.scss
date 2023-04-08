@@ -8,14 +8,18 @@
 
 
     .projects_title{
+        font-family: "Cy Grotesk";
         font-size: 120px;
-        font-weight: 500;
+        text-transform: uppercase;
+        font-weight: 900;
+        font-style: normal;
+        line-height: 172px;
         color: $primary-text-color;
     }
 
     .projects_filter{
         display: flex;
-        margin-bottom: 40px;
+        margin-top: 20px;
 		
     }
 
@@ -24,7 +28,7 @@
         border-color: $first-border-color ;
         border-radius: 60px;
 
-        padding: 6px 22px;
+        // padding: 6px 22px;
 
         &:not(:last-child) {
 			margin-right: 25px;
@@ -32,23 +36,53 @@
     }
 
     .projects_filter_btn{
-        font-size: 40px;
+        font-family: "Gilroy";
+        font-size: 30px;
         font-weight: 500;
+        padding: 10px 25px;
         color: $primary-text-color;
     }
 
     .projects_img_border{
-    
+        border-radius: 10px;
     }
 
     .projects_img{
         width: 100%;
-        margin-bottom: 40px;
+        height: 1000px;
+        border-radius: 10px;
     }
 
-    .projects__describ{
-        font-size: 40px;
-        font-weight: 500;
+    .projects_describ{
+        padding-top: 150px;
+        padding-left: 150px;
+    }
+
+    .projects_describ_text{
+        display: flex;
+        justify-content: center;
+    }
+
+    .projects_describ_title{
+        font-family: "Gilroy";
+        font-size: 90px;
+        font-weight: 700;
         color: $primary-text-color;
     }
+
+    .projects_describ_info{
+        font-family: "Gilroy";
+        font-size: 30px;
+        font-weight: 500;
+        
+    }
+
+   
+
+    .projects_describ_arrow{
+        margin-top: 200px;
+        width: 100%;
+        height: 500px;
+    }
 }
+

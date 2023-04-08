@@ -5,7 +5,7 @@
 	padding: 20px 40px;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	background-color: $main-background-color;
 
 	.nav{
@@ -19,6 +19,10 @@
 		  }
 	}
 
+	.nav_menu_logo{
+		height: 100px;
+	}
+
 	.nav_menu_btn{
 		font-family: inherit;
   		font-weight: 500;
@@ -27,7 +31,7 @@
   		text-decoration: none;
   		text-transform: uppercase;
   		text-align: center;
-      color: $primary-text-color;
+      	color: $primary-text-color;
 	}
 
 	

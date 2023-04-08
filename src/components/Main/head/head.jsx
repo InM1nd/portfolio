@@ -43,7 +43,7 @@ const Head = () => {
     p.draw = () => {
   
   p.normalMaterial();
-  p.fill(248, 244, 217);
+  p.fill(222, 222, 222);
   p.background(250,0,0,0);
   p.rotateY(p.frameCount * 0.01);
 
@@ -68,9 +68,9 @@ const Head = () => {
 
   return (
     <section className={styles.main}>
-      <div className={styles.main_section_logo}>
+      {/* <div className={styles.main_section_logo}>
         <img className={styles.main_logo_img} src={LOGO} alt='SPOLUKA'/>	
-      </div>
+      </div> */}
 
       <div className={styles.main_section_shpere}>
         {/* <img className={styles.main_sphere_img} src= {SPHERE} alt='SPHERE'/> */}
