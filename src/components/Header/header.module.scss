@@ -1,0 +1,35 @@
+@import '../main.scss';
+
+
+.header {
+	padding: 20px 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: $main-background-color;
+
+	.nav{
+		display: flex;
+		justify-content: end;
+	}
+	
+	.nav_item{
+		&:not(:last-child) {
+			margin-right: 70px;
+		  }
+	}
+
+	.nav_menu_btn{
+		font-family: inherit;
+  		font-weight: 500;
+  		font-size: 40px;
+  		line-height: calc(14 / 12);
+  		text-decoration: none;
+  		text-transform: uppercase;
+  		text-align: center;
+      color: $primary-text-color;
+	}
+
+	
+}
+

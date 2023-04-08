@@ -1,0 +1,43 @@
+@import '../../main.scss';
+
+.team{
+    padding: 20px 40px;
+    background-color: $main-background-color;
+
+    .team_title{
+        font-size: 120px;
+        font-weight: 500;
+        color: $primary-text-color;
+    }
+
+    .team_list{
+        padding-top:100px;
+        padding-bottom: 25px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .team_card{
+        display: flex;
+        align-items: center;
+        
+    }
+
+    .team_card_fill{
+
+    }
+
+    .team_card_name{
+        font-size: 70px;
+        font-weight: 700;
+        color: $primary-text-color;
+    }
+
+    .team_card_text{
+        font-size: 40px;
+        font-weight: 400;
+        color: $primary-text-color;
+    }
+
+}

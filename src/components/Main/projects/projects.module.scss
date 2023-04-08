@@ -1,0 +1,54 @@
+@import '../../main.scss';
+
+
+.projects{
+    padding: 20px 40px;
+	display: flex;
+    background-color: $main-background-color;
+
+
+    .projects_title{
+        font-size: 120px;
+        font-weight: 500;
+        color: $primary-text-color;
+    }
+
+    .projects_filter{
+        display: flex;
+        margin-bottom: 40px;
+		
+    }
+
+    .projects_filter_button{
+        border-style: solid;
+        border-color: $first-border-color ;
+        border-radius: 60px;
+
+        padding: 6px 22px;
+
+        &:not(:last-child) {
+			margin-right: 25px;
+		  } 
+    }
+
+    .projects_filter_btn{
+        font-size: 40px;
+        font-weight: 500;
+        color: $primary-text-color;
+    }
+
+    .projects_img_border{
+    
+    }
+
+    .projects_img{
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .projects__describ{
+        font-size: 40px;
+        font-weight: 500;
+        color: $primary-text-color;
+    }
+}

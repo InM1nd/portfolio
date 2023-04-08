@@ -1,0 +1,33 @@
+@import '../../main.scss';
+
+.main{
+    background-color: $main-background-color;
+    padding: 20px 40px;
+
+    .main_section_logo{
+    display: flex;
+    justify-content: center;
+    
+    }
+
+    .main_logo_img{
+        width: 100%;
+	
+    }
+
+    .main_section_shpere{
+    display: flex;
+    justify-content: center;
+    }
+
+    .main_sphere_img{
+        width: 26%;
+    }
+
+    .main_section_text{
+        font-size: 40px;
+        font-weight: 500;
+        color: $primary-text-color;
+    }
+
+}

@@ -1,0 +1,47 @@
+@import '../main.scss';
+
+
+.footer{
+    display: flex;
+	align-items: center;
+    padding: 20px 40px;
+    background-color: $main-background-color;
+
+    .footer_sub{
+        padding-left: 160px;
+        font-size: 20px;
+        font-weight: 500;
+        color: $primary-text-color;
+    }
+
+    .footer_address{
+        display: flex;
+		justify-content: end;
+
+        position: absolute;
+        right: 0;
+
+        margin-right: 180px;
+    }
+
+    .footer_address_title{
+        font-size: 20px;
+        font-weight: 500;
+        color: $primary-text-color;
+
+    }
+
+    .footer_address_list{
+        display: flex;
+        font-size: 20px;
+        font-weight: 500;
+        color: $primary-text-color;
+        margin-left: 30px;
+    }
+
+    .footer_address_link{
+        &:not(:last-child) {
+			margin-right: 16px;
+		  }
+    }
+}
