@@ -21,7 +21,7 @@ const Head = () => {
     let t=0;
 
     p.setup = () => {
-      p.createCanvas(2000, 1000, p.WEBGL).parent(myRef.current);
+      p.createCanvas(2300, 950, p.WEBGL).parent(myRef.current);
       
     };
 
