@@ -11,18 +11,24 @@
     }
 
     .main_logo_img{
-        width: 100%;
+        // width: 100%;
 	
     }
 
     .main_section_sphere{
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     }
 
     .main_sphere_img{
         padding-bottom: 30px;
+        
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     }
 

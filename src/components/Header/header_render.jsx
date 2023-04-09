@@ -9,7 +9,7 @@ const Header = () => {
 			 <ul className={styles.nav}>
 			 	<li className={styles.nav_item}><button className={styles.nav_menu_btn}>Our Work</button></li>
 				<li className={styles.nav_item} ><button className={styles.nav_menu_btn}>Services</button></li>
-				<li className={styles.nav_item}  style={{ padding: '0 110px 0 150px', }}>
+				<li className={styles.nav_item}  style={{ padding: '0 80px 0 150px', }}>
 					<a href='/'>
 					<img className={styles.nav_menu_logo} src={LOGO} alt='SPOLUKA'/>
 					</a>
