@@ -2,11 +2,35 @@
 
 
 .footer{
-    display: flex;
-	align-items: center;
-    padding: 20px 40px;
-    background-color: $main-background-color;
+    border-style: solid;
+    border-radius: 60px 60px 0  0;
+    
+    border-color: $hover-btn-color;
+    background-color: $hover-btn-color;
 
+    padding: 20px 40px;
+
+    .talk_btn{
+        // width: 100%;
+        display: flex;
+        justify-content: left;
+        
+        // background-color: $hover-btn-color;
+    }
+
+    .talk_btn_text{
+        font-family: 'Cy Grotesk';
+        font-size: 200px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: $primary-text-color;
+    }
+
+    .footer_info{
+        display: flex;
+	    align-items: center;
+    }
+    
     .footer_sub{
         padding-left: 160px;
         font-size: 20px;
@@ -24,24 +48,25 @@
         margin-right: 180px;
     }
 
-    .footer_address_title{
-        font-size: 20px;
-        font-weight: 500;
-        color: $primary-text-color;
+    // .footer_address_title{
+    //     font-family: 'Gilroy';
+    //     font-size: 30px;
+    //     font-weight: 600;
+    //     color: $primary-text-color;
 
-    }
+    // }
 
     .footer_address_list{
         display: flex;
-        font-size: 20px;
-        font-weight: 500;
+        font-family: 'Gilroy';
+        font-size: 30px;
+        font-weight: 600;
         color: $primary-text-color;
-        margin-left: 30px;
     }
 
     .footer_address_link{
         &:not(:last-child) {
-			margin-right: 16px;
+			margin-right: 40px;
 		  }
     }
 }

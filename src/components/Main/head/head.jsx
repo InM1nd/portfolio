@@ -64,9 +64,12 @@ const Head = () => {
         <div className={styles.main_sphere_img} ref={myRef}> </div>
       </div>
       <div>
-        <p className={styles.main_section_text}>
-        WE CREATE BRAND THWIGA PESOGK`SOJG AJWG AJRHPOJAERPOHJSPOTHJSDPOTNJPSDOTJNPOSDTJNPSODNJSDPONJDPONJZDPONJZDNPO. 
-        </p>
+        <div className={styles.main_section_text}>
+        we create and scale brands
+        </div>
+        <div className={styles.main_section_text2}>
+        that disrupt the digital
+        </div>
       </div>
     </section>
   );
