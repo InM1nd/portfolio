@@ -15,13 +15,19 @@
 	
     }
 
-    .main_section_shpere{
+    .main_section_sphere{
     display: flex;
     justify-content: center;
+    align-items: center;
     }
 
     .main_sphere_img{
-        width: 26%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
     }
 
     .main_section_text{

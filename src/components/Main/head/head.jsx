@@ -59,9 +59,9 @@ const Head = () => {
         <img className={styles.main_logo_img} src={LOGO} alt='SPOLUKA'/>	
       </div> */}
 
-      <div className={styles.main_section_shpere}>
+      <div className={styles.main_section_sphere}>
         {/* <img className={styles.main_sphere_img} src= {SPHERE} alt='SPHERE'/> */}
-        <div ref={myRef}> </div>
+        <div className={styles.main_sphere_img} ref={myRef}> </div>
       </div>
       <div>
         <p className={styles.main_section_text}>
