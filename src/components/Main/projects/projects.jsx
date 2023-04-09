@@ -1,6 +1,7 @@
 import styles from './projects.module.scss'
 import PROJECT from '../../../img/other/PROJECT.png'
-import ARROW from '../../../img/other/ARROW.png'
+// import ARROW from '../../../img/other/ARROW.png'
+import ARROW from '../../../img/other/9TR5GzG5c.gif'
 
 const Projects = () => {
     return (

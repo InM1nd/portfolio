@@ -5,7 +5,7 @@ import LOGO from '../../img/other/LOGO 2.png'
 const Header = () => {
     return (
         <div className={styles.header}>
-			<nav >
+			<nav className={styles.nav} >
 			 <ul className={styles.nav}>
 			 	<li className={styles.nav_item}><button className={styles.nav_menu_btn}>Our Work</button></li>
 				<li className={styles.nav_item} ><button className={styles.nav_menu_btn}>Services</button></li>
