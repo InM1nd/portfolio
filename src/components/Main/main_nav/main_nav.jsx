@@ -10,16 +10,16 @@ const Main_Nav = () => {
         <div className={styles.main_nav}>
         <div className={styles.menu_wrap}>
             <ul className={styles.menu}>
-                <li className={styles.menu_link}><Link className={styles.menu_link_text}  to="/projects">Projects</Link></li>
-                <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/services">Services</Link></li>
-                <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/about">About us</Link></li>
-                <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/greet">Say hi</Link></li>
+                <li className={styles.menu_link}><Link className={styles.menu_link_text}  to="/agency_/projects">Projects</Link></li>
+                <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/agency_/services">Services</Link></li>
+                <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/agency_/about">About us</Link></li>
+                <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/agency_/greet">Say hi</Link></li>
             </ul>
         </div>
         <div className={styles.main_outlet}> 
-        {/* <Suspense>
+        <Suspense>
         <Outlet className={styles.main_outlet_color}/>
-        </Suspense> */}
+        </Suspense>
         </div>
         </div>
     )

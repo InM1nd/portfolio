@@ -14,12 +14,12 @@ function App () {
   return (
     
     <Routes>
-      <Route path="/" element={<SharedLayout />}>
+      <Route path="/agency_" element={<SharedLayout />}>
         <Route index element={<Head />} /> 
-        <Route path="/projects" element={<Projects />} /> 
-        <Route path="/services" element={<Services />} /> 
-        <Route path="/about" element={<About />} /> 
-        <Route path="/greet" element={<Talk />} /> 
+        <Route path="/agency_/projects" element={<Projects />} /> 
+        <Route path="/agency_/services" element={<Services />} /> 
+        <Route path="/agency_/about" element={<About />} /> 
+        <Route path="/agency_/greet" element={<Talk />} /> 
         {/* <Route path="*" element={<Main_Head />} />  */}
       </Route>
     </Routes>
