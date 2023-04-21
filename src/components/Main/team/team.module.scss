@@ -1,12 +1,16 @@
 @import '../../main.scss';
 
 .team{
-    padding: 20px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: $main-background-color;
+    box-sizing: border-box;
+    height: 100%;
 
     .team_title{
         font-family: "Cy Grotesk";
-        font-size: 120px;
+        font-size: 12rem;
         text-transform: uppercase;
         font-weight: 900;
         font-style: normal;
@@ -14,11 +18,9 @@
     }
 
     .team_list{
-        padding-top:20px;
-        padding-bottom: 25px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        gap: 5rem;
     }
 
     .team_card{
@@ -32,19 +34,18 @@
     }
 
     .team_card_img{
-        width: 700px;
-        height: 900px;
-        border-radius: 10px;
+        height: 100%;
+        border-radius: 1rem;
     }
 
     .team_card_name{
-        font-size: 90px;
+        font-size: 9rem;
         font-weight: 700;
         color: $primary-text-color;
     }
 
     .team_card_text{
-        font-size: 50px;
+        font-size: 5rem;
         font-weight: 400;
         color: $primary-text-color;
     }

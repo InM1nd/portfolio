@@ -1,55 +1,44 @@
 @import '../../main.scss';
 
 .main{
-    background-color: $main-background-color;
-    padding: 20px 40px;
+      background-color: $primary-text-color;
+      padding: 10px;
+      height: 100%;
 
-    .main_section_logo{
-    display: flex;
-    justify-content: center;
+      display: flex;
+      align-items: center;
     
+    .main_services{
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      
     }
 
     .main_logo_img{
-        // width: 100%;
-	
+      width: 50%;
+      max-height: 100%;
+      
     }
 
-    .main_section_sphere{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    }
+    // .main_section_text{
 
-    .main_sphere_img{
-        padding-bottom: 30px;
+    //   display: inline;
+    //   font-family: "Gilroy";
+    //   text-transform: uppercase;
+    //   font-size: 40px;
+    //   font-weight: 500;
+    //   color: $primary-text-color;
+    // }
+
+    // .main_section_text2{
         
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    }
-
-    .main_section_text{
-
-        display: inline;
-        font-family: "Gilroy";
-        text-transform: uppercase;
-        font-size: 40px;
-        font-weight: 500;
-        color: $primary-text-color;
-    }
-
-    .main_section_text2{
-        
-        float: right;
-        font-family: "Gilroy";
-        text-transform: uppercase;
-        font-size: 40px;
-        font-weight: 500;
-        color: $primary-text-color;
-    }
+    //   float: right;
+    //   font-family: "Gilroy";
+    //   text-transform: uppercase;
+    //   font-size: 40px;
+    //   font-weight: 500;
+    //   color: $primary-text-color;
+    // }
 
 }

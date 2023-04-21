@@ -17,31 +17,35 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  // color: $hover-btn-color;
-  text-decoration: inherit;
+html {
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  box-sizing: border-box;
+  font-size: calc(100vh/1920*10);
+  
+  @media (max-width:1024px) {
+    font-size: calc(100vh/768*10);
+  }
+
+  @media (max-width:767px) {
+    font-size: calc(100vh/500*10);
+  }
+
+  @media (max-width:500px) {
+    font-size: calc(100vh/375*10);
+  }
 }
-a:hover {
-  color: $hover-btn-color;
-}
+
 
 body {
   margin: 0;
   // display: flex;
   place-items: center;
-  min-width: 320px;
+  height: 100vh;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 

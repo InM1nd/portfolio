@@ -1,0 +1,114 @@
+@import '../../main.scss';
+
+.main_nav{
+    display: flex;
+    height: 77vh;
+    flex: 1;
+
+    align-items: center;
+
+}
+
+.main_services{
+
+ 
+}
+
+
+.menu_wrap{
+    width: 120rem;
+    height: 100%;
+    
+    @media (max-width:1024px) {
+        width: 90rem;
+    }
+
+    @media (max-width:767px) {
+      
+    }
+  
+    @media (max-width:500px) {
+      
+    }
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    
+    height: 100%;
+}
+
+.menu_link{
+    border: solid;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    
+
+   
+    
+
+    &:nth-child(1):hover {
+        background-color: #E4572E;
+      }
+      
+    &:nth-child(2):hover {
+        background-color: #9A1BFF;
+      }
+      
+    &:nth-child(3):hover {
+        background-color: #02DD25;
+      }
+      
+    &:nth-child(4):hover {
+        background-color: #9F956C;
+      }
+}
+
+.menu_link_text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 19rem;
+    text-transform: uppercase;
+    
+    top: 0;
+    left: 0;
+    // width: 100%;
+    height: 100%;
+
+    padding: 5rem;
+
+    &:hover{
+        color: $main-background-color;
+    }
+
+    &:hover::before {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        
+        content: url("../../../img/other/BUTTON_HOVER_2.png");
+      }
+}
+
+.main_outlet{
+    overflow: hidden;
+    padding: 8rem;
+    
+    width: 250rem;
+    height: 144.5rem;
+
+    
+}
+

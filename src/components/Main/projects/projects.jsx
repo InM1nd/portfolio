@@ -6,8 +6,8 @@ import ARROW from '../../../img/other/9TR5GzG5c.gif'
 const Projects = () => {
     return (
       <section className={styles.projects}>
-        <div>
-            <h1 className={styles.projects_title}>Featured</h1>
+        <div className={styles.projects_content}>
+            {/* <h1 className={styles.projects_title}>Featured</h1> */}
             <div className={styles.projects_img_border}>
                 <img className={styles.projects_img} src={PROJECT} alt='PROJECT'/>
             </div>
@@ -25,7 +25,9 @@ const Projects = () => {
           <p className={styles.projects_describ_info}>CREATING A PRACTICAL FITNESS PLATFORM</p>
         </h2>
         </div>
+        <div className={styles.projects_describ_arrow_wrapper}>
         <a  href='/'><img className={styles.projects_describ_arrow} src={ARROW}/></a>
+        </div>
         </div>
       </section>
       

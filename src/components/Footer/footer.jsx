@@ -4,16 +4,11 @@ import styles from './footer.module.scss'
 const Footer = () => {
     return (
         <div className={styles.footer}>
-            <a href='/'>
-            <div className={styles.talk_btn}>
-                <p className={styles.talk_btn_text}>Say hi</p>
-            </div>
-            </a>
         <div className={styles.footer_info}>    
         <ul className={styles.footer_address_list}>
-            <li className={styles.footer_address_link}><a>Instagram</a></li>
-            <li className={styles.footer_address_link}><a>behance</a></li>
-            <li className={styles.footer_address_link}><a>linkedin</a></li>
+            <li className={styles.footer_address_link}><a href='/'>instagram</a></li>
+            <li className={styles.footer_address_link}><a href='/'>behance</a></li>
+            <li className={styles.footer_address_link}><a href='/'>linkedin</a></li>
         </ul>
         <address className={styles.footer_address}>
         {/* <p className={styles.footer_address_title}>contact</p> */}
