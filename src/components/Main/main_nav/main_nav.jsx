@@ -17,9 +17,9 @@ const Main_Nav = () => {
             </ul>
         </div>
         <div className={styles.main_outlet}> 
-        <Suspense>
+        {/* <Suspense>
         <Outlet className={styles.main_outlet_color}/>
-        </Suspense>
+        </Suspense> */}
         </div>
         </div>
     )

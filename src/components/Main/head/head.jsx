@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-import LOGO from '../../../img/other/LOGO.png'
+import LOGO from '../../../img/other/LOGO_SMILE.mp4'
 import styles from './head.module.scss'
 
 
@@ -8,7 +8,7 @@ const Head = () => {
   return (
     <section className={styles.main}>
       <div className={styles.main_services}>
-        <img className={styles.main_logo_img} src={LOGO} />
+      <video className={styles.main_logo_img} src={LOGO} autoPlay loop muted />  
       </div>
     </section>
   );
