@@ -16,11 +16,11 @@ const Main_Nav = () => {
                 <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/agency_/greet">Say hi</Link></li>
             </ul>
         </div>
-        {/* <div className={styles.main_outlet}> 
+        <div className={styles.main_outlet}> 
         <Suspense>
         <Outlet className={styles.main_outlet_color}/>
         </Suspense>
-        </div> */}
+        </div>
         </div>
     )
 };
