@@ -51,6 +51,12 @@ $duration: 40s;  //return to 40s
 	border-bottom: 0;
 
 
+	@media (max-width:767px) {
+		border-left: 0;
+    	border-right: 0;
+	  }
+	
+
 	
 	.header_logo{
 		display: flex;

@@ -7,7 +7,7 @@
     flex: 1;
 
     align-items: center;
-    // flex-direction: row-reverse;
+    flex-direction: row-reverse;
 
     @media (max-width:767px) {
       flex-direction: column;
@@ -64,6 +64,13 @@
     }
     
     @media (max-width:767px) {
+
+    }
+
+    @media (max-width:767px) {
+      border-left: 0;
+      border-right: 0;
+
       &:first-child{
         border-top: solid;
       } 
