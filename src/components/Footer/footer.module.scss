@@ -8,7 +8,13 @@
     border: solid;
     flex-shrink: 0;
     border-color: $first-border-color;
-    background-color: $main-background-color;
+
+    backdrop-filter: blur(10px);
+
+
+    position:fixed;
+	  bottom: 0;
+    z-index: 1;
 
     height: 5vh;
 
