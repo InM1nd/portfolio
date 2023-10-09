@@ -37,6 +37,7 @@ $duration: 20s;
 	background-color: $main-background-color;
 
 	position: relative;
+  z-index: 9;
 	
 	.header_logo{
 		display: flex;

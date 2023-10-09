@@ -1,0 +1,39 @@
+/* ElectricSpider.css */
+.electric-spider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #222;
+    overflow: hidden;
+    cursor: none;
+  }
+  
+  .point {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    transform: translate(-50%, -50%);
+  }
+  
+  .electric-effect {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    transform: translate(-50%, -50%);
+    // animation: electricEffect 0.5s linear infinite;
+  }
+  
+  @keyframes electricEffect {
+    0% {
+      width: 2px;
+      height: 2px;
+      opacity: 1;
+    }
+    100% {
+      width: 100px;
+      height: 100px;
+      opacity: 0;
+    }
+  }

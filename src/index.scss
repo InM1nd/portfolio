@@ -8,18 +8,21 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: $main-background-color;
+  background-color: #000000;
+  background-image: src;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  
 }
 
 html {
 
-
+  
   box-sizing: border-box;
   font-size: calc(100vh/1920*10);
   
@@ -42,8 +45,16 @@ body {
   margin: 0;
   // display: flex;
   place-items: center;
-  height: 100vh;
-  min-height: 100vh;
+  // height: 100vh;
+  // min-height: 100vh;
+  
+
+  // background-image: url('./img/other/123.jpg');
+  background-size: cover; /* чтобы изображение занимало всю доступную область */
+  background-position: center; /* центрируем изображение */
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  
 }
 
 ::-webkit-scrollbar {

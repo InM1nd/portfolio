@@ -1,0 +1,24 @@
+@import '../../main.scss';
+
+.main{
+     
+
+      display: flex;
+      align-items: center;
+
+      position: fixed;
+      z-index: -1;
+    
+    .main_services{
+      display: flex;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      
+    }
+
+    .main_logo_img{
+      
+    }
+
+}

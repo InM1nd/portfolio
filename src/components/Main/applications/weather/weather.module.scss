@@ -1,0 +1,154 @@
+@import '../../../main.scss';
+
+.weather{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+.form{
+    display: flex;
+}
+
+.input{
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    background-color: #000000;
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    min-width: 300px;
+    font-size: 5rem;
+    border: 3px solid white;
+
+    &::placeholder{
+        transition: all 0.2s ease-in-out;
+        color: rgb(161, 161, 161);
+    }
+
+    &:focus{
+        outline: none;
+        transition: all 0.2s ease-in-out;
+        
+        &::placeholder{
+            transition: all 0.2s ease-in-out;
+            color: rgb(248, 248, 248);
+        }
+
+    }
+
+    
+}
+
+.search{
+    margin-left: 2rem;
+    border-radius: 15px;
+    border: 3px solid white;
+    padding: 15px;
+    background-color: #000000;
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    width: 100%;
+    min-width: 50px;
+    font-size: 5rem;
+
+    &:focus{
+        outline: none;
+        transition: all 0.2s ease-in-out;
+        background-color: #000000;
+    }
+
+    &:hover{
+        outline: none;
+        transition: all 0.2s ease-in-out;
+        background-color: #000000;
+    }
+
+    
+}
+
+.search_form{
+    width: 100%;
+}
+
+.main{
+    background-color: #000000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+
+    border: 3px solid;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.top{
+    display: flex;
+}
+
+.right{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 100%;
+
+    border: 3px solid;
+    padding: 15px;
+    margin:  0 0 5px 5px ;
+    border-radius: 15px;
+}
+
+.time{
+    
+}
+
+.date{
+   
+}
+
+.location{
+
+}
+
+
+.left{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 100%;
+
+    border: 3px solid;
+    padding: 15px;
+    margin:  0 5px 5px 0 ;
+    border-radius: 15px;
+}
+
+.temp{
+    
+}
+
+.feelsLike{
+
+}
+
+.bot{
+    
+}
+
+.additional{
+    display: flex;
+    justify-content: space-between;
+    border: 3px solid;
+    padding: 15px;
+    margin-top: 5px ;
+    border-radius: 15px;
+
+    &:first-child{
+        margin-bottom: 10px ;
+    }
+}

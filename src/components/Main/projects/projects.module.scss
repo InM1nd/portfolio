@@ -1,18 +1,16 @@
 @import '../../main.scss';
 
+.wrapepr{
+  box-sizing: border-box;
+  height: 100%;
+  padding: 7vh 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;  
+}
 
 .projects{
-    
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    box-sizing: border-box;
-    height: 100%;
-
-    padding-top: 10vh;
-    padding-bottom: 10vh;
-    
+    padding-bottom: 30px;
     
     .projects_wrapper{
         width: 100%;
@@ -20,7 +18,7 @@
         
 
         display: flex;
-        flex-direction: column;
+        // justify-content: space-between;
 
         padding: 7rem 10rem;
 
@@ -50,24 +48,8 @@
 
     }
 
-  //   .projects_wrapper_img{
-  //     height: 80rem;
-  //     width: 100%;
-  //     // width: 100%;
-  //     // height: 100%;
-  //     // overflow: hidden;
-
-      
-  // }
-
     .projects_content{
-        // display: flex;
-        // width: 100%;
-        // height: 100%;
-        align-items: center;
-        // position: absolute;
-
-        
+        align-items: center;  
     }
 
     .swiper_projects{
@@ -91,7 +73,7 @@
     
 
     .projects_title{
-        font-family: 'Gilroy';
+        font-family: 'Bebas Neue', sans-serif;
         font-size: 12rem;
         text-transform: uppercase;
         font-weight: 900;
@@ -99,12 +81,16 @@
         color: $primary-text-color;
     }
 
+    .projects_content{
+      padding-left: 50px;
+
+      display: grid;
+      
+    }
+
     .projects_filter{
+
         display: flex;
-        // justify-content: space-between;
-        
-        margin: 2rem 0rem  ;
-        flex-wrap: wrap;
 
         @media (max-width:1024px) {
             // justify-content: center;
@@ -120,6 +106,7 @@
     .projects_filter_button{
       display: flex;
       align-items: center;
+      justify-content: center;
         color: $main-background-color;
         border-style: solid;
         border-color: $primary-text-color ;
@@ -128,8 +115,10 @@
         
         margin: 1rem 0rem;
 
-        font-family: 'Gilroy';
-        font-size: 3rem;
+        width: 30rem;
+
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 20px;
         font-weight: 500;
         padding: 1rem 2.5rem;
         // color: $primary-text-color;
@@ -159,7 +148,7 @@
           }
 
         &:not(:last-child) {
-			margin-right: 2.5rem;
+			  margin-right: 2.5rem;
 
         @media (max-width:1024px) {
           margin-right: 2rem;
@@ -200,17 +189,12 @@
     .projects_img_border{
 
       display: flex;
-      
-  
+
       object-fit: contain ;
+    
+      height: 150rem;
+      width: 500rem;
       
-      width: 99%;
-      
-      
-
-      height: 80rem;
-
-      max-height: 100%;
 
       @media (max-width:1024px) {
             height: 38rem;
@@ -231,6 +215,9 @@
 
       
       img{
+
+        height: 150rem;
+        width: 500rem;
       
         border-radius: 3rem;
         border: solid #E9E9E9;
@@ -260,8 +247,8 @@
 
   
     .projects_describ_title{
-        font-family: 'Gilroy';
-        font-size: 9rem;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 100px;
         font-weight: 700;
         color: $primary-text-color;
 
@@ -290,8 +277,8 @@
     }
 
     .projects_describ_info{
-        font-family: 'Gilroy';
-        font-size: 3rem;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 5rem;
         font-weight: 500;
 
         @media (max-width:1024px) {
@@ -316,6 +303,63 @@
             
           }
         
+    }
+    
+
+    .projects_content_descib{
+      padding-top: 20px;
+
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 25px;
+      font-weight: 500;
+
+    }
+
+
+
+    .projects_content_paragraph{
+      
+
+      &:not(:first-child){
+        padding-top: 20px;
+      }
+    }
+
+    .projects_button_wrapper{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      
+    }
+
+    .projects_button{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+        color: $main-background-color;
+        border-style: solid;
+        border-color: $primary-text-color ;
+        border-radius: 3rem;
+        background-color: $primary-text-color;
+
+
+        margin-top: 100px;
+
+        width: 100rem;
+
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 40px;
+        font-weight: 500;
+        padding: 1rem 2.5rem;
+
+        &:hover {
+          background-color: $main-background-color;
+          color: $primary-text-color ;
+          border-color: $primary-text-color ;
+          border: solid;
+          transition: 0.3s;
+      }
     }
     
     

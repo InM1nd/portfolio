@@ -1,0 +1,138 @@
+.pallette{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.canvasCursor {
+    background-color: transparent;
+    border-radius: 50%; /* Для создания круглой формы */
+    position: absolute;
+    z-index: 1;
+    pointer-events: none; /* Предотвратит взаимодействие с курсором */
+  }
+
+
+  // border: 3px solid;
+  .canvas{
+    border: 3px solid white;
+    border-radius: 15px;
+    // cursor: none;
+
+    background-color: #000000;
+   
+  }
+  
+  .canvas_wrapper{
+    width: 100%;
+    height: 100%;
+  }
+
+.brush_style{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-left: 50px;
+  width: 100%;
+  height: 100%;
+}
+
+.brush_size{
+  text-align: center;
+}
+
+.brush_size_counter{
+  font-size: 28px;
+  
+}
+
+.brush_size_control{
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.brush_size_toggle{
+    width: 100%; /* Занимает 100% доступной ширины */
+    height: 10px; /* Высота ползунка */
+    -webkit-appearance: none; /* Убери стандартные стили для WebKit браузеров */
+    appearance: none; /* Убери стандартные стили для не-WebKit браузеров */
+    background: #d3d3d3; /* Цвет фона ползунка */
+    border-radius: 5px; /* Закругленные углы */
+    outline: none; /* Убери контур в фокусе */
+    margin: 5px 0; /* Добавь немного отступа сверху и снизу */
+
+    &::-webkit-slider-runnable-track {
+      background: #fff;
+      border-radius: 5px;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px; /* Ширина бегунка */
+    height: 15px; /* Высота бегунка */
+    background: #9A1BFF; /* Цвет бегунка */
+    border-radius: 50%; /* Круглый бегунок */
+    cursor: pointer;
+}
+}
+
+
+
+.brush_size_start{
+  padding: 10px;
+}
+
+.brush_size_finish{
+  padding: 10px;
+}
+
+.button {
+  border: 3px solid white;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 15px;
+  text-transform: uppercase;
+  font-size: 24px;
+
+  background-color: #000000;
+
+
+  &:nth-child(2):hover {
+    background-color: white;
+    color:black;
+    }
+    
+  &:nth-child(3):hover {
+    background-color: red;
+    color:black;
+    }
+    
+  &:nth-child(4):hover {
+    background-color: blue;
+    color:black;
+    }
+    
+  &:nth-child(5):hover {
+    background-color: green;
+    color:black;
+    }
+
+  &:nth-child(6):hover {
+    background-color: yellow;
+    color:black;
+    }
+
+  &:nth-child(7):hover {
+    background-color: white;
+    color:black;
+    }  
+}
+
+
+  
+

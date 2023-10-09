@@ -2,47 +2,66 @@
 
 .team{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: $main-background-color;
     box-sizing: border-box;
-    height: 100%;
-    padding: 10vh 0;
+    height: 86vh;
+    width: 100%;
+    margin: 7vh 0px;
 
-    .team_title{
-        font-family: "Cy Grotesk";
-        font-size: 12rem;
-        text-transform: uppercase;
-        font-weight: 900;
-        font-style: normal;
-        color: $primary-text-color;
-    }
-
-    .team_list{
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 5rem;
-    }
+   
 
     .team_card{
         display: flex;
-        align-items: center;
-        
+        flex-direction: row;
+
+        padding:  50px ;
+        height: 100%;
+        width: 100%;    
     }
+   
 
-    .team_card_fill{
+    .team_card_img_wrapper{
+        height: 100%;
+        width: 40%;
 
+        border-radius: 15px;
+        border: 3px solid white;
     }
 
     .team_card_img{
+        display: flex;
+        border-radius: 15px;
+    //   object-fit: contain ;
+    
+      height: 100%;
+      width: 100%;
+    }
+
+    .team_card_fill{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        border-radius: 15px;
+        border: 3px solid white;
+
         height: 100%;
-        border-radius: 1rem;
+        width: 60%;
+
+        margin-left: 50px;
     }
 
     .team_card_name{
         font-size: 9rem;
         font-weight: 700;
         color: $primary-text-color;
+    }
+
+    .team_card_text_wrapper{
+        
     }
 
     .team_card_text{

@@ -1,13 +1,25 @@
-import styles from './talk.module.scss'
+import React from "react"
 
-const Talk = () => {
-    return ( 
-        <section className={styles.talk}>
-            <div className={styles.talk_btn}>
-                <a href='/'><p className={styles.talk_btn_text}>Talk to us</p></a>
-            </div>
-        </section>
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls, ContactShadows} from "@react-three/drei"
+
+import styles from "./talk.module.scss"; 
+import RoundedTablet from "./Tablet.jsx"
+
+const About = () => {
+    return (
+
+        <div className={styles.talk}>
+            <Canvas camera={{ position: [5, 5, 5], fov: 25 }}>
+                <ambientLight intensity={0.5}/>
+                <directionalLight position={[1,3,3]} />
+                <ContactShadows frames={1} position={[0, -0.5, 0]} blur={1} opacity={0.75} />
+                <ContactShadows frames={1} position={[0, -0.5, 0]} blur={3} color="orange" />
+                <OrbitControls enableZoom={false} minPolarAngle={0} maxPolarAngle={Math.PI / 2.1} />
+                <RoundedTablet/>
+            </Canvas>
+        </div>
     )
 }
 
-export default Talk
+export default About 

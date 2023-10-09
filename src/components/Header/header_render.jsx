@@ -8,12 +8,12 @@ const Header = () => {
     return (
         <div className={styles.header}>
 			<div className={styles.header_logo}> 
-				<Link className={styles}  to="/portfolio/">inm1nd</Link>
+				{/* <Link className={styles.header_logo}  to="/portfolio/">inm1nd</Link> */}
 			</div>
 			<div className={styles.menu_wrap}>
             <ul className={styles.menu}>
-                <li className={styles.menu_link}><Link className={styles.menu_link_text}  to="/portfolio/projects">Projects</Link></li>
-                <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/portfolio/services">Services</Link></li>
+                <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/portfolio/projects">Projects</Link></li>
+                <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/portfolio/applications">Apps</Link></li>
                 <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/portfolio/about">About me</Link></li>
                 <li className={styles.menu_link}><Link className={styles.menu_link_text} to="/portfolio/greet">Say hi</Link></li>
             </ul>
