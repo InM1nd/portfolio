@@ -15,7 +15,10 @@ const Team = () => {
                                 <p className={styles.team_card_text}>WEB DEVELOPER</p>
                                 <p className={styles.team_card_text}>CREATIVE CODER</p>
                             </div>
-                            
+                            <div className={styles.team_card_text_wrapper}>
+                                <p className={styles.team_card_text}>WEB DEVELOPER</p>
+                                <p className={styles.team_card_text}>CREATIVE CODER</p>
+                            </div>
                         </div>
                     </div>
         </section>

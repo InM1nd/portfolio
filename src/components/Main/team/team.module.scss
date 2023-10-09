@@ -61,7 +61,14 @@
     }
 
     .team_card_text_wrapper{
-        
+        border-radius: 15px;
+        border: 3px solid white;
+
+        padding: 15px;
+
+        &:first-child{
+            margin-bottom: 10px ;
+        }
     }
 
     .team_card_text{
