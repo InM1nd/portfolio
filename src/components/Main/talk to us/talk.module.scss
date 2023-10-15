@@ -1,5 +1,7 @@
 @import '../../main.scss';
 
+
+
 .talk{
     display: flex;
     justify-content: center;
@@ -8,10 +10,14 @@
     padding-top: 10vh;
     padding-bottom: 10vh;
     // background-color: #e9adad;
+
+    
+
+    
 }
 .text{
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 50px;
+    font-size: clamp(1rem, 1rem + 3vw, 8rem);
 
     display: flex;
     justify-content: center;
@@ -39,7 +45,7 @@
 
 .label{
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 40px;
+    font-size: clamp(0.5rem, 0.5rem + 3vw, 8rem);
     padding: 10px;
 }
 
@@ -56,7 +62,7 @@
     color: white;
     font-family: 'Bebas Neue', sans-serif;
   
-    font-size: 40px;
+    font-size: clamp(0.5rem, 0.5rem + 3vw, 8rem);
 
     transition: all 0.3s ease-in-out;
 
@@ -85,7 +91,7 @@
     font-family: 'Bebas Neue', sans-serif;
     max-height: 500px;
     max-width: 500px;
-    font-size: 40px;
+    font-size: clamp(0.5rem, 0.5rem + 3vw, 8rem);
     
     border-radius: 20px;
     background: #121212;
@@ -107,7 +113,7 @@
     color: white;
     font-family: 'Bebas Neue', sans-serif;
     width: 100%;
-    font-size: 5rem;
+    font-size: clamp(0.5rem, 0.5rem + 3vw, 8rem);
 
     border: 3px solid #121212;
 
@@ -131,3 +137,39 @@
     }
 
 }
+
+
+@media (max-width:500px) {
+    .talk{
+        flex-direction: column; 
+    }
+
+    .text{
+        margin: 20px 5px;
+        padding: 0;
+        width: auto;
+
+        text-align: center;
+    }
+
+    .form{
+        // width: 100%;
+        width: auto;
+        
+    }
+
+    // .wrapper{
+    //     width: 100%;
+    //     width: auto;
+    // }
+
+    // .input{
+    //     width: 100%;
+    // }
+
+    // .textarea{
+    //     width: 100%;
+        
+    // }
+    
+  }

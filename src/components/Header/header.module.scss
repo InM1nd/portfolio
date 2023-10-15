@@ -110,9 +110,8 @@
 		&:hover{
 			// color: $main-background-color;
 			// background: radial-gradient(50% 50% at 50% 10%, #0099ff 15%,  #0800e800 100%);
-			border-radius: 20px;
-			box-shadow: inset 4px -4px 8px #525252,  
-        	inset -4px 4px 8px #525252;
+			box-shadow: inset 4px -4px 8px #121212,
+			inset -4px 4px 8px #525252;
 			
 		}
 		
@@ -147,20 +146,7 @@
 		
 		}
 
-		@media (max-width:767px) {
-		border-left: 0;
-		border-right: 0;
-
-		&:first-child{
-			border-top: solid;
-		} 
-		}
-
-		@media (max-width:500px) {
-		&:first-child{
-			border-top: solid;
-		} 
-		}
+		
 	}
 
 	.menu_link_text{

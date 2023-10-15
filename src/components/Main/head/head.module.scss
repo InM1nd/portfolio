@@ -9,6 +9,8 @@
 
       position: absolute;
       top:50%;
+
+      
     
     .main_services{
       display: flex;
@@ -40,13 +42,15 @@
       z-index: 1;
       display: flex;
       justify-content: center;
+      text-align: center;
       align-items: center;
       width: 100%;
       height: fit-content;
-      backdrop-filter: blur(5px);
 
-      font-size: 100px;
+      font-size: clamp(1rem, 1rem + 10vw, 20rem);
       font-family: 'Bebas Neue', sans-serif;
+
+     
     }
 
     
