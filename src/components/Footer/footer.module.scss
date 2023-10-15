@@ -4,8 +4,12 @@
 .footer{
     flex-shrink: 0;
 
-    border: 3px solid white;
-    border-radius: 15px;
+    // border: 3px solid white;
+    // border-radius: 15px;
+
+    border-radius: 20px;
+    background: #121212;
+
 
     backdrop-filter: blur(10px);
 
@@ -16,40 +20,18 @@
     height: 7vh;
     width: 100%;
 
-      @media (max-width:1100px) {
-        font-size: 4rem;
-        // height: 100%;
-      }
-
-      @media (max-width:1024px) {
-        // height: 5rem;
-        padding: 1rem 1rem;
-        // height: 100%;
-
-      }
-
-      @media (max-width:767px) {
-        // height: 5rem;
-        padding: 0.7rem 0.7rem;
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 0;
-        // height: 100%;
-
-      }
-
-      @media (max-width:500px) {
-        display: flex;
-        align-items: center;
-        height: 100%;
-      }
+      // @media (max-width:500px) {
+      //   display: flex;
+      //   align-items: center;
+      //   height: 100%;
+      // }
   
 
 
     .footer_list{
         display: flex;
         font-family: 'Bebas Neue', sans-serif;;
-        font-size: 42px;
+        font-size: clamp(0.1rem, 0.1rem + 3vw, 8rem);
         color: $primary-text-color;
 
         width: 100%;
@@ -72,31 +54,43 @@
           }
         
         @media (max-width:500px) {
-            flex-direction: column;
+            // flex-direction: column;
             
           }
+
     }
 
-    .footer_link{
+    .footer_link {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
       height: 100%;
+      // background-color: aliceblue;
+      transition: all 0.3s ease-in-out;
+      
+    
+      &:hover {
+        // background: radial-gradient(50% 50% at 50% 90%, #0099ff 15%,  #0800e800 100%);
+        border-radius: 20px;
+        // background: #121212;
+        // box-shadow:  8px -8px 16px #070707,
+        //             -8px 8px 16px #1d1d1d;
 
-      &:hover{
-        color: $main-background-color;
-        background-color: #ff00bf;
+        box-shadow: inset 4px -4px 8px #525252,  
+        inset -4px 4px 8px #525252;
       }
 
-   
-    &:last-child {
-      border-radius: 0 15px 15px 0;
-    }
+      
 
-    &:first-child{
-      border-radius:  15px 0 0 15px ;
-    }
+   
+    // &:last-child {
+    //   border-radius: 0 15px 15px 0;
+    // }
+
+    // &:first-child{
+    //   border-radius:  15px 0 0 15px ;
+    // }
 
       // &:nth-child(1):hover {
       //   background-color: #E4572E;

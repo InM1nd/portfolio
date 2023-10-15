@@ -1,6 +1,6 @@
 import React , { useRef, useState, useEffect } from "react"
 import { OrbitControls, RenderTexture, Text, PerspectiveCamera, ContactShadows, SpotLight, Torus, Circle, Capsule } from "@react-three/drei"
-import { useFrame, Canvas } from "@react-three/fiber";
+import { useFrame, Canvas, useThree } from "@react-three/fiber";
 import * as THREE from 'three';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
@@ -32,7 +32,7 @@ const Scene = ({   }) => {
 
   const chromeDonut = new MeshStandardMaterial({
     color: "#000000", // Базовый цвет (можете оставить белый, так как текстура будет покрывать его)
-    metalness: 0.5,     // Металличность на максимуме для эффекта хрома
+    metalness: 10,     // Металличность на максимуме для эффекта хрома
     roughness: 0,     // Шероховатость на минимуме
     // wireframe: true,
     
@@ -101,7 +101,7 @@ const Scene = ({   }) => {
     }
   });
 
-  const donuts = generateDonuts(50);
+  const donuts = generateDonuts(70);
   // Generate all stuff
 
 
@@ -109,21 +109,24 @@ const Scene = ({   }) => {
   return (
     <>
         
-        <directionalLight color={0xffffff}  position={[-5, 0, 10]} intensity={10} castShadow  />
-        <directionalLight color={0xffffff}  position={[5, 0, 10]} intensity={10} castShadow  />
-        <directionalLight color={0xffffff}  position={[0, 0, 10]} intensity={10} castShadow  />
+        <directionalLight color={0x0099ff}  position={[-5, 0, 10]} intensity={10} castShadow  />
+        <directionalLight color={0x00F0FF}  position={[5, 0, 10]} intensity={10} castShadow  />
+        <directionalLight color={0x00F0FF}  position={[0, 0, 10]} intensity={10} castShadow  />
 
-        <directionalLight color={0xff00bf}  position={[-5, 0, -10]} intensity={200} castShadow  />
-        <directionalLight color={0xff00bf}  position={[5, 0, -10]} intensity={20} castShadow  />
-        <directionalLight color={0xff00bf}  position={[0, 0, -10]} intensity={20} castShadow  />
+        <directionalLight color={0x0099ff}  position={[-5, 0, -10]} intensity={1000} castShadow  />
+        <directionalLight color={0x00F0FF}  position={[5, 0, -10]} intensity={20} castShadow  />
+        <directionalLight color={0x00F0FF}  position={[0, 0, -10]} intensity={1000} castShadow  />
 
-        <pointLight color={0xff00bf}  position={[0, 0,  0]} intensity={1000} castShadow  />
+        <pointLight color={0x0099ff}  position={[0, 0,  0]} intensity={1000} castShadow  />
+        {/* <pointLight color={0x00F0FF}  position={[0, 0,  10]} intensity={1000} castShadow  /> */}
 
-        {/* <mesh ref={textRef} geometry={textGeometry} material={chromeText}  position={[ 0, 0, 0]} /> */}
+        {/* <mesh ref={textRef} geometry={textGeometry} material={chromeText}  position={[ 0, 0, 3]} /> */}
         <group ref={(group) => (donutsRef.current = group.children)} position={[ 0, 0, -1]}>{donuts}</group> 
     </>
   );
 };
+
+
 
 
 const Background = () => {
@@ -133,15 +136,18 @@ const Background = () => {
     <section className={styles.main}>
     <div className={styles.main_services}>
       <Canvas style={{ width: '100%', height: '100%' }}  camera={{ position: [0, 0, 5], fov: 60}}>
+
       <OrbitControls 
         enableZoom={false}
         enablePan={false}
-        enableRotate={true} // Отключает вращение
+        enableRotate={false} // Отключает вращение
         enableDamping={true}
         dampingFactor={0.25}
         rotateSpeed={0.1}
         maxPolarAngle={Math.PI / 2.1}
-        minPolarAngle={0} />
+        screenSpacePanning={true}
+        minPolarAngle={0} 
+            />
         <Scene scene={scene} />
       </Canvas>
     </div>

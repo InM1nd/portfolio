@@ -19,8 +19,11 @@
 	height: 7vh;  // IF LOGO HERE
 
 
-	border: 3px solid white;
-    border-radius: 15px;
+	// border: 3px solid white;
+    border-radius: 20px;
+	// border-radius: 50px;
+	background: #121212;
+	
 
 	@media (max-width:767px) {
 		border-left: 0;
@@ -44,17 +47,17 @@
 		height: 100%;
 		
 	
-		@media (max-width:1024px) {
-			margin: 1rem;
-		  }
+		// @media (max-width:1024px) {
+		// 	margin: 1rem;
+		//   }
 
-		@media (max-width:767px) {
-            margin: 1rem;
-          }
+		// @media (max-width:767px) {
+        //     margin: 1rem;
+        //   }
 		
-		@media (max-width:500px) {
-			margin: 0.8rem;
-		  }
+		// @media (max-width:500px) {
+		// 	margin: 0.8rem;
+		//   }
 
 	}
 
@@ -94,25 +97,32 @@
 		align-items: center;
 		height: 100%;
 		width: 100%;
+
+		border-radius: 15px;
 	
 		text-decoration: none;
 		font-family: 'Bebas Neue', sans-serif;
-		font-size: 42px;
+		font-size: clamp(0.1rem, 0.1rem + 3vw, 8rem);
 		text-transform: uppercase;
-	
+
+		transition: all 0.3s ease-in-out;
 	
 		&:hover{
-			color: $main-background-color;
-			background-color: #ff00bf;
+			// color: $main-background-color;
+			// background: radial-gradient(50% 50% at 50% 10%, #0099ff 15%,  #0800e800 100%);
+			border-radius: 20px;
+			box-shadow: inset 4px -4px 8px #525252,  
+        	inset -4px 4px 8px #525252;
+			
 		}
 		
-		&:last-child {
-			border-radius: 0 15px 15px 0;
-		  }
+		// &:last-child {
+		// 	border-radius: 0 15px 15px 0;
+		//   }
 	  
-		  &:first-child{
-			border-radius:  15px 0 0 15px ;
-		  }
+		//   &:first-child{
+		// 	border-radius:  15px 0 0 15px ;
+		//   }
 		
 
 	

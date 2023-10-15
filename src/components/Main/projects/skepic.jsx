@@ -8,7 +8,9 @@ const Skeptic = () => {
       <section>
         <div className={styles.projects_wrapper}>
                     <div className={styles.projects_img_border}>
+                      <div className={styles.projects_img_wrapper}>
                       <img className={styles.projects_img} src={Teple} alt='PROJECT'/>
+                      </div>
                   </div>
             <div  className={styles.projects_content}>
             <div className={styles.projects_describ}>

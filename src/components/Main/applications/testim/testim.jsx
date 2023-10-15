@@ -131,7 +131,7 @@ function InteractiveCanvas() {
       
       </div>
       </div>
-      <button className={styles.button} onClick={() => {setCurrentColor('black'), setCursorBorderColor('white')}}>rubber</button>
+      <button className={styles.button} onClick={() => {setCurrentColor('#121212'), setCursorBorderColor('white')}}>rubber</button>
       <button className={styles.button} onClick={() => setCurrentColor('red')}>red</button>
       <button className={styles.button} onClick={() => setCurrentColor('blue')}>blue</button>
       <button className={styles.button} onClick={() => setCurrentColor('green')}>green</button>

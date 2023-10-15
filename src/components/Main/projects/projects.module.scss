@@ -107,12 +107,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-        color: $main-background-color;
-        border-style: solid;
-        border-color: $primary-text-color ;
-        border-radius: 3rem;
-        background-color: $primary-text-color;
+      color: #fff;
         
+        
+        border-radius: 15px;
+        background: #121212;
+        box-shadow: inset 8px -8px 16px #070707,
+                inset -8px 8px 16px #1d1d1d;
+        
+        border: 3px solid #121212;
         margin: 1rem 0rem;
 
         width: 30rem;
@@ -120,8 +123,9 @@
         font-family: 'Bebas Neue', sans-serif;
         font-size: 20px;
         font-weight: 500;
-        padding: 1rem 2.5rem;
+        padding: 10px 10px;
         // color: $primary-text-color;
+        transition: all 0.3s ease-in-out;
 
         @media (max-width:1024px) {
             font-size: 1rem;
@@ -195,6 +199,7 @@
       height: 150rem;
       width: 500rem;
       
+      border-radius: 20px;
 
       @media (max-width:1024px) {
             height: 38rem;
@@ -213,14 +218,21 @@
             
           }
 
+      .projects_img_wrapper{
+        border-radius: 20px;
+      }
       
       img{
 
         height: 150rem;
         width: 500rem;
-      
-        border-radius: 3rem;
-        border: solid #E9E9E9;
+        
+        border-radius: 20px;
+        background: #121212;
+        box-shadow:  8px -8px 16px #070707,
+                    -8px 8px 16px #1d1d1d;
+
+        padding: 20px;
         
       }
     
@@ -337,12 +349,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-        color: $main-background-color;
-        border-style: solid;
-        border-color: $primary-text-color ;
-        border-radius: 3rem;
-        background-color: $primary-text-color;
+        
+      border-radius: 15px;
+        background: #121212;
+        box-shadow: inset 8px -8px 16px #070707,
+                inset -8px 8px 16px #1d1d1d;
+       border: 3px solid #121212;
 
+       transition: all 0.3s ease-in-out;
 
         margin-top: 100px;
 
@@ -358,7 +372,7 @@
           color: $primary-text-color ;
           border-color: $primary-text-color ;
           border: solid;
-          transition: 0.3s;
+          
       }
     }
     
