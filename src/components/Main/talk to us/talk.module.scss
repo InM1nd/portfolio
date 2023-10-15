@@ -142,6 +142,7 @@
 @media (max-width:500px) {
     .talk{
         flex-direction: column; 
+        padding: 0 15px;
     }
 
     .text{
@@ -153,23 +154,23 @@
     }
 
     .form{
-        // width: 100%;
-        width: auto;
+        width: 100%;
+        // width: auto;
         
     }
 
-    // .wrapper{
-    //     width: 100%;
-    //     width: auto;
-    // }
+    .wrapper{
+        width: 100%;
+        // width: auto;
+    }
 
-    // .input{
-    //     width: 100%;
-    // }
+    .input{
+        width: 100%;
+    }
 
-    // .textarea{
-    //     width: 100%;
+    .textarea{
+        width: 100%;
         
-    // }
+    }
     
   }
