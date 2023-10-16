@@ -88,7 +88,7 @@ function InteractiveCanvas() {
     
     <div style={{ position: 'relative' }}
       className={styles.pallette}>
-    <div>
+    <div className={styles.canvas_wrapper}>
     {/* <div
       ref={cursorSmallRef}
       className={styles.canvasCursor}
@@ -106,8 +106,8 @@ function InteractiveCanvas() {
     <canvas
         className={styles.canvas}
         ref={canvasRef}
-        width={950}
-        height={600}
+      //   width={950}
+      //   height={600}
       > 
       
       </canvas>

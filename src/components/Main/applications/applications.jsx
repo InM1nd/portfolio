@@ -21,12 +21,7 @@ const Applications = () => {
                         Aliquam nec sem et dolor accumsan volutpat porta quis lorem. Curabitur eu semper urna, eget vestibulum nibh. Vestibulum interdum diam non nisl finibus, vehicula rhoncus lorem tristique. 
                         Phasellus ac urna eu quam tincidunt bibendum vel vel augue. Donec eget iaculis nisi. Suspendisse tempus risus at erat porttitor sodales. Pellentesque venenatis auctor tortor non pretium. 
                         Quisque ex arcu, tincidunt in mi sed, imperdiet rutrum neque.
-                        Sed efficitur erat quis pulvinar porttitor. 
-                        Nullam hendrerit efficitur tortor, non consectetur tellus iaculis vitae. Aenean sagittis sem lorem, lobortis tempor leo maximus eu. 
-                        Phasellus blandit egestas sem, et vestibulum velit laoreet sed. Sed ullamcorper pulvinar velit, sit amet suscipit est cursus non. 
-                        Pellentesque elementum ultrices ligula, lacinia blandit nisi pulvinar sodales. Proin rutrum semper libero, non dapibus metus tincidunt quis. 
-                        Proin nec neque aliquam, pulvinar mi sed, fringilla sem. Proin nisi nunc, consectetur at erat quis, convallis euismod velit.
-                        Mauris ut tincidunt massa. Duis ut facilisis turpis. 
+                        Sed efficitur erat quis pulvinar porttitor.  
                     </div> 
                     </div>
                 </div>
@@ -42,11 +37,6 @@ const Applications = () => {
                         Phasellus ac urna eu quam tincidunt bibendum vel vel augue. Donec eget iaculis nisi. Suspendisse tempus risus at erat porttitor sodales. Pellentesque venenatis auctor tortor non pretium. 
                         Quisque ex arcu, tincidunt in mi sed, imperdiet rutrum neque.
                         Sed efficitur erat quis pulvinar porttitor. 
-                        Nullam hendrerit efficitur tortor, non consectetur tellus iaculis vitae. Aenean sagittis sem lorem, lobortis tempor leo maximus eu. 
-                        Phasellus blandit egestas sem, et vestibulum velit laoreet sed. Sed ullamcorper pulvinar velit, sit amet suscipit est cursus non. 
-                        Pellentesque elementum ultrices ligula, lacinia blandit nisi pulvinar sodales. Proin rutrum semper libero, non dapibus metus tincidunt quis. 
-                        Proin nec neque aliquam, pulvinar mi sed, fringilla sem. Proin nisi nunc, consectetur at erat quis, convallis euismod velit.
-                        Mauris ut tincidunt massa. Duis ut facilisis turpis. 
                         </div> 
                     </div> 
                 </div>
@@ -61,12 +51,7 @@ const Applications = () => {
                         Aliquam nec sem et dolor accumsan volutpat porta quis lorem. Curabitur eu semper urna, eget vestibulum nibh. Vestibulum interdum diam non nisl finibus, vehicula rhoncus lorem tristique. 
                         Phasellus ac urna eu quam tincidunt bibendum vel vel augue. Donec eget iaculis nisi. Suspendisse tempus risus at erat porttitor sodales. Pellentesque venenatis auctor tortor non pretium. 
                         Quisque ex arcu, tincidunt in mi sed, imperdiet rutrum neque.
-                        Sed efficitur erat quis pulvinar porttitor. 
-                        Nullam hendrerit efficitur tortor, non consectetur tellus iaculis vitae. Aenean sagittis sem lorem, lobortis tempor leo maximus eu. 
-                        Phasellus blandit egestas sem, et vestibulum velit laoreet sed. Sed ullamcorper pulvinar velit, sit amet suscipit est cursus non. 
-                        Pellentesque elementum ultrices ligula, lacinia blandit nisi pulvinar sodales. Proin rutrum semper libero, non dapibus metus tincidunt quis. 
-                        Proin nec neque aliquam, pulvinar mi sed, fringilla sem. Proin nisi nunc, consectetur at erat quis, convallis euismod velit.
-                        Mauris ut tincidunt massa. Duis ut facilisis turpis. 
+                        Sed efficitur erat quis pulvinar porttitor.  
                     </div> 
                     </div> 
                 </div>

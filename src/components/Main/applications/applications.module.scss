@@ -17,7 +17,7 @@
     display: none;
     justify-content: center;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 75px;
+    font-size: clamp(1rem, 1rem + 7vw, 15rem);
 
     padding: 20px 0;
 }
@@ -26,7 +26,7 @@
   display: flex;
   justify-content: center;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 80px;
+  font-size: clamp(1rem, 1rem + 10vw, 15rem);
 
   padding: 20px 0;
 }
@@ -42,34 +42,12 @@
     flex-direction: column;
     justify-content: center;
     // margin: 0 50px 0 50px ;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     height: 100%;
 
         &:not(:last-child) {
         
           } 
-
-        @media (max-width:1100px) {
-            margin: 30px;
-          }
-    
-          @media (max-width:1024px) {
-            margin: 30px;
-        
-            }
-    
-          @media (max-width:767px) {
-            width: 100%;
-              
-            }
-          
-          @media (max-width:500px) {
-            width: 100%;
-            }
-
-        @media (max-width:1024px) {
-
-        }
 
     }
 
@@ -120,5 +98,39 @@
       padding: 30px;
 
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
+		font-size: clamp(0.1rem, 0.1rem + 2vw, 5rem);
+
     }
+
+
+
+	 @media (max-width:1400px) {
+		.wrapepr{
+			margin: 0px 20px;
+		}
+
+		.card{
+			flex-direction: column;
+			margin: 0px;
+		}
+
+		.sub_title{
+			font-size: clamp(1rem, 1rem + 5vw, 15rem);
+		}
+
+		.content{
+			width: auto;
+			margin-right:0;
+			margin-bottom: 20px;
+			padding: 20px 0;
+		}
+		
+		.description{
+			width: auto;
+		}
+	 }
+
+	 @media (max-width:500px) {
+		
+		
+	 }
