@@ -22,12 +22,13 @@
     background: #121212;
     box-shadow: inset 8px -8px 16px #070707,
                 inset -8px 8px 16px #1d1d1d;
-    height: clamp(1rem, 3rem + 10vw, 35rem);
-    width: clamp(1rem, 3rem + 10vw, 35rem);
 
-	 margin: 1rem;
+    height: clamp(0.5rem, 3rem + 10vw, 35rem);
+    width: clamp(0.5rem, 3rem + 10vw, 35rem);
+
+	margin: 0.5rem;
     text-align: center;
-	 font-size: clamp(0.5rem, 0.5rem + 5vw, 10rem);
+	font-size: clamp(0.5rem, 0.5rem + 5vw, 10rem);
     font-weight: 500;
     transition: all 0.2s ease-in-out;
 
@@ -58,12 +59,13 @@
 .steps{
     display: flex;
     justify-content: center;
+    margin-left: 40px;
 }
 
 .list{
     margin: 0px;
     padding-left: 50px;
-	 font-size: clamp(0.1rem, 0.1rem + 3vw, 8rem);
+	font-size: clamp(0.1rem, 0.1rem + 3vw, 8rem);
 }
 
 .li{
@@ -81,7 +83,7 @@
         border: 3px solid #121212;
     
     padding: 5px 20px;
-	 font-size: clamp(0.1rem, 0.1rem + 3vw, 8rem);
+	font-size: clamp(0.1rem, 0.1rem + 3vw, 8rem);
     transition: all 0.2s ease-in-out;
     margin: 0 0 10px 0;
 
@@ -94,15 +96,18 @@
     }
 }
 
+
+
+
 @media (max-width:800px) {
 	.tictac{
-		// flex-direction: column;
+		flex-direction: column;
 		justify-content: center;
 	}
 
 	.steps{
 		// margin-top: 10px;
-		margin-left: 40px;
+		margin-left: 0px;
 	}
 
 	.result{
@@ -120,9 +125,32 @@
 	.reset{
 		margin-bottom: 5px;
 	}
+
+    .btn{
+        margin: 0.3rem;
+    }
+}
+
+@media (max-width:800px) {
+    .board{
+        margin-bottom: 1rem;
+    }
 }
 
 @media (max-width:500px) {
-		
-		
+
+    .tictac{
+        flex-direction: column;
+    }
+
+    .board{
+        margin-bottom: 0.5rem;
+    }
+
+    .btn{
+        height: clamp(0.5rem, 2rem + 2vw, 5rem);
+        width: clamp(0.5rem, 2rem + 2vw, 5rem);
+        margin: 0.1rem;
+    }
+
 }

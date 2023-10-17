@@ -17,7 +17,7 @@
   }
 
   .canvas_wrapper{
-	width: 80%;
+	// width: 80%;
 	height: 100%;
 
 	padding: 0 20px;
@@ -182,4 +182,24 @@
 			margin-right: 10px;
 		}
 	}
+}
+
+
+@media (max-width:800px) { 
+  .brush_style{
+		padding: 0px 20px 0 20px ;
+		flex-direction: column;
+		width: auto;
+		
+	}
+
+  .button{
+		width: auto;
+		margin: 0;
+
+		&:not(:last-child){
+			margin-bottom: 10px;
+		}
+  }
+
 }

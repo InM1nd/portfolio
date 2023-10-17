@@ -106,8 +106,8 @@ function InteractiveCanvas() {
     <canvas
         className={styles.canvas}
         ref={canvasRef}
-      //   width={950}
-      //   height={600}
+        width={950}
+        height={600}
       > 
       
       </canvas>

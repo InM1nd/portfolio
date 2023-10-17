@@ -1,5 +1,5 @@
 import React , { useRef, useState, useEffect } from "react"
-import { OrbitControls, RenderTexture, Text, PerspectiveCamera, ContactShadows, SpotLight, Torus, Circle, Capsule } from "@react-three/drei"
+import { OrbitControls, RenderTexture, Text, PerspectiveCamera, ContactShadows, SpotLight, Torus, Sphere, Capsule } from "@react-three/drei"
 import { useFrame, Canvas, useThree } from "@react-three/fiber";
 import * as THREE from 'three';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
@@ -14,6 +14,7 @@ import gradientTexture from '../../../img/other/Foil003_1K-JPG_Metalness.jpg';
 import styles from "./Background.module.scss"
 
 const Scene = ({   }) => {
+
   const textRef = useRef();
   const donutsRef = useRef([]);
 
@@ -23,7 +24,7 @@ const Scene = ({   }) => {
   // const material = new THREE.MeshNormalMaterial()
 
   const chromeText = new MeshStandardMaterial({
-    color: "#000000", // Базовый цвет (можете оставить белый, так как текстура будет покрывать его)
+    color: "##121212", // Базовый цвет (можете оставить белый, так как текстура будет покрывать его)
     // metalness: 0.3,     // Металличность на максимуме для эффекта хрома
     roughness: 0.1,     // Шероховатость на минимуме
     // wireframe: true,
@@ -31,9 +32,9 @@ const Scene = ({   }) => {
   });
 
   const chromeDonut = new MeshStandardMaterial({
-    color: "#000000", // Базовый цвет (можете оставить белый, так как текстура будет покрывать его)
-    metalness: 10,     // Металличность на максимуме для эффекта хрома
-    roughness: 0,     // Шероховатость на минимуме
+    color: "#121212", // Базовый цвет (можете оставить белый, так как текстура будет покрывать его)
+    metalness: 0,     // Металличность на максимуме для эффекта хрома
+    roughness: 1,     // Шероховатость на минимуме
     // wireframe: true,
     
   });
@@ -61,6 +62,7 @@ const Scene = ({   }) => {
   };
 
   const textGeometry = createTextGeometry(font);
+
   // DONUT
   
   const generateDonuts = (count) => {
@@ -73,15 +75,39 @@ const Scene = ({   }) => {
         (Math.random() ) ,
       ];
 
+      const [isHovered, setHover] = useState(false);
+
+      // const 
+
       const donut = (
-        <Capsule
+        <mesh
+        >
+        <Sphere
           key={i}
-          args={[0.8, 0.6, 4, 100 ]}
+          args={[1, 64, 32]}
           position={position}
           rotation={[Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI]}
-          scale={[(Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2]}
-          material={chromeDonut}
-        />
+          // scale={[
+          //   Math.random() / 2, // Adjusted to ensure a more spherical shape
+          //   Math.random() / 2,
+          //   Math.random() / 1.1,
+          // ]}
+            >
+            <meshPhysicalMaterial
+             onPointerOver={() => setHover(true)}
+             onPointerOut={() => setHover(false)}
+             
+              attach="material"
+              color={'#121212'}
+              // transparent
+              // opacity={0.9}
+              roughness={10}
+              // metalness={1}
+              // clearcoat={0}
+              // clearcoatRoughness={0.9}
+            />
+            </Sphere>
+        </mesh>
       );
 
       donuts.push(donut);
@@ -90,16 +116,16 @@ const Scene = ({   }) => {
   };
 
   
-  useFrame(() => {
-    for (let i = 0; i < donutsRef.current.length; i++) {
-      const donut = donutsRef.current[i];
-      donut.rotation.x += 0.0003; 
-      donut.rotation.y += 0.0003; 
-      donut.rotation.z += 0.0003; 
+  // useFrame(() => {
+  //   for (let i = 0; i < donutsRef.current.length; i++) {
+  //     const donut = donutsRef.current[i];
+  //     donut.rotation.x += 0.0003; 
+  //     donut.rotation.y += 0.0003; 
+  //     donut.rotation.z += 0.0003; 
   
-      // donut.position.x += 0.0005; 
-    }
-  });
+  //     // donut.position.x += 0.0005; 
+  //   }
+  // });
 
   const donuts = generateDonuts(70);
   // Generate all stuff
@@ -108,20 +134,25 @@ const Scene = ({   }) => {
 
   return (
     <>
-        
-        <directionalLight color={0x0099ff}  position={[-5, 0, 10]} intensity={10} castShadow  />
-        <directionalLight color={0x00F0FF}  position={[5, 0, 10]} intensity={10} castShadow  />
-        <directionalLight color={0x00F0FF}  position={[0, 0, 10]} intensity={10} castShadow  />
+        <directionalLight color={0xffffff}  position={[0, 0, 10]} intensity={4} castShadow  />
+        <directionalLight color={0xffffff}  position={[-10, 0, 10]} intensity={1} castShadow  />
+        {/* <directionalLight color={0xffffff}  position={[10, 0, 10]} intensity={1} castShadow  /> */}
+        {/* <directionalLight color={0xffffff}  position={[0, 0, -10]} intensity={1} castShadow  /> */}
+        {/* <directionalLight color={0x0099ff}  position={[-5, 0, 10]} intensity={10} castShadow  /> */}
+        {/* <directionalLight color={0x00F0FF}  position={[5, 0, 10]} intensity={10} castShadow  /> */}
+        {/* <directionalLight color={0x00F0FF}  position={[0, 0, 10]} intensity={10} castShadow  /> */}
 
-        <directionalLight color={0x0099ff}  position={[-5, 0, -10]} intensity={1000} castShadow  />
-        <directionalLight color={0x00F0FF}  position={[5, 0, -10]} intensity={20} castShadow  />
-        <directionalLight color={0x00F0FF}  position={[0, 0, -10]} intensity={1000} castShadow  />
+        {/* <directionalLight color={0x0099ff}  position={[-5, 0, -10]} intensity={1000} castShadow  /> */}
+        {/* <directionalLight color={0x00F0FF}  position={[5, 0, -10]} intensity={20} castShadow  /> */}
+        {/* <directionalLight color={0x00F0FF}  position={[0, 0, -10]} intensity={1000} castShadow  /> */}
 
-        <pointLight color={0x0099ff}  position={[0, 0,  0]} intensity={1000} castShadow  />
+        {/* <pointLight color={0x0099ff}  position={[0, 0,  0]} intensity={1000} castShadow  /> */}
         {/* <pointLight color={0x00F0FF}  position={[0, 0,  10]} intensity={1000} castShadow  /> */}
 
         {/* <mesh ref={textRef} geometry={textGeometry} material={chromeText}  position={[ 0, 0, 3]} /> */}
-        <group ref={(group) => (donutsRef.current = group.children)} position={[ 0, 0, -1]}>{donuts}</group> 
+        <group ref={(group) => (donutsRef.current = group.children)} position={[ 0, 0, -1]}>
+          {donuts}
+        </group> 
     </>
   );
 };

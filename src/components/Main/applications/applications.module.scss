@@ -11,6 +11,7 @@
     margin: 0 50px 0 50px ;
 
     
+    
 }
 
 .title{
@@ -42,7 +43,7 @@
     flex-direction: column;
     justify-content: center;
     // margin: 0 50px 0 50px ;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
     height: 100%;
 
         &:not(:last-child) {
@@ -116,6 +117,7 @@
 
 		.sub_title{
 			font-size: clamp(1rem, 1rem + 5vw, 15rem);
+      text-align: center;
 		}
 
 		.content{
@@ -131,6 +133,8 @@
 	 }
 
 	 @media (max-width:500px) {
-		
+    .app{
+      margin-bottom: 1rem;
+    }
 		
 	 }
