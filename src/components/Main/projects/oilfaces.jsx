@@ -7,7 +7,7 @@ import ARROW from '../../../img/other/9TR5GzG5c.gif'
 
 const Oilfaces = () => {
     return (
-      <section>
+      <section className={styles.section}>
         <div className={styles.projects_wrapper}>
                     <div className={styles.projects_img_border}>
                       <img className={styles.projects_img} src={Teple} alt='PROJECT'/>
@@ -30,9 +30,9 @@ const Oilfaces = () => {
                     <div className={styles.projects_content_paragraph}>Blue is perfect. It’s the most popular and the most relaxing colour. Blue is also the base of the color spectrum. No blue — no color: all other colors may be 
                     created only by mixing blue, red and green. Web is pure blue: from the first site by CERN till now. Why not to create another beatiful site?
                     </div>
-                    <div className={styles.projects_content_paragraph}> No blue — no color: all other colors may be created only by mixing blue, red and green. Web is pure blue: from the
+                    {/* <div className={styles.projects_content_paragraph}> No blue — no color: all other colors may be created only by mixing blue, red and green. Web is pure blue: from the
                     first site by CERN till now. Why not to create another beatiful site?
-                    </div>
+                    </div> */}
             </div>
             <div className={styles.projects_button_wrapper}>
               <a className={styles.projects_button}>
