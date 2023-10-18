@@ -100,7 +100,7 @@ const Head = () => {
   return (
     <section className={styles.main}>
     <div className={styles.main_text_container}>
-      {/* <div className={styles.main_text}> Oleksandr Zabolotnyi </div> */}
+      <div className={styles.main_text}> Oleksandr Zabolotnyi </div>
       
       {/* <div className={styles.container_11} id="container">
       <span className={styles.text1} id="text1"></span>

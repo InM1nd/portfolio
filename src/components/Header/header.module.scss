@@ -8,40 +8,26 @@
 	text-align: center;
 	justify-content: center;
 	
-	backdrop-filter: blur(10px);
-	
 	position:fixed;
 	top: 0;
 	z-index: 10;
 	
 	width: 100%;
 
-	height: 7vh;  // IF LOGO HERE
-
-
-	// border: 3px solid white;
-    border-radius: 20px;
-	// border-radius: 50px;
-	background: #121212;
-	
-	.header_logo{
-		display: none;   
-
-		align-items: center;
-		justify-content: center;
-		
-		font-family: 'Bebas Neue', sans-serif;
-		text-decoration: none;
-		font-size: 100px;
-		text-transform: uppercase;
-		
-		width: 100%;
-		height: 100%;
-	}
+	height: 7vh;  // IF LOGO HE
 
 	.menu_wrap{
-		width: 100%;
+		width: 50%;
 		height: 100%;
+		border: 5px solid #191919;
+		margin-top: 15px;
+		
+		backdrop-filter: blur(10px);
+
+		border-radius: 20px;
+		background: #121212;
+		box-shadow: inset 8px -8px 16px #070707,
+                inset -8px 8px 16px #070707;
 	}
 	
 	.menu{
@@ -60,48 +46,36 @@
 		height: 100%;
 		width: 100%;
 
-		border-radius: 15px;
+		// border-radius: 20px;
 	
 		text-decoration: none;
 		font-family: 'Bebas Neue', sans-serif;
-		font-size: clamp(0.1rem, 0.1rem + 3vw, 8rem);
+		font-size: clamp(0.1rem, 0.1rem + 3vw, 5rem);
 		text-transform: uppercase;
 
 		transition: all 0.3s ease-in-out;
-	
-		&:hover{
-			// color: $main-background-color;
-			// background: radial-gradient(50% 50% at 50% 10%, #0099ff 15%,  #0800e800 100%);
-			box-shadow: inset 4px -4px 8px #121212,
-			inset -4px 4px 8px #525252;
-			
-		}
-		
-		// &:last-child {
-		// 	border-radius: 0 15px 15px 0;
-		//   }
-	  
-		//   &:first-child{
-		// 	border-radius:  15px 0 0 15px ;
-		//   }
-		
 
 	
-		// &:nth-child(1):hover {
-		// 	background-color: #E4572E;
-		//   }
-		  
-		// &:nth-child(2):hover {
-		// 	background-color: #9A1BFF;
-		//   }
-		  
-		// &:nth-child(3):hover {
-		// 	background-color: #02DD25;
-		//   }
-		  
-		// &:nth-child(4):hover {
-		// 	background-color: #9F956C;
-		//   }
+		&:hover{
+			color: #00b7ff;
+			box-shadow: inset 8px -8px 16px #070707,  
+			inset -8px 8px 16px #070707;				
+		}
+
+		&:focus{
+			color: #00b7ff;
+			box-shadow: inset 8px -8px 16px #070707,  
+			inset -8px 8px 16px #070707;				
+		}
+
+		&:last-child {
+			border-radius: 0 16px 16px 0;
+		  }
+	  
+		  &:first-child{
+			border-radius:  16px 0 0 16px ;
+		  }
+		
 	}
 
 	.menu_link_text{
@@ -111,20 +85,40 @@
 		height: 100%;
 		width: 100%;
 	}
+
+	@media (max-width:1024px) {
+		.menu_link{
+			font-size: clamp(0.1rem, 0.1rem + 2vw, 4rem);
+		}
+		
+	   }
+
+	@media (max-width:800px) {
+
+		.menu_link{
+			font-size: clamp(0.1rem, 0.1rem + 3vw, 5rem);
+		}
+
+		.menu_wrap{
+		  width: 100%;
+		  margin: 0 20px;
+		  
+		}
+		
+	   }
+
+	   @media (max-width:500px) {
+		.menu_wrap{
+		 
+		  margin: 0 15px;
+		}
+		
+	   }
 	
 }
 
 
 
-@media (max-width:800px) {
-	.menu_link{
-		
-	}
-		
-}
 
 
-@media (max-width:500px) {
-		
-		
-}
+

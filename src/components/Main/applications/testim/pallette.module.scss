@@ -36,7 +36,7 @@
    
   }
   
- 
+
 
 .brush_style{
   display: flex;
@@ -103,6 +103,11 @@
   padding: 10px;
 }
 
+.button_list{
+  display: flex;
+  flex-direction: column;
+}
+
 .button {
   
   padding: 10px;
@@ -119,32 +124,33 @@
   transition: all 0.3s ease-in-out;
 
 
-  &:nth-child(2):hover {
+
+  &:nth-child(1):hover {
     background-color: white;
     color:black;
     }
     
-  &:nth-child(3):hover {
+  &:nth-child(2):hover {
     background-color: red;
     color:black;
     }
     
-  &:nth-child(4):hover {
+  &:nth-child(3):hover {
     background-color: blue;
     color:black;
     }
     
-  &:nth-child(5):hover {
+  &:nth-child(4):hover {
     background-color: green;
     color:black;
     }
 
-  &:nth-child(6):hover {
+  &:nth-child(5):hover {
     background-color: yellow;
     color:black;
     }
 
-  &:nth-child(7):hover {
+  &:nth-child(6):hover {
     background-color: white;
     color:black;
     }  
@@ -160,9 +166,9 @@
 	}
 
 	.brush_style{
-		padding: 20px 0px 20px 0;
+		padding: 20px;
 		flex-direction: row;
-		width: auto;
+		width: 100%;
 		
 	}
 
@@ -173,10 +179,14 @@
 	.brush_size{
 		margin-right: 10px;
 	}
+  
+  .button_list{
+
+  }
 
 	.button{
-		width: auto;
-		margin: 0;
+		width: fit-content;
+		margin: 0 ;
 
 		&:not(:last-child){
 			margin-right: 10px;
