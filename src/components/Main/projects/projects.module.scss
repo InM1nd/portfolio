@@ -19,6 +19,7 @@
 
         display: flex;
         padding: 7rem 10rem;
+        justify-content: center;
     }
 
     .swiper_projects{
@@ -41,7 +42,7 @@
     }
 
     .projects_content{
-      width: 50%;
+      width: 30%;
       padding-left: 50px;
       display: flex;
       flex-direction: column;
