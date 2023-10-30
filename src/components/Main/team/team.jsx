@@ -22,13 +22,15 @@ const Team = () => {
     return ( 
         <section className={styles.team}>
                     <div className={styles.team_card} >
-                        <div className={styles.team_card_img_wrapper} >
-                        <img className={styles.team_card_img} src={SANYA}/> 
-                        </div>
-                        <div className={styles.team_card_right}>
-
+                        
+                        <div className={styles.team_card_right}> 
                             <div className={styles.wrapper} ref={cardRef} >
-
+                            
+                            <div className={styles.team_card_img_wrapper} >
+                            <img className={styles.team_card_img} src={SANYA}/> 
+                            </div>
+                           
+                            <div className={styles.team_card_content}> 
                             <h2 className={styles.team_card_name}>oleksandr zabolotnyi</h2>
                             <div  className={styles.team_card_info}> FRONT_END DEVELOPER</div>
 
@@ -56,20 +58,6 @@ const Team = () => {
                                     <div className={`${styles.team_bar} ${styles._hard_3}`}></div>
                                     </div>
                                 </div>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={styles.team_card_bartext}>THREE.JS</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._hard_4}`}></div>
-                                    </div>
-                                </div>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={styles.team_card_bartext}>THREE.JS</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._hard_5}`}></div>
-                                    </div>
-                                </div>
                             </div>
                             <div className={styles.team_card_text_wrapper} >
                                 
@@ -95,30 +83,9 @@ const Team = () => {
                                     <div className={`${styles.team_bar} ${styles._soft_3}`}></div>
                                     </div>
                                 </div>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={`${styles.team_card_bartext} ${styles._soft}`}>COMMUNICATION</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._soft_4}`}></div>
-                                    </div>
-                                </div>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={`${styles.team_card_bartext} ${styles._soft}`}>COMMUNICATION</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._soft_5}`}></div>
-                                    </div>
-                                </div>
-
                             </div>
                             </div>
-
-                            <div className={styles.team_card_description}>
-                                On our platform, we'll introduce an achievement and certification system to boost client engagement. 
-                                Each course consists of modules. Complete a module, take a test to assess your understanding, and earn a grade. 
-                                Finish the entire course and receive a certificate
-                            </div>
-
+                            </div> 
                             </div>
                         </div>
 

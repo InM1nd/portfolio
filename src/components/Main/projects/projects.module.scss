@@ -10,7 +10,10 @@
 }
 
 .projects{
-    height: 87vh;
+    height: 86vh;
+    display: flex;
+    justify-content: center;
+    padding: 7rem 0rem;
   }
 
     .projects_wrapper{
@@ -18,7 +21,7 @@
         height: 100%;
 
         display: flex;
-        padding: 7rem 10rem;
+    
         justify-content: center;
     }
 
@@ -238,6 +241,8 @@
       .projects_wrapper{
         flex-direction: column;
         width: 100%;
+        padding: 0 20px;
+        padding-bottom: 40px;
       }
       .projects_img_border{
         width: 100%;

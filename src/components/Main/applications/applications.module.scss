@@ -3,7 +3,7 @@
 .wrapepr{
     box-sizing: border-box;
     height: 100%;
-	 padding: 7rem 10rem;
+	  padding: 7vh 0px;
     display: flex;
     justify-content: center;
     flex-direction: column;  
@@ -51,9 +51,14 @@
       height: 100%;
     }
 
-	//  .card_wrapper{
-	// 	width: 100%;
-	//  }
+	 .card_wrapper{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    width: 80%;
+	 }
 
     .content{
       backdrop-filter: blur(10px);
@@ -64,7 +69,7 @@
                     -8px 8px 16px #1d1d1d;
                     
       padding: 30px;
-      margin-right: 50px;
+      
 
       display: flex;
       justify-content: center;
@@ -84,8 +89,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 20%;
+      width: 100%;
 
+      margin-top: 50px;
       padding: 30px;
 
       font-family: 'Bebas Neue', sans-serif;
@@ -93,7 +99,15 @@
 
     }
 
+
+
+
 	 @media (max-width:1400px) {
+
+    .app{
+      margin: 0 10rem;
+    }
+
 		.card{
 			flex-direction: column;
 			margin: 0px;
@@ -119,13 +133,24 @@
 			display: flex;
 			align-items: center;
 			margin-right:0;
-			margin-bottom: 20px;
+		
 			padding: 20px 0;
 		}
 		
 		.description{
 			width: 100%;
 		}
+	 }
+
+   @media (max-width:800px) {
+    .app{
+      margin: 0 20px;
+    }
+
+    .description{
+      margin-top: 20px;
+    }
+		
 	 }
 
 	 @media (max-width:500px) {
