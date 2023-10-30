@@ -14,6 +14,7 @@ const Applications = () => {
                 <div className={styles.app}>
                 <p className={styles.sub_title}>TicTacToe</p> 
                     <div className={styles.card}>
+							<div className={styles.card_wrapper}>
                         <div className={styles.content}><TicTac/></div>
                         <div className={styles.description}> 
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia blandit sodales. 
@@ -24,11 +25,13 @@ const Applications = () => {
                         Sed efficitur erat quis pulvinar porttitor.  
                     </div> 
                     </div>
+						  </div>
                 </div>
 
                 <div className={styles.app}>
                 <p className={styles.sub_title}>Weather Forecast</p> 
                 <div className={styles.card}>
+					 <div className={styles.card_wrapper}>
                     <div className={styles.content}><Weather/></div>
                     <div className={styles.description}> 
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia blandit sodales. 
@@ -39,11 +42,13 @@ const Applications = () => {
                         Sed efficitur erat quis pulvinar porttitor. 
                         </div> 
                     </div> 
+						  </div>
                 </div>
 
                 <div className={styles.app}>
                 <p className={styles.sub_title}>Drawing Place</p> 
                 <div className={styles.card}>
+					 <div className={styles.card_wrapper}>
                     <div className={styles.content}><InteractiveCanvas/></div>
                     <div className={styles.description}> 
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia blandit sodales. 
@@ -53,6 +58,7 @@ const Applications = () => {
                         Quisque ex arcu, tincidunt in mi sed, imperdiet rutrum neque.
                         Sed efficitur erat quis pulvinar porttitor.  
                     </div> 
+						  </div>
                     </div> 
                 </div>
                 {/* <div className={styles.app} ><ElectricSpider className={styles.app}/></div> */} 

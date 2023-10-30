@@ -77,11 +77,9 @@ const Scene = ({   }) => {
 
       const [isHovered, setHover] = useState(false);
 
-      // const 
-
+   
       const donut = (
-        <mesh
-        >
+        
         <Sphere
           key={i}
           args={[1, 64, 32]}
@@ -96,18 +94,16 @@ const Scene = ({   }) => {
             <meshPhysicalMaterial
              onPointerOver={() => setHover(true)}
              onPointerOut={() => setHover(false)}
-             
               attach="material"
               color={'#121212'}
               // transparent
               // opacity={0.9}
               roughness={10}
-              // metalness={1}
+            //   metalness={1}
               // clearcoat={0}
               // clearcoatRoughness={0.9}
             />
-            </Sphere>
-        </mesh>
+            </Sphere>     
       );
 
       donuts.push(donut);
@@ -116,16 +112,16 @@ const Scene = ({   }) => {
   };
 
   
-  // useFrame(() => {
-  //   for (let i = 0; i < donutsRef.current.length; i++) {
-  //     const donut = donutsRef.current[i];
-  //     donut.rotation.x += 0.0003; 
-  //     donut.rotation.y += 0.0003; 
-  //     donut.rotation.z += 0.0003; 
+//   useFrame(() => {
+//     for (let i = 0; i < donutsRef.current.length; i++) {
+//       const donut = donutsRef.current[i];
+//       donut.rotation.x += 0.0003; 
+//       donut.rotation.y += 0.0003; 
+//       donut.rotation.z += 0.0003; 
   
-  //     // donut.position.x += 0.0005; 
-  //   }
-  // });
+//       donut.position.x += 0.1; 
+//     }
+//   });
 
   const donuts = generateDonuts(70);
   // Generate all stuff
@@ -167,11 +163,10 @@ const Background = () => {
     <section className={styles.main}>
     <div className={styles.main_services}>
       <Canvas style={{ width: '100%', height: '100%' }}  camera={{ position: [0, 0, 5], fov: 60}}>
-
       <OrbitControls 
         enableZoom={false}
         enablePan={false}
-        enableRotate={false} // Отключает вращение
+        enableRotate={true} // Отключает вращение
         enableDamping={true}
         dampingFactor={0.25}
         rotateSpeed={0.1}

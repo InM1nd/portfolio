@@ -17,7 +17,7 @@
 	height: 7vh;  // IF LOGO HE
 
 	.menu_wrap{
-		width: 50%;
+		width: 60%;
 		height: 100%;
 		border: 5px solid #191919;
 		margin-top: 15px;
@@ -85,6 +85,13 @@
 		height: 100%;
 		width: 100%;
 	}
+
+	@media (max-width:1024px) {
+		.menu_link{
+			font-size: clamp(0.1rem, 0.1rem + 5vw, 5rem);	
+		}
+		
+	   }
 
 	@media (max-width:1024px) {
 		.menu_link{
