@@ -8,8 +8,8 @@ import { MeshStandardMaterial, TextureLoader } from 'three';
 import { PointLight } from "three";
 
 import Font from '../../../components/Utils/fonts/Bebas_Neue_Regular.json';
-// import gradientTexture from '../../../img/other/DayEnvironmentHDRI035_1K-TONEMAPPED.jpg';
-import gradientTexture from '../../../img/other/Foil003_1K-JPG_Metalness.jpg';
+import gradientTexture from '../../../img/other/DayEnvironmentHDRI035_1K-TONEMAPPED.jpg';
+
 
 import styles from "./Background.module.scss"
 

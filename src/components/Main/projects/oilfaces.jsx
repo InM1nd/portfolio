@@ -1,17 +1,18 @@
 import styles from './projects.module.scss'
-import Teple from '../../../img/other/123.jpg'
-// import ARROW from '../../../img/other/ARROW.png'
-import ARROW from '../../../img/other/9TR5GzG5c.gif'
-
-// import Oilfaces_Pic from '../../../img/other/Website Skeptic 1.jpg'
+// import Teple from '../../../img/other/123.jpg'
+import Teple from '../../../img/other/Oilfaces.png'
 
 const Oilfaces = () => {
     return (
       <section className={styles.section}>
         <div className={styles.projects_wrapper}>
-                    <div className={styles.projects_img_border}>
+              <div className={styles.projects_img_border}>
+                <div className={styles.projects_img_wrapper}>
+                    
                       <img className={styles.projects_img} src={Teple} alt='PROJECT'/>
+                    
                   </div>
+                </div>
             <div  className={styles.projects_content}>
             <div className={styles.projects_describ}>
               <div className={styles.projects_describ_text}>
