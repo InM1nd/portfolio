@@ -7,6 +7,8 @@
   display: flex;
   justify-content: center;
   flex-direction: column;  
+
+  
 }
 
 .projects{
@@ -116,7 +118,7 @@
       border-radius: 20px;
         background: #121212;
         box-shadow:  8px -8px 16px #070707,
-                    -8px 8px 16px #1d1d1d;
+                    -8px 8px 16px #070707;
 
         padding: 20px;
 
@@ -236,6 +238,7 @@
     @media (max-width:800px) {
       .projects{
         height: 100%;
+        padding: 0;
       }
 
       .projects_wrapper{
@@ -264,6 +267,10 @@
     @media (max-width:500px) {
       .projects_wrapper{
         padding: 1rem 1rem;
+      }
+      
+      .projects_button{
+        width: 100%;
       }
 
       .projects_filter_button{

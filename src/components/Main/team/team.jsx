@@ -3,93 +3,69 @@ import vanillaTilt from 'vanilla-tilt';
 
 import styles from './team.module.scss'
 
-import SANYA from '../../../img/other/123.jpg'
-
+import SANYA from '../../../img/other/IMG_8316.jpg'
+// import SANYA from '../../../img/other/123.jpg'
 
 const Team = () => {
 
     const cardRef = useRef();
 
-    useEffect(() => {
-        vanillaTilt.init(cardRef.current, {
-          max: 5,
-          speed: 200,
-          glare: true,
-          'max-glare': 0.1,
-        });
-      }, []);
+    // useEffect(() => {
+    //     vanillaTilt.init(cardRef.current, {
+    //       max: 5,
+    //       speed: 200,
+    //     //   glare: true,
+    //     //   'max-glare': 0.1,
+    //     });
+    //   }, []);
 
     return ( 
-        <section className={styles.team}>
-                    <div className={styles.team_card} >
-                        
-                        <div className={styles.team_card_right}> 
-                            <div className={styles.wrapper} ref={cardRef} >
-                            
-                            <div className={styles.team_card_img_wrapper} >
-                            <img className={styles.team_card_img} src={SANYA}/> 
-                            </div>
-                           
-                            <div className={styles.team_card_content}> 
-                            <h2 className={styles.team_card_name}>oleksandr zabolotnyi</h2>
-                            <div  className={styles.team_card_info}> FRONT_END DEVELOPER</div>
-
-                            <div className={styles.team_card_skills}>
-                            <div className={styles.team_card_text_wrapper}>
-                                <p className={`${styles.team_card_subtitle} ${styles._hard}`}>HARD SKILLS</p>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={styles.team_card_bartext}>HTML&SCSS</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._hard_1}`}></div>
-                                    </div>
-                                </div>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={styles.team_card_bartext}>REACT</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._hard_2}`}></div>
-                                    </div>
-                                </div>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={styles.team_card_bartext}>THREE.JS</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._hard_3}`}></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={styles.team_card_text_wrapper} >
-                                
-                            <p className={`${styles.team_card_subtitle} ${styles._soft}`}>SOFT SKILLS</p>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={`${styles.team_card_bartext} ${styles._soft}`}>TEAM WORK</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._soft_1}`}></div>
-                                    </div>
-                                </div>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={`${styles.team_card_bartext} ${styles._soft}`}>COMMUNICATION</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._soft_2}`}></div>
-                                    </div>
-                                </div>
-
-                                <div className={styles.team_card_hardskills}>
-                                    <p className={`${styles.team_card_bartext} ${styles._soft}`}>COMMUNICATION</p>
-                                    <div className={styles.team_bar_wrapper}>
-                                    <div className={`${styles.team_bar} ${styles._soft_3}`}></div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                            </div> 
-                            </div>
-                        </div>
-
+        <section className={styles.me}>
+            
+            <div className={styles.wrapper}>
+   
+                <div className={styles.side_wrapper}>
+                    <div className={styles.img_container}>
+                    <div className={styles.img_wrapper} >
+                    <img className={styles.img} src={SANYA}/>
                     </div>
+                    </div>
+
+                    <div className={styles.underimg}>
+                        <h2 className={styles.title}>oleksandr zabolotnyi</h2>
+                        <div className={styles.track}>front_end developer</div>
+                    </div>
+                </div>
+                
+                
+                
+                <div className={styles.content_wrapper}>
+
+                <div className={styles.text}>
+                <h2>Hard Skills</h2> SkillsHard
+                    Hard SkillsHard SkillsHard SkillsHard 
+                    SkillsHard SkillsHard Skills
+                    Hard SkillsHard SkillsHard Skills
+                    Hard SkillsHard SkillsHard Skills
+                    Hard SkillsHard SkillsHard Skills
+                    Hard SkillsHard SkillsHard Skills
+                    Hard Skills
+                </div>
+                
+                <div className={styles.text}>
+                <h2>Soft Skills</h2>
+                    Soft SkillsSoft SkillsSoft Skills
+                    Soft SkillsSoft SkillsSoft Skills
+                    Soft SkillsSoft SkillsSoft Skills
+                    Soft SkillsSoft SkillsSoft Skills
+                    Soft SkillsSoft SkillsSoft SkillsSoft Skills
+                    Soft SkillsSoft SkillsSoft SkillsSoft Skills
+                </div>
+                
+
+                </div>
+            </div>    
+            
         </section>
         )
     }
