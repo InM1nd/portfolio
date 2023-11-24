@@ -53,7 +53,7 @@ const Team = () => {
                 </div>
                 
                 <div className={styles.text}>
-                    <h2 className={styles.subtitle}>Stack</h2>           
+                    <h2 className={styles.subtitle}>technologies</h2>           
                 <div className={styles.icon_wrapper}>
 
                     <div className={styles.gridItem}> 
