@@ -42,9 +42,8 @@ const Team = () => {
                 <div className={styles.content_wrapper}>
 
                 <div className={styles.text}>
-                <h2>Hard Skills</h2> 
-                    As an aspiring front-end developer, I have experience with HTML, CSS, JavaScript, and 
-                    React. My primary goal is to create visually appealing, functional, and user-friendly 
+                <h2 className={styles.subtitle}>Profile</h2> 
+                    My primary goal is to create visually appealing, functional, and user-friendly 
                     websites and applications. 
                     I believe that a combination of creative solutions and technology is key to success. 
                     That is why I try always to stay up-to-date and continue to explore best practices to 
@@ -54,16 +53,43 @@ const Team = () => {
                 </div>
                 
                 <div className={styles.text}>
-                    <h2>Skills</h2>
-                        HTML & CSS
-                        JavaScript
-                        React
-                        Three.js
-                        Teamwork
-                        Communication
-                </div>
-                
+                    <h2 className={styles.subtitle}>Stack</h2>           
+                <div className={styles.icon_wrapper}>
 
+                    <div className={styles.gridItem}> 
+                        <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" />
+                    </div>
+
+                    <div className={styles.gridItem }> 
+                        <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" />
+                    </div>
+
+                    <div className={styles.gridItem}> 
+                        <img className={styles.icon}src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" /> 
+                    </div>
+
+                    <div className={styles.gridItem}> 
+                        <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" /> 
+                    </div>
+
+                    <div className={styles.gridItem}> 
+                        <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />  
+                    </div>
+                    
+                    <div className={styles.gridItem}> 
+                        <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" />
+                    </div>
+
+                    <div className={styles.gridItem}> 
+                        <img className={styles.icon}src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
+                    </div>
+                    
+                    <div className={styles.gridItem}> 
+                        <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" />
+                    </div>
+
+                </div>
+                </div>
                 </div>
             </div>    
             

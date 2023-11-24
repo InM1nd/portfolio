@@ -82,9 +82,13 @@
     
     display: flex;
     flex-direction: column;
-    text-align: center;
+    
     padding-top: 20px;
     
+}
+
+.subtitle{
+    text-align: center;
 }
 
 .title{
@@ -104,7 +108,7 @@
     flex-direction: column;
     justify-content: center;
     width: 70%;
-    height: fit-content;
+    height: 100%;
     font-size: clamp(0.1rem, 0.1rem + 2vw, 5rem);
 
     padding-left: 20px;
@@ -116,7 +120,8 @@
     height: 100%;
     
     padding: 20px;
-    
+    font-size: clamp(0.1rem, 0.1rem + 2vw, 5rem);
+
     border-radius: 10px;
     background: #121212;
     box-shadow: inset 8px -8px 16px #070707,
@@ -124,6 +129,67 @@
 
     &:not(:last-child){
         margin-bottom: 20px;
+    }
+}
+
+.icon_wrapper{
+    width: 100%;
+    height: fit-content;
+
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-gap: 10px;
+}
+
+.gridItem{
+
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+.icon {
+    
+    
+
+    &:first-child{
+        padding-left: 0;
+    }
+}
+
+
+@media (max-width:1400px ) {
+    .side_wrapper{
+        width: 40%;
+        max-width: 50%;
+    }
+
+    .content_wrapper{
+        width: 60%;
+    }
+
+    .text{
+        font-size: clamp(0.1rem, 0.1rem + 2vw, 4rem);
+    }
+
+    .icon_wrapper{
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+    }
+}
+
+@media (max-width:1280px) {
+    
+
+    .gridItem{
+        padding: 10px;
+      }
+
+    .icon_wrapper{
+        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); 
     }
 }
 
@@ -153,6 +219,10 @@
 
     .text{
         margin: 0;
+    }
+
+    .icon_wrapper{
+        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); 
     }
     
 }
