@@ -7,19 +7,28 @@ import Skeptic from './skepic'
 import Oilfaces from './oilfaces'
 import Dashboard from './dashboard'
 import Skelya from './skelya'
+import Filmoteka from './filmoteka'
+import IceCream from './icecream'
 
 
 const Projects = () => {
     return (
+      
       <div className={styles.wrapepr}>
         <div className={styles.projects}>
-          <Skeptic/>
+          <Dashboard/>
         </div>
+        <div className={styles.projects}>
+          <Filmoteka/>
+        </div>
+        <div className={styles.projects}>
+          <IceCream/>
+        </div>    
         <div className={styles.projects}>
           <Oilfaces/>
         </div>
         <div className={styles.projects}>
-          <Dashboard/>
+          <Skeptic/>
         </div>
         <div className={styles.projects}>
           <Skelya/>
