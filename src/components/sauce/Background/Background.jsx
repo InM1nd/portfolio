@@ -33,7 +33,7 @@ const Scene = ({   }) => {
 
   const chromeDonut = new MeshStandardMaterial({
     color: "#121212", // Базовый цвет (можете оставить белый, так как текстура будет покрывать его)
-    metalness: 0,     // Металличность на максимуме для эффекта хрома
+    metalness: 1,     // Металличность на максимуме для эффекта хрома
     roughness: 1,     // Шероховатость на минимуме
     // wireframe: true,
     
@@ -99,7 +99,7 @@ const Scene = ({   }) => {
               // transparent
               // opacity={0.9}
               roughness={10}
-            //   metalness={1}
+              // metalness={1}
               // clearcoat={0}
               // clearcoatRoughness={0.9}
             />
@@ -130,20 +130,20 @@ const Scene = ({   }) => {
 
   return (
     <>
-        <directionalLight color={0xffffff}  position={[0, 0, 10]} intensity={4} castShadow  />
+        <directionalLight color={0xffffff}  position={[0, 0, 10]} intensity={1} castShadow  />
         <directionalLight color={0xffffff}  position={[-10, 0, 10]} intensity={1} castShadow  />
         {/* <directionalLight color={0xffffff}  position={[10, 0, 10]} intensity={1} castShadow  /> */}
         {/* <directionalLight color={0xffffff}  position={[0, 0, -10]} intensity={1} castShadow  /> */}
         {/* <directionalLight color={0x0099ff}  position={[-5, 0, 10]} intensity={10} castShadow  /> */}
         {/* <directionalLight color={0x00F0FF}  position={[5, 0, 10]} intensity={10} castShadow  /> */}
-        {/* <directionalLight color={0x00F0FF}  position={[0, 0, 10]} intensity={10} castShadow  /> */}
+        {/* <directionalLight color={0x00b7ff}  position={[0, 0, 10]} intensity={10} castShadow  /> */}
 
         {/* <directionalLight color={0x0099ff}  position={[-5, 0, -10]} intensity={1000} castShadow  /> */}
         {/* <directionalLight color={0x00F0FF}  position={[5, 0, -10]} intensity={20} castShadow  /> */}
-        {/* <directionalLight color={0x00F0FF}  position={[0, 0, -10]} intensity={1000} castShadow  /> */}
+        {/* <ambientLight color={0x00b7ff}  position={[0, 0, 0]} intensity={10} castShadow  /> */}
 
-        {/* <pointLight color={0x0099ff}  position={[0, 0,  0]} intensity={1000} castShadow  /> */}
-        {/* <pointLight color={0x00F0FF}  position={[0, 0,  10]} intensity={1000} castShadow  /> */}
+        <pointLight color={0x00b7ff}  position={[-5, 0,  -4]} intensity={1000}/>
+        <pointLight color={0x00b7ff}  position={[5, 0,  -4]} intensity={1000} />
 
         {/* <mesh ref={textRef} geometry={textGeometry} material={chromeText}  position={[ 0, 0, 3]} /> */}
         <group ref={(group) => (donutsRef.current = group.children)} position={[ 0, 0, -1]}>

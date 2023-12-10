@@ -18,14 +18,12 @@
     padding: 7rem 0rem;
   }
 
-    .projects_wrapper{
-        width: 100%;
-        height: 100%;
-
-        display: flex;
-    
-        justify-content: center;
-    }
+  .section{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
     .swiper_projects{
         height: 100%;
@@ -33,12 +31,15 @@
     
     }
 
-    .section{
-      height: 100%;
+  
+    .projects_wrapper{
       width: 80%;
+      height: 100%;
+
       display: flex;
+  
       justify-content: center;
-    }
+  }
 
     .projects_title{
         font-family: 'Bebas Neue', sans-serif;
@@ -83,7 +84,7 @@
         box-shadow: inset 8px -8px 16px #070707,
                 inset -8px 8px 16px #1d1d1d;
         
-        border: 3px solid #121212;
+        // border: 3px solid #121212;
         margin: 1rem 0rem;
 
         width: auto;
@@ -91,21 +92,13 @@
         font-family: 'Bebas Neue', sans-serif;
         font-size: clamp(0.1rem, 0.1rem + 2vw, 5rem);
         font-weight: 500;
-        padding: 10px 10px;
+        padding: 10px 15px;
         // color: $primary-text-color;
         transition: all 0.3s ease-in-out;
 
         &:not(:last-child) {
 			  margin-right: 2.5rem;
 		    } 
-
-          &:hover {
-            background-color: $main-background-color;
-            color: $primary-text-color ;
-            border-color: $primary-text-color ;
-            border: solid;
-            transition: 0.3s;
-        }
     }
 
     .projects_filter_btn{
@@ -127,7 +120,7 @@
       box-shadow:  8px -8px 16px #070707,
                   -8px 8px 16px #070707;
 
-                }  
+    }  
 
     .projects_img_wrapper{
       display: flex;
@@ -139,6 +132,12 @@
       width: 100%;
       height: 100%;
       padding: 20px;
+      
+      border: 5px solid #070707;
+      border-radius: 20px;
+      background: #121212;
+      box-shadow: inset 8px -8px 16px #070707,
+                  inset -8px 8px 16px #070707;
     }
 
       .projects_img{
@@ -205,7 +204,7 @@
         background: #121212;
         box-shadow: inset 8px -8px 16px #070707,
                 inset -8px 8px 16px #1d1d1d;
-       border: 3px solid #121212;
+      //  border: 3px solid #121212;
 
        transition: all 0.3s ease-in-out;
 
@@ -218,24 +217,43 @@
         font-weight: 500;
         padding: 4rem 2.5rem;
 
-        &:hover {
-          background-color: $main-background-color;
-          color: $primary-text-color ;
-          border-color: $primary-text-color ;
-          border: solid;
-          
-      }
+        &:hover{
+          color: #00b7ff;
+          box-shadow: inset 8px -8px 16px #070707,  
+          inset -8px 8px 16px #070707;				
+        }
+    
+        &:focus{
+          color: #00b7ff;
+          box-shadow: inset 8px -8px 16px #070707,  
+          inset -8px 8px 16px #070707;				
+        }
 
     
     }
     
 
+    
 
 
+    @media (max-width:1400px) {
+      .projects{
+        height: 100%;
+        padding-bottom: 20px;
+      }
 
-    @media (max-width:1024px) {
       .projects_wrapper{
-        padding: 2rem 2rem;
+        margin: 0 20px;
+        padding: 0;
+        width: 100%;
+
+        flex-direction: column;        
+      }
+
+      .projects_content{
+        width: 100%;
+        padding-top: 20px;
+        padding-left: 0;
       }
 
       .projects_describ_title{
@@ -246,7 +264,11 @@
         font-size: clamp(0.1rem, 0.1rem + 3vw, 5rem);
       }
 
-      .projects_filter_button{
+      .projects_img_border{
+        width: 100%;
+      }
+
+      .projects_filter{
         margin: 0.3rem 0;
         &:not(:last-child) {
           margin-right: 1rem;
@@ -257,6 +279,9 @@
         margin-top: 3rem;
         padding: 2rem ;
       }
+
+    
+
     }
 
     @media (max-width:800px) {
@@ -270,19 +295,12 @@
       }
 
       .projects_wrapper{
-        flex-direction: column;
-        width: 100%;
-        padding: 0 20px;
-        padding-bottom: 40px;
+        
       }
       .projects_img_border{
         width: 100%;
       }
-      .projects_content{
-        width: 100%;
-        padding-top: 20px;
-        padding-left: 0;
-      }
+      
       .projects_button_wrapper{
         // justify-content: left;
       }
@@ -302,12 +320,7 @@
         width: 100%;
       }
 
-      .projects_filter_button{
-        margin: 0.1rem 0;
-        &:not(:last-child) {
-          margin-right: 0.3rem;
-          } 
-      }
+      
     }
     
 

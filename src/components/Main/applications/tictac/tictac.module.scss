@@ -36,9 +36,12 @@
 
 .btn:hover {
     cursor: pointer;
-    background-color: rgba(240, 240, 240, 0.692);
+    background-color: #09b9ff;
     transform:scale(1.05);
 }
+
+
+
 
 .btn:disabled {
     color: black;
@@ -65,7 +68,7 @@
 .list{
     margin: 0px;
     padding-left: 50px;
-	font-size: clamp(0.1rem, 0.1rem + 3vw, 8rem);
+	font-size: clamp(0.1rem, 0.1rem + 3vw, 5rem);
 }
 
 .li{
@@ -76,23 +79,29 @@
 .reset {
     border-radius: 10px;
     background: #121212;
-    box-shadow: inset 4px -4px 8px #070707,
-                inset -4px 4px 8px #1d1d1d;
+    box-shadow: inset 8px -8px 16px #070707,
+                inset -8px 8px 16px #1d1d1d;
         cursor: pointer;
     
         border: 3px solid #121212;
     
     padding: 5px 20px;
-	font-size: clamp(0.1rem, 0.1rem + 3vw, 8rem);
-    transition: all 0.2s ease-in-out;
+	font-size: clamp(0.1rem, 0.1rem + 3vw, 5rem);
+    transition: all 0.3s ease-in-out;
     margin: 0 0 10px 0;
 
     width: 100%;
 
-    &:hover {
-        border: 3px solid #fff;
+    &:focus{
+        outline: none;
+        color: #00b7ff;
+        background-color: #000000;
+    }
 
-        transform:scale(1.05);
+    &:hover{
+        outline: none;
+        color: #00b7ff;
+        background-color: #000000;
     }
 }
 
