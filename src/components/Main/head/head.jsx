@@ -70,6 +70,8 @@ const Head = () => {
           className="link">
           {startText}  
         </h2>
+        
+        <p className={styles.main_desc}> portfolio still in progress  </p>
       </div>
     </div>
     </section>
