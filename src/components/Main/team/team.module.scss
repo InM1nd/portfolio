@@ -29,10 +29,12 @@
 
     padding: 50px;
     margin: 50px;
-    border-radius: 20px;
-        background: #121212;
-        box-shadow:  8px -8px 16px #070707,
-                    -8px 8px 16px #070707;  
+
+    border: 5px solid #070707;
+      border-radius: 20px;
+      background: #121212;
+      box-shadow: inset 8px -8px 16px #070707,
+                  inset -8px 8px 16px #070707; 
 }
 
 
@@ -217,8 +219,22 @@
         padding-left: 0;
     }
 
+    .underimg{
+        align-items: center;
+    }
+
+    .title{
+        font-size: clamp(1rem, 1rem + 5vw, 15rem);
+        
+    }
+    
+    .track{   
+        font-size: clamp(1rem, 0.5rem + 3vw, 10rem);  
+    }
+
     .text{
         margin: 0;
+        font-size: clamp(0.1rem, 0.1rem + 3vw, 5rem);
     }
 
     .icon_wrapper{

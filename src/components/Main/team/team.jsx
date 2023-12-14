@@ -43,6 +43,7 @@ const Team = () => {
 
                 <div className={styles.text}>
                 <h2 className={styles.subtitle}>Profile</h2> 
+                <p>
                     My primary goal is to create visually appealing, functional, and user-friendly 
                     websites and applications. 
                     I believe that a combination of creative solutions and technology is key to success. 
@@ -50,6 +51,7 @@ const Team = () => {
                     improve my skills.
                     I strongly emphasize teamwork, clear and transparent communication is crucial for 
                     successful project implementation.
+                </p>
                 </div>
                 
                 <div className={styles.text}>

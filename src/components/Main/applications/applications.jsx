@@ -19,8 +19,9 @@ const Applications = () => {
                         <div className={styles.description}>
                         <h2 className={styles.sub_title}>TicTacToe</h2>  
                         <p className={styles.text}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia blandit sodales. 
-                        In congue eros arcu, ut cursus felis placerat ut. Proin pretium vulputate dapibus. Donec posuere tristique eros. In ultricies purus sit amet est rutrum tempus. 
+                        Mini Tic-Tac-Toe app—it's a fun little game for two. 
+                        Take turns placing Xs or Os on the 3x3 board, and whoever lines up three in a row first wins. 
+                        I whipped it up as a coding and game development practice, making it more than just a game — it's a showcase of my skills in the portfolio.
                         </p>
                     </div> 
                     </div>
@@ -33,9 +34,11 @@ const Applications = () => {
                     <div className={styles.content}><Weather/></div>
                     <div className={styles.description}>
                     <h2 className={styles.sub_title}>Weather Forecast</h2> 
-                        <p className={styles.text}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia blandit sodales. 
-                        In congue eros arcu, ut cursus felis placerat ut. Proin pretium vulputate dapibus. Donec posuere tristique eros. In ultricies purus sit amet est rutrum tempus. 
+                        <p className={styles.text}>                         
+                        Check out my Weather Checker app—it's like a skill-boosting project. 
+                        Easily peep at the current weather using OpenWeatherMap. 
+                        Get live updates on temperature, humidity, and forecasts for wherever you fancy. 
+                        I've seamlessly weaved in API magic to amp up the portfolio's functionality.
                         </p> 
                     </div> 
                     </div> 
@@ -50,8 +53,10 @@ const Applications = () => {
                     <div className={styles.description}> 
                     <h2 className={styles.sub_title}>Drawing Place</h2> 
                         <p className={styles.text}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia blandit sodales. 
-                        In congue eros arcu, ut cursus felis placerat ut. Proin pretium vulputate dapibus. Donec posuere tristique eros. In ultricies purus sit amet est rutrum tempus. 
+                        Drawing App — keeping it plain and effective. 
+                        You've got the basics: change brush color, tweak size, and wipe the canvas clean. 
+                        Nothing fancy, just a handy tool for letting your creative juices flow.   
+                        <br/> P.S.  App has some issues with positioning of the brush. Gonna be fixed soon.
                         </p>
                     </div> 
 						  </div>

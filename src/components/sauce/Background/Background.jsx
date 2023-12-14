@@ -15,53 +15,13 @@ import styles from "./Background.module.scss"
 
 const Scene = ({   }) => {
 
-  const textRef = useRef();
+  const pointLight = useRef();
   const donutsRef = useRef([]);
-
+  const pointLightOrbitRadius = 5;
   const fontLoader = new FontLoader();
   const font = fontLoader.parse(Font);
 
   // const material = new THREE.MeshNormalMaterial()
-
-  const chromeText = new MeshStandardMaterial({
-    color: "##121212", // Базовый цвет (можете оставить белый, так как текстура будет покрывать его)
-    // metalness: 0.3,     // Металличность на максимуме для эффекта хрома
-    roughness: 0.1,     // Шероховатость на минимуме
-    // wireframe: true,
-    map: new THREE.TextureLoader().load(gradientTexture)
-  });
-
-  const chromeDonut = new MeshStandardMaterial({
-    color: "#121212", // Базовый цвет (можете оставить белый, так как текстура будет покрывать его)
-    metalness: 1,     // Металличность на максимуме для эффекта хрома
-    roughness: 1,     // Шероховатость на минимуме
-    // wireframe: true,
-    
-  });
-
- 
-
-  // Text
-
-    const createTextGeometry = (font) => {
-    const textGeometry = new TextGeometry('Oleksandr Zabolotnyi', {
-      font: font,
-      size: 1.2,
-      height: 0.4,
-      curveSegments: 115,
-      bevelEnabled: true,
-      bevelThickness: 0.02,
-      bevelSize: 0.02,
-      bevelOffset: 0,
-      bevelSegments: 10,
-    });
-
-    textGeometry.center();
-    return textGeometry;
-    
-  };
-
-  const textGeometry = createTextGeometry(font);
 
   // DONUT
   
@@ -77,7 +37,6 @@ const Scene = ({   }) => {
 
       const [isHovered, setHover] = useState(false);
 
-   
       const donut = (
         
         <Sphere
@@ -85,23 +44,14 @@ const Scene = ({   }) => {
           args={[1, 64, 32]}
           position={position}
           rotation={[Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI]}
-          // scale={[
-          //   Math.random() / 2, // Adjusted to ensure a more spherical shape
-          //   Math.random() / 2,
-          //   Math.random() / 1.1,
-          // ]}
-            >
+        >
             <meshPhysicalMaterial
              onPointerOver={() => setHover(true)}
              onPointerOut={() => setHover(false)}
               attach="material"
               color={'#121212'}
-              // transparent
-              // opacity={0.9}
               roughness={10}
-              // metalness={1}
-              // clearcoat={0}
-              // clearcoatRoughness={0.9}
+              metalness={0}
             />
             </Sphere>     
       );
@@ -111,39 +61,39 @@ const Scene = ({   }) => {
     return donuts;
   };
 
+
   
-//   useFrame(() => {
-//     for (let i = 0; i < donutsRef.current.length; i++) {
-//       const donut = donutsRef.current[i];
-//       donut.rotation.x += 0.0003; 
-//       donut.rotation.y += 0.0003; 
-//       donut.rotation.z += 0.0003; 
   
-//       donut.position.x += 0.1; 
-//     }
-//   });
+  useFrame(() => {
+    for (let i = 0; i < donutsRef.current.length; i++) {
+      const donut = donutsRef.current[i];
+      donut.rotation.x += 0.5; 
+      donut.rotation.y += 0.5; 
+      donut.rotation.z += 0.5; 
+    }
+
+    // Move point light in orbit
+    const time = performance.now() * 0.0003;
+    const pointLightX = Math.cos(time) * pointLightOrbitRadius;
+    const pointLightY = Math.sin(time) * pointLightOrbitRadius;
+    const pointLightZ = -4; // Adjust Z position as needed
+    pointLight.current.position.set(pointLightX, pointLightY, pointLightZ);
+    
+  });
 
   const donuts = generateDonuts(70);
   // Generate all stuff
-
-
 
   return (
     <>
         <directionalLight color={0xffffff}  position={[0, 0, 10]} intensity={1} castShadow  />
         <directionalLight color={0xffffff}  position={[-10, 0, 10]} intensity={1} castShadow  />
-        {/* <directionalLight color={0xffffff}  position={[10, 0, 10]} intensity={1} castShadow  /> */}
-        {/* <directionalLight color={0xffffff}  position={[0, 0, -10]} intensity={1} castShadow  /> */}
-        {/* <directionalLight color={0x0099ff}  position={[-5, 0, 10]} intensity={10} castShadow  /> */}
-        {/* <directionalLight color={0x00F0FF}  position={[5, 0, 10]} intensity={10} castShadow  /> */}
-        {/* <directionalLight color={0x00b7ff}  position={[0, 0, 10]} intensity={10} castShadow  /> */}
 
-        {/* <directionalLight color={0x0099ff}  position={[-5, 0, -10]} intensity={1000} castShadow  /> */}
-        {/* <directionalLight color={0x00F0FF}  position={[5, 0, -10]} intensity={20} castShadow  /> */}
-        {/* <ambientLight color={0x00b7ff}  position={[0, 0, 0]} intensity={10} castShadow  /> */}
+        <pointLight ref={pointLight}  color={0x00b7ff}  position={[-5, 0,  -4]} intensity={1000}/>
+        <pointLight ref={pointLight}  color={0x00b7ff}  position={[5, 0,  -4]} intensity={1000} />
 
-        <pointLight color={0x00b7ff}  position={[-5, 0,  -4]} intensity={1000}/>
-        <pointLight color={0x00b7ff}  position={[5, 0,  -4]} intensity={1000} />
+        {/* <pointLight ref={pointLight} color={0x00b7ff} position={[0, 1, 1]} intensity={1000} /> */}
+        {/* <pointLight ref={pointLight} color={0x00b7ff} position={[0, -1, -1]} intensity={100} /> */}
 
         {/* <mesh ref={textRef} geometry={textGeometry} material={chromeText}  position={[ 0, 0, 3]} /> */}
         <group ref={(group) => (donutsRef.current = group.children)} position={[ 0, 0, -1]}>
