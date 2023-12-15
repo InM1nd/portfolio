@@ -25,13 +25,13 @@ const Projects = () => {
           <IceCream/>
         </div>    
         <div className={styles.projects}>
-          <Oilfaces/>
+          <Skelya/> 
         </div>
         <div className={styles.projects}>
           <Skeptic/>
         </div>
         <div className={styles.projects}>
-          <Skelya/>
+          <Oilfaces/>
         </div>
       </div>
     )

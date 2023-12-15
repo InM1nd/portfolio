@@ -27,8 +27,9 @@ const Oilfaces = () => {
                 <div className={styles.projects_filter_button}>Cloud Server Deploy</div>     
             </div >
             <div className={styles.projects_content_descib}>
-                    <div className={styles.projects_content_paragraph}>Blue is perfect. It’s the most popular and the most relaxing colour. Blue is also the base of the color spectrum. No blue — no color: all other colors may be 
-                    created only by mixing blue, red and green. Web is pure blue: from the first site by CERN till now. Why not to create another beatiful site?
+                    <div className={styles.projects_content_paragraph}>
+                      Developing creative agency landing page using React + Vite, Three.js for 3D interactive elements 
+                      and deploy it using cloud services.
                     </div>
             </div>
             <div className={styles.projects_button_wrapper}>

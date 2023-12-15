@@ -25,8 +25,10 @@ const Skelya = () => {
                 <div className={styles.projects_filter_button}>WordPress</div>    
             </div >
             <div className={styles.projects_content_descib}>
-                    <div className={styles.projects_content_paragraph}>Blue is perfect. It’s the most popular and the most relaxing colour. Blue is also the base of the color spectrum. No blue — no color: all other colors may be 
-                    created only by mixing blue, red and green. Web is pure blue: from the first site by CERN till now. Why not to create another beatiful site?
+                    <div className={styles.projects_content_paragraph}>
+                      Our friends approached us with an exciting startup idea and needed help launching it. 
+                      They envisioned a career service targeting young professionals and job switchers which is currently an underrepresented niche.
+                      My mission is gonna be to create landing page with couple of pages.
                     </div>
                     {/* <div className={styles.projects_content_paragraph}> No blue — no color: all other colors may be created only by mixing blue, red and green. Web is pure blue: from the
                     first site by CERN till now. Why not to create another beatiful site?

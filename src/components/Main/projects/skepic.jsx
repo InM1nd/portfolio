@@ -24,8 +24,10 @@ const Skeptic = () => {
               <div className={styles.projects_filter_button}>UX|UI Design</div>         
             </div >
             <div className={styles.projects_content_descib}>
-                    <div className={styles.projects_content_paragraph}>Blue is perfect. It’s the most popular and the most relaxing colour. Blue is also the base of the color spectrum. No blue — no color: all other colors may be 
-                    created only by mixing blue, red and green. Web is pure blue: from the first site by CERN till now. Why not to create another beatiful site?
+                    <div className={styles.projects_content_paragraph}>
+                      For the past ten years, Roman has explored various areas of sports and health, from fitness and martial arts to rehabilitation and nutrition. 
+                      He's developed his own fitness approach and has been teaching it for the past few years. 
+                      Now, he's ready to start a fitness platform to teach his methods to a wider audience.
                     </div>
                     {/* <div className={styles.projects_content_paragraph}> No blue — no color: all other colors may be created only by mixing blue, red and green. Web is pure blue: from the
                     first site by CERN till now. Why not to create another beatiful site?
