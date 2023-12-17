@@ -13,15 +13,15 @@ import './App.module.scss';
 function App () {
   return (
     
-    <Routes>
-      <Route path="/portfolio" element={<SharedLayout />}>
-        <Route index element={<Head />} /> 
-        <Route path="/portfolio/projects" element={<Projects />} /> 
-        <Route path="/portfolio/applications" element={<Applications />} /> 
-        <Route path="/portfolio/about" element={<About />} /> 
-        <Route path="/portfolio/greet" element={<Talk />} /> 
-        <Route path="*" element={<Head />} /> 
-      </Route>
+    <Routes basename="/portfolio">
+        <Route path="/portfolio" element={<SharedLayout />}>
+          <Route index element={<Head />} /> 
+          <Route path="projects" element={<Projects />} /> 
+          <Route path="applications" element={<Applications />} /> 
+          <Route path="about" element={<About />} /> 
+          <Route path="greet" element={<Talk />} /> 
+          <Route path="*" element={<Head />} /> 
+        </Route>
     </Routes>
     
   );
