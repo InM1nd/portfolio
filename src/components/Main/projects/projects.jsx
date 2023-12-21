@@ -9,11 +9,11 @@ import Dashboard from './dashboard'
 import Skelya from './skelya'
 import Filmoteka from './filmoteka'
 import IceCream from './icecream'
+import Nutrify from './nutrify'
 
 
 const Projects = () => {
     return (
-      
       <div className={styles.wrapepr}>
         <div className={styles.projects}>
           <Dashboard/>
@@ -23,7 +23,10 @@ const Projects = () => {
         </div>
         <div className={styles.projects}>
           <IceCream/>
-        </div>    
+        </div>  
+        <div>
+          <Nutrify/>
+        </div>  
         <div className={styles.projects}>
           <Skelya/> 
         </div>
