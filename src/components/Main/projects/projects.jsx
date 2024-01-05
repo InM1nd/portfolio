@@ -24,7 +24,7 @@ const Projects = () => {
         <div className={styles.projects}>
           <IceCream/>
         </div>  
-        <div>
+        <div className={styles.projects}>
           <Nutrify/>
         </div>  
         <div className={styles.projects}>

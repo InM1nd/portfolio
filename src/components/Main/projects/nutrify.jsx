@@ -1,5 +1,5 @@
 import styles from './projects.module.scss'
-// import Teple from '../../../img/other/123.jpg'
+import Teple from '../../../img/other/Nutrify.png'
 // import Teple from '../../../img/other/Filmoteka.png'
 
 const Nutrify = () => {
@@ -8,8 +8,7 @@ const Nutrify = () => {
         <div className={styles.projects_wrapper}>
                     <div className={styles.projects_img_border}>
                       <div className={styles.projects_img_wrapper}>
-                      {/* <img className={styles.projects_img} src={Teple} alt='SOON..'/> */}
-                        Picture will be soon!
+                      <img className={styles.projects_img} src={Teple} alt='SOON..'/>
                       </div>
                   </div>
             <div  className={styles.projects_content}>

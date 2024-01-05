@@ -21,9 +21,7 @@ const IceCream = () => {
             <div className={styles.projects_filter}>
                 <div className={styles.projects_filter_button}>HTML</div>
                 <div className={styles.projects_filter_button}>SCSS</div>
-                <div className={styles.projects_filter_button}>JS</div>
-                <div className={styles.projects_filter_button}>FireBase</div>
-                <div className={styles.projects_filter_button}>MovieDB API</div>    
+                <div className={styles.projects_filter_button}>JS</div>   
             </div >
             <div className={styles.projects_content_descib}>
                     <div className={styles.projects_content_paragraph}> 
