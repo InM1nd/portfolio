@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./weather.module.scss"; 
-import axios from 'axios';
-
 
 const BASE_URL = 'https://api.openweathermap.org';
 const API_KEY = 'b8cdefe33c7dc142f0fe3da4ae1bf5e8';
@@ -38,10 +36,8 @@ const Weather = () => {
 }
 
 
-const Search = (props) => {
-
+const Search = ({setWeatherData}) => {
     const [city, setCity] = useState ("");
-    const {weatherData: setWeatherData} = props;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -88,9 +84,7 @@ const Search = (props) => {
 }
 
 
-const Result = (props) => {
-
-    const {weatherData} = props;
+const Result = ({weatherData}) => {
     
     if (!weatherData) {
         return <div>Loading...</div>;
