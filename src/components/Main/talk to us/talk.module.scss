@@ -139,6 +139,24 @@
 
 }
 
+.successMessage{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000000f1;
+    
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1rem, 1rem + 3vw, 8rem);
+}
+
 
 @media (max-width:800px) { 
     .talk{

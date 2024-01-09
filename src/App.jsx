@@ -11,8 +11,7 @@ import './App.module.scss';
 
 
 function App () {
-  return (
-    
+  return (  
     <Routes basename="/portfolio">
         <Route path="/portfolio" element={<SharedLayout />}>
           <Route index element={<Head />} /> 
@@ -23,7 +22,7 @@ function App () {
           <Route path="*" element={<Head />} /> 
         </Route>
     </Routes>
-    
+
   );
 }
 

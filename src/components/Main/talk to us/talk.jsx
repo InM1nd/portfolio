@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState} from 'react';
 import emailjs from '@emailjs/browser';
 
 // import { Canvas } from "@react-three/fiber"
@@ -10,6 +10,7 @@ import styles from "./talk.module.scss";
 const About = () => {
 
     const form = useRef();
+    const [isSuccess, setSuccess] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -17,22 +18,19 @@ const About = () => {
     emailjs.sendForm('service_akm93ow', 'template_0d6shyb', form.current, 'zbsLT_FXTpYzv9OGr')
       .then((result) => {
           console.log(result.text);
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+            form.current.reset();
+          }, 2000);
       }, (error) => {
           console.log(error.text);
       });
   };
 
     return (
-
         <div className={styles.talk}>
-            {/* <Canvas camera={{ position: [5, 5, 5], fov: 25 }}>
-                <ambientLight intensity={0.5}/>
-                <directionalLight position={[1,3,3]} />
-                <ContactShadows frames={1} position={[0, -0.5, 0]} blur={1} opacity={0.75} />
-                <ContactShadows frames={1} position={[0, -0.5, 0]} blur={3} color="orange" />
-                <OrbitControls enableZoom={false} minPolarAngle={0} maxPolarAngle={Math.PI / 2.1} />
-                <RoundedTablet/>
-            </Canvas> */}
+            
             <div  className={styles.text}>
                 Write your Hi message to me!
             </div>
@@ -46,7 +44,13 @@ const About = () => {
                 <textarea className={styles.textarea} name="message" />
                 <input className={styles.button} type="submit" value="Send" />
                 </div>
-            </form>
+            </form>   
+            {isSuccess && (
+                <div className={styles.successMessage}>
+                <p>Message sent successfully!</p> 
+                <p>Form will be cleared shortly.</p>
+            </div>
+            )}
         </div>
     )
 }

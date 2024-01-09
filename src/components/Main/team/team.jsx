@@ -43,7 +43,7 @@ const Team = () => {
 
                 <div className={styles.text}>
                 <h2 className={styles.subtitle}>Profile</h2> 
-                <p>
+                <p >
                     My primary goal is to create visually appealing, functional, and user-friendly 
                     websites and applications. 
                     I believe that a combination of creative solutions and technology is key to success. 
@@ -83,11 +83,15 @@ const Team = () => {
                     </div>
 
                     <div className={styles.gridItem}> 
-                        <img className={styles.icon}src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
+                        <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
                     </div>
                     
                     <div className={styles.gridItem}> 
                         <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" />
+                    </div>
+
+                    <div className={styles.gridItem}>
+                    <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original-wordmark.svg" />
                     </div>
 
                 </div>
