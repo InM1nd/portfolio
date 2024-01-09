@@ -91,7 +91,7 @@ const Team = () => {
                     </div>
 
                     <div className={styles.gridItem}>
-                    <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original-wordmark.svg" />
+                        <img className={styles.icon} src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-line.svg" />
                     </div>
 
                 </div>
