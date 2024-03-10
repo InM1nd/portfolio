@@ -35,7 +35,7 @@ const Container = styled.div`
 
 const ImageConatiner = styled.div`
   padding: 20px;
-  border-radius: 50px;
+  border-radius: 30px;
   background-color: #383637;
   display: flex;
   height: auto;
@@ -54,7 +54,7 @@ const ImageConatiner = styled.div`
 `;
 
 const Image = styled.img`
-  border-radius: 50px;
+  border-radius: 30px;
   max-height: 100%;  
 `;
 
@@ -124,7 +124,7 @@ const Wrapper = styled.div`
 
 const Card = styled.div`
   padding: 20px;
-  border-radius: 50px;
+  border-radius: 30px;
   background-color: #383637;
 `;
 
