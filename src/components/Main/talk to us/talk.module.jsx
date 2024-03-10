@@ -29,7 +29,7 @@ const Container = styled.div`
 const Card = styled.div`
     grid-column: span 4;
     background: #383637;
-    border-radius: 20px;
+    border-radius: 30px;
 
    
 
