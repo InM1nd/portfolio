@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from "./tictac.module.scss";
+import {Main, Desk, Row, Button, Result, Reset, Steps, List, ListItem } from "./tictac.module.jsx";
 
 
 
@@ -7,11 +7,10 @@ import styles from "./tictac.module.scss";
 
 function Square({value, onSquareClick}) {
 
-  return <button 
-    className={styles.btn}
+  return <Button
     onClick={onSquareClick}>
     {value}
-    </button>;
+    </Button>;
 }
 
 
@@ -41,8 +40,7 @@ function calculateWinner(squares) {
 // BOARD COMPONENT //
 
 function Board ({xIsNext, squares, onPlay}) {
-  // const [xIsNext, setXIsNext] = useState(true);
-  // const [squares, setSquares] = useState(Array(9).fill(null));
+
 
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) {
@@ -71,28 +69,26 @@ function Board ({xIsNext, squares, onPlay}) {
 
 
   return (
-    <div className={styles.wrapper}>
-    <section className={styles.board}>
+    <Desk>
       <>
-      <div className={styles.row}>
+      <Row>
         <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
         <Square value={squares[1]} onSquareClick={() => handleClick(1)}/>
         <Square value={squares[2]} onSquareClick={() => handleClick(2)}/>
-      </div>
-      <div className={styles.row}>
+      </Row>
+      <Row>
         <Square value={squares[3]} onSquareClick={() => handleClick(3)}/>
         <Square value={squares[4]} onSquareClick={() => handleClick(4)}/>
         <Square value={squares[5]} onSquareClick={() => handleClick(5)}/>
-      </div>
-      <div className={styles.row}>
+      </Row>
+      <Row>
         <Square value={squares[6]} onSquareClick={() => handleClick(6)}/>
         <Square value={squares[7]} onSquareClick={() => handleClick(7)}/>
         <Square value={squares[8]} onSquareClick={() => handleClick(8)}/>
-      </div>
-      <div className={styles.result}>{status}</div>
+      </Row>
+      <Result>{status}</Result>
     </>
-    </section>
-    </div>
+    </Desk>
   );
 };
 
@@ -129,20 +125,20 @@ const TicTac = () => {
       description = 'Go to game start';
     }
     return ( 
-      <li className={styles.li} key={move}>
-        <button className={styles.reset} onClick={() => jumpTo(move)}>{description}</button>
-      </li>
+      <ListItem key={move}>
+        <Reset onClick={() => jumpTo(move)}>{description}</Reset>
+      </ListItem>
       
     )
   })
 
   return (
-    <div className={styles.tictac}>
+    <Main>
     <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
-    <div className={styles.steps} >
-      <ol className={styles.list}>{moves}</ol>
-      </div>
-    </div>
+      <Steps>
+        <List>{moves}</List>
+      </Steps>
+    </Main>
   )
 }
 

@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-import styles from "./pallette.module.scss";
+import {Palette, CanvasCursor, CanvasWrapper, Canvas, BrushStyle, BrushSize, 
+  BrushSizeCounter, BrushSizeControl, BrushSizeToggle, BrushSizeStart, 
+  BrushSizeFinish, ButtonList, Button } from "./pallette.module.jsx";
 
 
 
@@ -12,6 +14,41 @@ function InteractiveCanvas() {
   const [cursorBorderColor, setCursorBorderColor] = useState('transparent');
   const [brushSize, setBrushSize] = useState(8);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+  const [canvasWidth, setCanvasWidth] = useState(1200);
+  const [canvasHeight, setCanvasHeight] = useState(900);
+
+
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      const viewportWidth = window.innerWidth;
+      if (viewportWidth <= 500) {
+        setCanvasWidth(320);
+        setCanvasHeight(600);
+      } else if (viewportWidth <= 960) {
+        setCanvasWidth(420);
+        setCanvasHeight(600);
+      } else if (viewportWidth <= 1500) {
+        setCanvasWidth(900);
+        setCanvasHeight(600);
+      } else {
+        setCanvasWidth(1200);
+        setCanvasHeight(900);
+      }
+    };
+
+    // Вызываем функцию handleResize() при загрузке страницы и при изменении размеров окна
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    // Очищаем слушатель событий при размонтировании компонента
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   const drawLine = (context, x1, y1, x2, y2) => {
     context.beginPath();
@@ -86,63 +123,47 @@ function InteractiveCanvas() {
 
   return (
     
-    <div style={{ position: 'relative' }}
-      className={styles.pallette}>
-    <div className={styles.canvas_wrapper}>
-    {/* <div
-      ref={cursorSmallRef}
-      className={styles.canvasCursor}
-      style={{
-        width: `${brushSize * 2 }px`, // Умножьте размер кисти на 2, чтобы получить диаметр круга
-        height: `${brushSize * 2 }px`, // Умножьте размер кисти на 2, чтобы получить диаметр круга
-        backgroundColor: currentColor,
-        border: `1px solid ${cursorBorderColor}`, // Цвет кисти будет цветом курсора
-        transform: `translate(-30%, 100%) scale(${brushSize / 20})`,
-        // left: `${cursorPosition.x - brushSize / 2}px`,
-        // top: `${cursorPosition.y - brushSize / 2}px`,
-      }}
-      /> */}
-
-    <canvas
-        className={styles.canvas}
+    <Palette >
+    <CanvasWrapper>
+    <Canvas
         ref={canvasRef}
-        width={950}
-        height={600}
+        width={canvasWidth}
+        height={canvasHeight}
       > 
-      
-      </canvas>
-      </div>
+  
+      </Canvas>
+      </CanvasWrapper>
 
-      <div  className={styles.brush_style}>
-      <div className={styles.brush_size}>
+      <BrushStyle>
+      <BrushSize>
 
-      <span className={styles.brush_size_counter}>{brushSize} pixels </span>
-      <div className={styles.brush_size_control}>
-      <span className={styles.brush_size_start}>1</span>
-      <input 
-      className={styles.brush_size_toggle}
+      <BrushSizeCounter>{brushSize} pixels </BrushSizeCounter>
+      <BrushSizeControl>
+      <BrushSizeStart>1</BrushSizeStart>
+      <BrushSizeToggle
       type="range" 
       min="1"
       max="40"
       step="3"
       value={brushSize}
       onChange={(e) => setBrushSize(parseInt(e.target.value))}/>
-      <span className={styles.brush_size_finish}>40</span>
+      <BrushSizeFinish>40</BrushSizeFinish>
       
-      </div>
-      </div>
-      <div className={styles.button_list}>
-      <button className={styles.button} onClick={() => {setCurrentColor('#121212'), setCursorBorderColor('white')}}>rubber</button>
-      <button className={styles.button} onClick={() => setCurrentColor('red')}>red</button>
-      <button className={styles.button} onClick={() => setCurrentColor('blue')}>blue</button>
-      <button className={styles.button} onClick={() => setCurrentColor('green')}>green</button>
-      <button className={styles.button} onClick={() => setCurrentColor('yellow')}>yellow</button>
-      <button className={styles.button} onClick={clearCanvas}>Clean</button>
-      </div>
-      </div>
+      </BrushSizeControl>
+      </BrushSize>
+      
+      <ButtonList>
+      <Button onClick={() => {setCurrentColor('#121212'), setCursorBorderColor('white')}}>rubber</Button>
+      <Button onClick={() => setCurrentColor('red')}>red</Button>
+      <Button onClick={() => setCurrentColor('blue')}>blue</Button>
+      <Button onClick={() => setCurrentColor('green')}>green</Button>
+      <Button onClick={() => setCurrentColor('yellow')}>yellow</Button>
+      <Button onClick={clearCanvas}>Clean</Button>
+      </ButtonList>
+      </BrushStyle>
 
       
-    </div>
+    </Palette>
   );
 }
 
@@ -152,26 +173,3 @@ export default InteractiveCanvas;
 
 
 
-
-
-
-
-
-
-
-
-
-
-  // const handleCanvasMouseEnter = (e) => {
-  //   const cursorSmall = cursorSmallRef.current;
-  //   if (cursorSmall) {
-  //     cursorSmall.style.display = 'block'; // Показать кастомный курсор при входе на канвас.
-  //   }
-  // };
-  
-  // const handleCanvasMouseLeave = (e) => {
-  //   const cursorSmall = cursorSmallRef.current;
-  //   if (cursorSmall) {
-  //     cursorSmall.style.display = 'none'; // Скрыть кастомный курсор при выходе из канваса.
-  //   }
-  // };

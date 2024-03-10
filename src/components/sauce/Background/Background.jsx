@@ -49,7 +49,7 @@ const Scene = ({   }) => {
              onPointerOver={() => setHover(true)}
              onPointerOut={() => setHover(false)}
               attach="material"
-              color={'#121212'}
+              color={'#171516'}
               roughness={10}
               metalness={0}
             />
@@ -89,8 +89,8 @@ const Scene = ({   }) => {
         <directionalLight color={0xffffff}  position={[0, 0, 10]} intensity={1} castShadow  />
         <directionalLight color={0xffffff}  position={[-10, 0, 10]} intensity={1} castShadow  />
 
-        <pointLight ref={pointLight}  color={0x00b7ff}  position={[-5, 0,  -4]} intensity={1000}/>
-        <pointLight ref={pointLight}  color={0x00b7ff}  position={[5, 0,  -4]} intensity={1000} />
+        <pointLight ref={pointLight}  color={0x9C0312}  position={[-5, 0,  -4]} intensity={1000}/>
+        <pointLight ref={pointLight}  color={0x9C0312}  position={[5, 0,  -4]} intensity={1000} />
 
         {/* <pointLight ref={pointLight} color={0x00b7ff} position={[0, 1, 1]} intensity={1000} /> */}
         {/* <pointLight ref={pointLight} color={0x00b7ff} position={[0, -1, -1]} intensity={100} /> */}

@@ -1,10 +1,10 @@
 import React , { useRef, useState, useEffect } from "react"
-import styles from "./head.module.scss"
+import {Main, Subtitle, Title, Text } from "./head.module.jsx"
 
 const Head = () => {
 
-  const startText = 'oleksandr zabolotnyi';
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  
+  const startText = 'HI. I’m Alex.';
+  const letters = "abcdfghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";  
 
   const animateText = (target, originalText) => {
       let iteration = 0;
@@ -61,20 +61,14 @@ const Head = () => {
   }, []);
 
   return (
-    <section className={styles.main}>
-    <div className={styles.main_text_container}>
-      <div 
-        className={styles.main_text}> 
-        <h2  
-          data-value={startText} 
-          className="link">
-          {startText}  
-        </h2>
-        
-        <p className={styles.main_desc}> portfolio still in progress  </p>
-      </div>
-    </div>
-    </section>
+    <Main> 
+        <Title data-value={startText}  className="link">
+            {startText}  
+        </Title>
+        <Subtitle>Front-End Developer.</Subtitle>
+        <Text> I'm passionate about crafting experiences that are engaging, accessible, and user-centric. </Text>
+        <Text> portfolio still in progress </Text>   
+    </Main>
   );
 };
 

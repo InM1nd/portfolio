@@ -10,7 +10,7 @@ const Main_Nav = () => {
         <div className={styles.main_nav}>
         <div className={styles.main_outlet}> 
         <Suspense>
-        <Outlet className={styles.main_outlet_color}/>
+            <Outlet className={styles.main_outlet_color}/>
         </Suspense>
         </div>
         </div>
