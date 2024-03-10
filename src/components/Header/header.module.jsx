@@ -51,17 +51,18 @@ const Menu = styled.ul`
 	gap: 20px;
 
 	@media (max-width: 550px) {
-		gap: 10px;
-    font-size: 18px;
+		font-size: 16px;
+    gap: 5px;
 
 		width: 100%;
 		justify-content: space-between;
   }
 
-	@media (max-width: 400px) {
-		font-size: 16px;
-    gap: 5px;
+	@media (max-width: 375px) {
+		font-size: 14px;
+    gap: 0;
   }
+
 `
 
 

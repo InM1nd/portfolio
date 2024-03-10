@@ -147,6 +147,10 @@ const Button = styled.button`
     background-color: white;
     color: black;
   }
+
+  @media (max-width: 500px) {
+        font-size: 18px;
+    }
 `;
 
 export {Palette, CanvasCursor, CanvasWrapper, Canvas, BrushStyle, BrushSize, 

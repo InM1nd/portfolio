@@ -65,6 +65,10 @@ const Result = styled.div`
   font-weight: 400;
   font-size: 48px;
   color: #fff;
+
+  @media (max-width: 500px) {
+        font-size: 28px;
+    }
 `;
 
 const Reset = styled.button`
@@ -95,6 +99,8 @@ const Reset = styled.button`
     margin-top: 20px;
     margin-bottom: 0;
   }
+
+  
 `;
 
 const Steps = styled.div`

@@ -65,11 +65,17 @@ const FormTitle = styled.h3`
     font-weight: 400;
     font-size: 48px;
     color: #fff;
+
+    @media (max-width: 500px) {
+        font-size: 28px;
+    }
 `
 
 const Label = styled.label`
     font-size: 48px;
     padding: 10px;
+
+    
 `;
 
 const Input = styled.input`
@@ -96,6 +102,10 @@ const Input = styled.input`
     &::placeholder{
         color: #fff;
     }
+
+    @media (max-width: 500px) {
+        font-size: 28px;
+    }
 `;
 
 const Textarea = styled.textarea`
@@ -116,6 +126,10 @@ const Textarea = styled.textarea`
 
     &::placeholder{
         color: #fff;
+    }
+
+    @media (max-width: 500px) {
+        font-size: 28px;
     }
 `;
 
@@ -144,6 +158,10 @@ const Button = styled.button`
 
     &:hover {
         
+    }
+
+    @media (max-width: 500px) {
+        font-size: 28px;
     }
 `;
 

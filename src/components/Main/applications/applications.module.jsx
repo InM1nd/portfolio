@@ -45,6 +45,10 @@ const CardTile = styled.h4`
   color: #fff;
   margin-bottom: 20px;
   margin-left: 20px;
+
+  @media (max-width: 500px) {
+        font-size: 28px;
+    }
 `
 
 const SmallCard = styled(Card)`

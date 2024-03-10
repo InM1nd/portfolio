@@ -49,12 +49,21 @@ const Container = styled.div`
     font-weight: 400;
     font-size: 24px;
     color: #fff;
+
+    @media (max-width: 500px) {
+        font-size: 18px;
+    }
 `
 
 const Card = styled.div`
     background-color: #171516;
     border-radius: 50px;
     padding: 40px;
+
+    @media (max-width: 500px) {
+        border-radius: 30px;
+        padding: 20px;
+    }
 `;
 
 const VerticalCard = styled(Card)`

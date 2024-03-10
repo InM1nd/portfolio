@@ -84,6 +84,7 @@ const Subtitle = styled.h1`
     font-size: 40px;
   }
 
+  
 
 `;
 
@@ -146,6 +147,10 @@ const CardTitle = styled.h3`
   color: #fff;
   margin-bottom: 10px;
   margin-left: 20px;
+
+  @media (max-width: 500px) {
+        font-size: 28px;
+    }
 `
 
 const CardTech = styled.div`

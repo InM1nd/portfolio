@@ -62,6 +62,8 @@ const SectionTitle = styled.h2`
   color: #fff;
 
   margin: 100px 0;
+
+  
 `
 
 
@@ -78,7 +80,12 @@ const Title = styled.h2`
   font-size: 48px;
   color: #fff;
 
-  margin-left: 20px; 
+  margin-left: 20px;
+  
+  @media (max-width: 500px) {
+      margin-left: 0px;
+      font-size: 28px;
+    }
 
 `
 
@@ -89,6 +96,11 @@ const Subtitle = styled.h3`
 
   margin-left: 20px; 
   padding-bottom: 20px;
+
+  @media (max-width: 500px) {
+      margin-left: 0px;  
+      font-size: 18px;
+    }
 `
 
 const Text = styled.p`
@@ -131,6 +143,11 @@ const Button = styled.a`
     color: #D9D9D9;
     background: #9C0312; // убираем блюр при наведении
   }
+
+  @media (max-width: 500px) {
+       
+      font-size: 24px;
+    }
 `
 
 
