@@ -67,7 +67,7 @@ const Head = () => {
         </Title>
         <Subtitle>Front-End Developer.</Subtitle>
         <Text> I'm passionate about crafting experiences that are engaging, accessible, and user-centric. </Text>
-        <Text> portfolio still in progress </Text>   
+        <Text> Portfolio still in progress. </Text>   
     </Main>
   );
 };
