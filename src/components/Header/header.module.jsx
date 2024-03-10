@@ -26,7 +26,7 @@ const Nav = styled.nav`
 	margin-top: 50px;
 	margin: 20px;
 
-	@media (max-width: 500px) {	
+	@media (max-width: 550px) {	
 		
     width: 100%;
 
@@ -50,7 +50,7 @@ const Menu = styled.ul`
 
 	gap: 20px;
 
-	@media (max-width: 500px) {
+	@media (max-width: 550px) {
 		gap: 10px;
     font-size: 18px;
 
