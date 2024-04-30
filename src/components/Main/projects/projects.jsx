@@ -1,9 +1,9 @@
 import {Main, Container, LargeCard, SmallCard, SectionTitle} from './projects.module.jsx'
 
-import Skeptic from './skepic'
+import Skelya from './skelya'
 import Oilfaces from './oilfaces'
 import Dashboard from './dashboard'
-import Skelya from './skelya'
+import Boardy from './boardy'
 import Filmoteka from './filmoteka'
 import IceCream from './icecream'
 import Nutrify from './nutrify'
@@ -12,7 +12,6 @@ import Head from '../head/head'
 
 const Projects = () => {
     return (
-
       <Main>
         <Head/>
         <Container>
@@ -20,11 +19,11 @@ const Projects = () => {
             <Dashboard/>
           </SmallCard>
           <LargeCard>
+            <Boardy/>
+          </LargeCard>  
+          <LargeCard>
             <Filmoteka/>
           </LargeCard>
-          <LargeCard>
-            <Skelya/>
-          </LargeCard>     
           <SmallCard>
             <IceCream/>
           </SmallCard>  
@@ -35,10 +34,9 @@ const Projects = () => {
             <Nutrify/>
           </SmallCard> 
           <LargeCard>
-            <Skeptic/>
+            <Skelya/>
           </LargeCard>
         </Container>
-
       </Main>
     )
   }
