@@ -13,7 +13,7 @@ const Skelya = () => {
           <source media="(min-width: 701px)" srcSet={LargeImage} />
           <Image src={LargeImage}/>
         </picture>
-        <Button href='skelya.careers'>Learn</Button>
+        <Button href='https://skelya.careers/'>Learn</Button>
       </Content>
       </Wrapper>
       
