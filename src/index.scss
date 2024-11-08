@@ -6,6 +6,8 @@
   line-height: 1.5;
   font-weight: 400;
 
+  
+
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #171516;
@@ -20,8 +22,13 @@
   
 }
 
+#root{
+  width: 100%;
+}
+
 html {
 
+  
   
   box-sizing: border-box;
   font-size: calc(100vh/1920*10);

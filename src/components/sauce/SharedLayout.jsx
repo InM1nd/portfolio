@@ -5,7 +5,7 @@ import Background from '../sauce/Background/Background'
 
 function SharedLayout (){
     return (
-        <>
+      <>
       <Background/>
       <Header/>
       <Main_Nav/>
