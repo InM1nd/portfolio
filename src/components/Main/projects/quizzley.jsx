@@ -13,7 +13,7 @@ const Quizzley = () => {
           <source media="(min-width: 701px) and (max-width: 900px)" srcSet={SmallImage} />
           <Image src={LargeImage} alt="Image" />
         </picture>
-          <Button href='https://balanced-presence-production.up.railway.app/'>Learn</Button> 
+          <Button href='https://quizzley-production.up.railway.app/'>Learn</Button> 
         </Content>
       </Wrapper>
     )
