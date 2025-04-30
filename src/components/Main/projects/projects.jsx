@@ -31,9 +31,6 @@ const Projects = () => {
         </Container>
         <SectionTitle>In Progress</SectionTitle>
         <Container>
-          <SmallCard>
-            <Nutrify/>
-          </SmallCard> 
           <LargeCard>
             <Skelya/>
           </LargeCard>
