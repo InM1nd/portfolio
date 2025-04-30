@@ -8,6 +8,7 @@ import Filmoteka from './filmoteka'
 import IceCream from './icecream'
 import Nutrify from './nutrify'
 import Head from '../head/head'
+import Quizzley from './quizzley.jsx'
 
 
 const Projects = () => {
@@ -19,14 +20,14 @@ const Projects = () => {
             <Dashboard/>
           </SmallCard>
           <LargeCard>
+            <Quizzley/>
+          </LargeCard> 
+          <LargeCard>
             <Boardy/>
           </LargeCard>  
-          <LargeCard>
-            <Filmoteka/>
-          </LargeCard>
           <SmallCard>
-            <IceCream/>
-          </SmallCard>  
+            <Filmoteka/>
+          </SmallCard> 
         </Container>
         <SectionTitle>In Progress</SectionTitle>
         <Container>

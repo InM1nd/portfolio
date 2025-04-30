@@ -10,7 +10,7 @@ const Filmoteka = () => {
         <Content>
         <picture>
           <source media="(max-width: 700px)" srcSet={SmallImage} />
-          <source media="(min-width: 701px)" srcSet={LargeImage} />
+          <source media="(min-width: 701px)" srcSet={SmallImage} />
           <Image src={LargeImage}/>
         </picture>
         <Button href='https://okolobaha-me.github.io/quentin-filmotino/#en'>Learn</Button>
