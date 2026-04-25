@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import ProjectLoadingPlaceholder from './ProjectLoadingPlaceholder'
 
 const TripweavePlanner = () => {
   const projectCode = 'TRIPWEAVE_PLANNER'
   const projectId = '007'
   const status = 25
-  const distortion = 15.2
+  const distortion = 82.4
   const projectDate = '2025-02-15'
   const techStack = ['React', 'Node.js', 'PostgreSQL']
 
@@ -32,6 +33,14 @@ const TripweavePlanner = () => {
             </div>
             <span className="font-mono text-xs text-terminal-danger animate-pulse">{status}%</span>
           </div>
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-xs md:text-sm text-terminal-danger animate-pulse">
+              DIST: <span className="font-bold">{distortion.toFixed(2)}%</span>
+            </span>
+            <span className="font-mono text-xs text-terminal-danger uppercase tracking-tighter">
+              [STRUCTURING_NODES...]
+            </span>
+          </div>
         </div>
       </div>
 
@@ -55,23 +64,13 @@ const TripweavePlanner = () => {
 
       <div className="relative border border-terminal-green/50 bg-black p-2">
         <div className="relative overflow-hidden min-h-[240px] md:min-h-[290px] flex items-center justify-center bg-terminal-dark/20">
-          <span className="font-mono text-terminal-green/30 text-xl uppercase tracking-widest">
-            [ IMAGE_PLACEHOLDER ]
+          <span className="font-mono text-terminal-green/30 text-xl uppercase tracking-widest animate-pulse">
+            [ MAPPING_NEURAL_PATHWAYS ]
           </span>
         </div>
       </div>
 
-      <div className="border border-terminal-green/50 bg-black p-3 space-y-2">
-        <div className="font-mono text-xs md:text-sm text-terminal-green/80 line-clamp-2 italic">
-          Data weaving in progress...
-        </div>
-      </div>
-
-      <div className="flex gap-3 pt-1">
-        <Button disabled className="flex-1 terminal-button project-cta-button project-cta-button-filled font-mono text-sm md:text-base uppercase tracking-wider py-3 opacity-50">
-          [ OFFLINE ]
-        </Button>
-      </div>
+      <ProjectLoadingPlaceholder />
     </div>
   )
 }

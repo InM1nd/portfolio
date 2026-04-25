@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import ProjectLoadingPlaceholder from './ProjectLoadingPlaceholder'
 
 const NebulaDashboard = () => {
   const projectCode = 'NEBULA_DASHBOARD'
   const projectId = '006'
   const status = 45
-  const distortion = 8.4
+  const distortion = 64.2 // High distortion for "filling" state
   const projectDate = '2025-01-10'
   const techStack = ['Next.js', 'Tailwind', 'Framer Motion']
 
@@ -32,6 +33,14 @@ const NebulaDashboard = () => {
             </div>
             <span className="font-mono text-xs text-terminal-warning">{status}%</span>
           </div>
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-xs md:text-sm text-terminal-danger animate-pulse">
+              DIST: <span className="font-bold">{distortion.toFixed(2)}%</span>
+            </span>
+            <span className="font-mono text-xs text-terminal-danger uppercase tracking-tighter">
+              [FILLING_BLOCKS...]
+            </span>
+          </div>
         </div>
       </div>
 
@@ -55,23 +64,13 @@ const NebulaDashboard = () => {
 
       <div className="relative border border-terminal-green/50 bg-black p-2">
         <div className="relative overflow-hidden min-h-[240px] md:min-h-[290px] flex items-center justify-center bg-terminal-dark/20">
-          <span className="font-mono text-terminal-green/30 text-xl uppercase tracking-widest">
-            [ IMAGE_PLACEHOLDER ]
+          <span className="font-mono text-terminal-green/30 text-xl uppercase tracking-widest animate-pulse">
+            [ INITIALIZING_GFX_ENGINE ]
           </span>
         </div>
       </div>
 
-      <div className="border border-terminal-green/50 bg-black p-3 space-y-2">
-        <div className="font-mono text-xs md:text-sm text-terminal-green/80 line-clamp-2 italic">
-          System description pending initialization...
-        </div>
-      </div>
-
-      <div className="flex gap-3 pt-1">
-        <Button disabled className="flex-1 terminal-button project-cta-button project-cta-button-filled font-mono text-sm md:text-base uppercase tracking-wider py-3 opacity-50">
-          [ ACCESS RESTRICTED ]
-        </Button>
-      </div>
+      <ProjectLoadingPlaceholder />
     </div>
   )
 }
