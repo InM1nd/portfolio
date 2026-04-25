@@ -1,6 +1,6 @@
-/** @type {import('next').NextConfig} */
 const isProduction = process.env.NODE_ENV === 'production'
-const useBasePath = process.env.USE_BASE_PATH === 'true' || isProduction
+const isVercel = process.env.VERCEL === '1' || !!process.env.VERCEL
+const useBasePath = (process.env.USE_BASE_PATH === 'true' || isProduction) && !isVercel
 
 const nextConfig = {
   output: 'export',
