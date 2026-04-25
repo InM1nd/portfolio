@@ -1,6 +1,7 @@
 # 🚀 ПЛАН РЕДИЗАЙНА ПОРТФОЛИО: SCI-FI TIME MACHINE UI
 
 ## 📋 ОГЛАВЛЕНИЕ
+
 1. [Визуальная концепция](#визуальная-концепция)
 2. [Цветовая палитра](#цветовая-палитра)
 3. [Типографика](#типографика)
@@ -18,9 +19,11 @@
 ## 🎨 ВИЗУАЛЬНАЯ КОНЦЕПЦИЯ
 
 ### Референс
+
 **Главный референс:** Time Machine UI by Sergio Butov
 
 ### Ключевые характеристики стиля:
+
 - ✅ Монохромная зелено-бирюзовая цветовая палитра на черном фоне (как мониторы 1990-2000х)
 - ✅ Технический, "машинный" интерфейс с координатами, системными данными
 - ✅ Множество информационных панелей, графиков, индикаторов
@@ -34,31 +37,34 @@
 ## 🌈 ЦВЕТОВАЯ ПАЛИТРА
 
 ### PRIMARY PALETTE
+
 ```css
---bg-primary: #000000;        /* Глубокий черный */
---bg-secondary: #050505;      /* Темный фон */
---ui-primary: #36A689;        /* Основной бирюзовый */
---ui-accent: #3FC89C;         /* Яркий акцент */
---ui-dark: #205030;           /* Темные элементы */
---ui-darker: #1a4029;         /* Очень темный зеленоватый */
---text-primary: #36A689;      /* Зеленый текст */
---text-secondary: #D9D9D9;    /* Светло-серый текст */
+--bg-primary: #000000; /* Глубокий черный */
+--bg-secondary: #050505; /* Темный фон */
+--ui-primary: #36a689; /* Основной бирюзовый */
+--ui-accent: #3fc89c; /* Яркий акцент */
+--ui-dark: #205030; /* Темные элементы */
+--ui-darker: #1a4029; /* Очень темный зеленоватый */
+--text-primary: #36a689; /* Зеленый текст */
+--text-secondary: #d9d9d9; /* Светло-серый текст */
 ```
 
 ### ALTERNATIVE STATES
+
 ```css
---danger: #DF2E30;            /* Красный для алертов */
---warning: #B98C13;           /* Желто-оранжевый */
---inactive: #050905;          /* Неактивные элементы */
---inactive-alt: #0F1410;      /* Альтернативный неактивный */
+--danger: #df2e30; /* Красный для алертов */
+--warning: #b98c13; /* Желто-оранжевый */
+--inactive: #050905; /* Неактивные элементы */
+--inactive-alt: #0f1410; /* Альтернативный неактивный */
 ```
 
 ### EFFECTS
+
 ```css
---glow: rgba(54, 166, 137, 0.3);      /* Glow эффект */
+--glow: rgba(54, 166, 137, 0.3); /* Glow эффект */
 --glow-strong: rgba(54, 166, 137, 0.8); /* Сильный glow */
---scanlines: rgba(54, 166, 137, 0.05);  /* Сканлайны */
---crt-noise: rgba(54, 166, 137, 0.02);  /* CRT шум */
+--scanlines: rgba(54, 166, 137, 0.05); /* Сканлайны */
+--crt-noise: rgba(54, 166, 137, 0.02); /* CRT шум */
 ```
 
 ---
@@ -68,6 +74,7 @@
 ### Шрифты
 
 #### PRIMARY FONT STACK
+
 ```css
 /* Headers */
 font-family: "Space Grotesk Expanded", "Orbitron", sans-serif;
@@ -87,13 +94,13 @@ text-transform: uppercase; /* Для labels */
 
 ### Размеры (адаптивные)
 
-| Элемент | Desktop | Mobile |
-|---------|---------|--------|
-| H1 | 72px (UPPERCASE, expanded) | 32px |
-| H2 | 48px (UPPERCASE) | 24px |
-| H3 | 32px (UPPERCASE) | 20px |
-| Body | 16-20px (mono) | 14-16px |
-| Labels | 12-14px (UPPERCASE, tracking wide) | 12px |
+| Элемент | Desktop                            | Mobile  |
+| ------- | ---------------------------------- | ------- |
+| H1      | 72px (UPPERCASE, expanded)         | 32px    |
+| H2      | 48px (UPPERCASE)                   | 24px    |
+| H3      | 32px (UPPERCASE)                   | 20px    |
+| Body    | 16-20px (mono)                     | 14-16px |
+| Labels  | 12-14px (UPPERCASE, tracking wide) | 12px    |
 
 ---
 
@@ -102,6 +109,7 @@ text-transform: uppercase; /* Для labels */
 ### 1. ОБЩИЙ LAYOUT СТИЛЬ
 
 #### Aesthetic Guidelines
+
 - Все интерфейсы должны выглядеть как "компьютерные терминалы 1990-2000х"
 - Строгая сетка с техническими рамками вокруг блоков
 - Множество маленьких деталей: координаты, метки, коды, индикаторы
@@ -112,21 +120,24 @@ text-transform: uppercase; /* Для labels */
 #### Border Styles
 
 **STANDARD BORDER:**
+
 ```css
-border: 1px solid #36A689;
+border: 1px solid #36a689;
 box-shadow: 0 0 10px rgba(54, 166, 137, 0.3); /* glow эффект */
 ```
 
 **EMPHASIZED BORDER:**
+
 ```css
-border: 2px solid #36A689;
+border: 2px solid #36a689;
 box-shadow: inset 0 0 20px rgba(54, 166, 137, 0.2);
 ```
 
 **TRIPLE FRAME (для важных блоков):**
+
 ```css
 /* Три вложенные рамки с отступами */
-border: 2px solid #36A689; /* Внешняя */
+border: 2px solid #36a689; /* Внешняя */
 /* Средняя: 1px solid rgba(54, 166, 137, 0.5) */
 /* Внутренняя: 1px solid rgba(54, 166, 137, 0.3) */
 ```
@@ -134,6 +145,7 @@ border: 2px solid #36A689; /* Внешняя */
 #### Background Effects
 
 **CRT SCANLINES:**
+
 ```css
 background: repeating-linear-gradient(
   0deg,
@@ -144,15 +156,17 @@ background: repeating-linear-gradient(
 ```
 
 **GRID PATTERN:**
+
 ```css
-background-image: 
-  linear-gradient(#36A689 1px, transparent 1px),
-  linear-gradient(90deg, #36A689 1px, transparent 1px);
+background-image:
+  linear-gradient(#36a689 1px, transparent 1px),
+  linear-gradient(90deg, #36a689 1px, transparent 1px);
 background-size: 50px 50px;
 opacity: 0.05;
 ```
 
 **VIGNETTE EFFECT:**
+
 ```css
 box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 ```
@@ -164,6 +178,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 **Концепция:** Терминальная навигационная панель со статус-индикаторами
 
 **Структура:**
+
 ```
 ┌───────────────────────────────────────────────────────────┐
 │ [⌘] NEXUS TERMINAL                      [●] SYSTEM ONLINE │
@@ -174,6 +189,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 ```
 
 **Детали дизайна:**
+
 - Fixed top navbar с backdrop-filter (blur) + темный фон
 - Двойная рамка (border top/bottom 2px зеленый)
 - Кнопки навигации: прямоугольные с outline, glow при hover
@@ -184,6 +200,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 - Hover эффект: glitch animation + glow увеличение
 
 **Пример кода:**
+
 ```jsx
 <nav className="fixed top-0 w-full border-y-2 border-[#36A689] bg-black/90 backdrop-blur-md shadow-[0_0_20px_rgba(54,166,137,0.3)]">
   <div className="flex items-center justify-between px-6 py-3">
@@ -192,7 +209,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
       <span className="tracking-widest">NEXUS TERMINAL</span>
     </div>
     <div className="flex gap-2">
-      {navItems.map(item => (
+      {navItems.map((item) => (
         <button className="px-6 py-2 border border-[#36A689] hover:bg-[#36A689] hover:text-black transition-all uppercase tracking-wider text-sm">
           {item}
         </button>
@@ -213,6 +230,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 **Концепция:** Экран загрузки системы + приветствие как терминальный вывод
 
 **Структура:**
+
 ```
 ┌──────────────────────────────────────────────┐
 │  NEXUS OS VERSION 2000                       │
@@ -232,6 +250,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 ```
 
 **Детали дизайна:**
+
 - Большая центральная панель с тройной рамкой
 - Анимация печатающегося текста (typewriter effect) для приветствия
 - Прогресс-бары загрузки (animated)
@@ -242,6 +261,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 - Кнопки в стиле терминала: [▸ TEXT]
 
 **Анимации:**
+
 - Появление текста по буквам (100-150ms delay)
 - Мигающие индикаторы (blink animation)
 - Плавное появление прогресс-баров
@@ -254,6 +274,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 **Концепция:** Архив миссий/проектов в виде терминальной базы данных
 
 **Структура каждого проекта:**
+
 ```
 ┌─ PROJECT_ID: 001 ──────────────────────────┐
 │  CODE: DASHBOARD_ADMIN                     │
@@ -269,6 +290,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 ```
 
 **Layout Grid:**
+
 - Grid 3 колонки (desktop) → 1 колонка (mobile)
 - Каждая карточка - как "файл" в системе
 - Изображения: grayscale + green overlay (как монитор)
@@ -276,19 +298,23 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 - Метки "In Progress" как мигающий индикатор [◆ IN_PROGRESS]
 
 **Карточки стиль:**
+
 ```css
 .project-card {
   background: linear-gradient(135deg, #0a0a0a 0%, #050505 100%);
-  border: 1px solid #36A689;
+  border: 1px solid #36a689;
   box-shadow: 0 0 15px rgba(54, 166, 137, 0.2);
   position: relative;
   padding: 20px;
 }
 
 .project-card::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: repeating-linear-gradient(
     0deg,
     rgba(54, 166, 137, 0.03) 0px,
@@ -314,6 +340,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 **Концепция:** Персональный профиль как досье оператора системы
 
 **Структура:**
+
 ```
 ┌─ OPERATOR_PROFILE ─────────────────────────┐
 │  USER_ID: InM1nd_487                       │
@@ -333,6 +360,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 ```
 
 **Детали дизайна:**
+
 - Две колонки: фото слева, информация справа
 - Фото: clip-path hexagon или rectangle с двойной рамкой, green tint overlay
 - Skill bars: прогресс-бары с процентами
@@ -347,6 +375,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 **Концепция:** Набор утилит/модулей системы
 
 **Layout:**
+
 ```
 ┌─ SYSTEM_UTILITIES ─────────────────────────┐
 │  SELECT_MODULE:                            │
@@ -367,6 +396,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 ```
 
 **Каждое приложение:**
+
 - Tabs навигация в стиле терминала
 - Активный модуль: увеличенная подсветка
 - Inputs: styled как терминальные поля с мигающим курсором
@@ -376,13 +406,17 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 - Drawing: canvas с toolbar в стиле терминала
 
 **Weather карточки:**
+
 ```jsx
 <div className="grid grid-cols-2 gap-4">
   <div className="border border-[#36A689] p-4">
     <div className="text-xs text-[#36A689] mb-2">TEMPERATURE</div>
     <div className="text-3xl font-mono">{temp}°C</div>
     <div className="mt-2 h-1 bg-[#36A689]/20">
-      <div className="h-full bg-[#36A689]" style={{width: `${tempPercent}%`}} />
+      <div
+        className="h-full bg-[#36A689]"
+        style={{ width: `${tempPercent}%` }}
+      />
     </div>
   </div>
   {/* Repeat for other metrics */}
@@ -396,6 +430,7 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 **Концепция:** Коммуникационный терминал / система сообщений
 
 **Структура:**
+
 ```
 ┌─ COMMUNICATION_TERMINAL ───────────────────┐
 │  ESTABLISH_CONNECTION                      │
@@ -418,25 +453,28 @@ box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
 ```
 
 **Input fields:**
+
 ```css
-input, textarea {
+input,
+textarea {
   background: transparent;
   border: none;
-  border-bottom: 1px solid #36A689;
-  color: #36A689;
-  font-family: 'Share Tech Mono', monospace;
+  border-bottom: 1px solid #36a689;
+  color: #36a689;
+  font-family: "Share Tech Mono", monospace;
   padding: 8px 0;
   outline: none;
 }
 
-input:focus, textarea:focus {
-  border-bottom: 2px solid #36A689;
+input:focus,
+textarea:focus {
+  border-bottom: 2px solid #36a689;
   box-shadow: 0 2px 10px rgba(54, 166, 137, 0.3);
 }
 
 /* Animated cursor in inputs */
 input::after {
-  content: '▮';
+  content: "▮";
   animation: blink 1s infinite;
 }
 ```
@@ -448,6 +486,7 @@ input::after {
 **Концепция:** Системная информация и внешние ссылки
 
 **Структура:**
+
 ```
 ┌────────────────────────────────────────────┐
 │  SYSTEM_INFO                  EXTERNAL_LINKS│
@@ -462,6 +501,7 @@ input::after {
 ```
 
 **Детали:**
+
 - Две колонки: info слева, links справа
 - Spotify widget: прогресс-бар в стиле терминала
 - Ссылки: кнопки с иконками и hover glow
@@ -472,16 +512,25 @@ input::after {
 ## 🎬 АНИМАЦИИ И ЭФФЕКТЫ
 
 ### 1. CRT Screen Effect
+
 ```css
 @keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.97; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.97;
+  }
 }
 
 body::after {
-  content: '';
+  content: "";
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: repeating-linear-gradient(
     0deg,
     rgba(0, 0, 0, 0.1) 0px,
@@ -493,14 +542,27 @@ body::after {
 ```
 
 ### 2. Glitch Effect
+
 ```css
 @keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
 }
 
 .glitch-hover:hover {
@@ -509,9 +571,10 @@ body::after {
 ```
 
 ### 3. Typing Effect
+
 ```jsx
 // Typewriter animation with blinking cursor
-const [displayText, setDisplayText] = useState('');
+const [displayText, setDisplayText] = useState("");
 const fullText = "HI. I'M ALEX.";
 
 useEffect(() => {
@@ -525,15 +588,21 @@ useEffect(() => {
 }, []);
 
 <h1 className="font-mono text-6xl">
-  {displayText}<span className="animate-blink">▮</span>
-</h1>
+  {displayText}
+  <span className="animate-blink">▮</span>
+</h1>;
 ```
 
 ### 4. Loading Bars Animation
+
 ```css
 @keyframes loading {
-  0% { width: 0%; }
-  100% { width: var(--progress); }
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: var(--progress);
+  }
 }
 
 .progress-bar {
@@ -542,12 +611,14 @@ useEffect(() => {
 ```
 
 ### 5. Glow Pulse
+
 ```css
 @keyframes glow-pulse {
-  0%, 100% { 
+  0%,
+  100% {
     box-shadow: 0 0 10px rgba(54, 166, 137, 0.3);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 30px rgba(54, 166, 137, 0.8);
   }
 }
@@ -558,10 +629,15 @@ useEffect(() => {
 ```
 
 ### 6. Scanline Movement
+
 ```css
 @keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
 }
 
 .scanline {
@@ -578,16 +654,34 @@ useEffect(() => {
 ```
 
 ### 7. Text Flicker
+
 ```css
 @keyframes text-flicker {
-  0%, 100% { opacity: 1; }
-  41.99% { opacity: 1; }
-  42% { opacity: 0; }
-  43% { opacity: 0; }
-  43.01% { opacity: 1; }
-  47.99% { opacity: 1; }
-  48% { opacity: 0; }
-  48.01% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  41.99% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0;
+  }
+  43% {
+    opacity: 0;
+  }
+  43.01% {
+    opacity: 1;
+  }
+  47.99% {
+    opacity: 1;
+  }
+  48% {
+    opacity: 0;
+  }
+  48.01% {
+    opacity: 1;
+  }
 }
 
 .flicker-text {
@@ -600,22 +694,22 @@ useEffect(() => {
 ## 🖼️ ОБРАБОТКА ИЗОБРАЖЕНИЙ
 
 ### CSS Filters для "монохромного монитора" эффекта:
+
 ```css
 .project-image {
-  filter: 
-    grayscale(100%)
-    brightness(0.7)
-    contrast(1.2)
-    hue-rotate(120deg); /* Сдвиг в зеленый спектр */
+  filter: grayscale(100%) brightness(0.7) contrast(1.2) hue-rotate(120deg); /* Сдвиг в зеленый спектр */
   mix-blend-mode: screen;
   position: relative;
 }
 
 .project-image::after {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: #36A689;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #36a689;
   mix-blend-mode: multiply;
   opacity: 0.3;
 }
@@ -626,13 +720,10 @@ useEffect(() => {
 ```
 
 ### Alternative: Duotone effect
+
 ```css
 .duotone-green {
-  filter: 
-    grayscale(100%)
-    sepia(100%)
-    hue-rotate(60deg)
-    saturate(400%)
+  filter: grayscale(100%) sepia(100%) hue-rotate(60deg) saturate(400%)
     brightness(0.9);
 }
 ```
@@ -642,31 +733,34 @@ useEffect(() => {
 ## 🎮 3D ФОНА РЕДИЗАЙН
 
 ### Концепция
+
 Вместо вращающихся сфер - координатная сетка / particle field
 
 ### Варианты
 
 #### Option 1: Координатная сетка
+
 ```jsx
 // Three.js grid с зелеными линиями
-<GridHelper 
-  args={[100, 50]} 
+<GridHelper
+  args={[100, 50]}
   position={[0, 0, 0]}
   material={new LineBasicMaterial({ color: 0x36A689, opacity: 0.2 })}
 />
 
 // Добавить "глобус" или сферу с wireframe
 <Sphere args={[5, 32, 32]}>
-  <meshBasicMaterial 
-    color="#36A689" 
-    wireframe 
-    transparent 
+  <meshBasicMaterial
+    color="#36A689"
+    wireframe
+    transparent
     opacity={0.3}
   />
 </Sphere>
 ```
 
 #### Option 2: Particle field
+
 ```jsx
 // Множество маленьких particle с glow
 const particles = useMemo(() => {
@@ -676,8 +770,8 @@ const particles = useMemo(() => {
       position: [
         Math.random() * 100 - 50,
         Math.random() * 100 - 50,
-        Math.random() * 100 - 50
-      ]
+        Math.random() * 100 - 50,
+      ],
     });
   }
   return temp;
@@ -685,7 +779,7 @@ const particles = useMemo(() => {
 
 return (
   <Points>
-    <pointsMaterial 
+    <pointsMaterial
       size={0.1}
       color="#36A689"
       transparent
@@ -697,6 +791,7 @@ return (
 ```
 
 #### Option 3: Комбинация
+
 Grid + rotating wireframe objects
 
 ---
@@ -706,6 +801,7 @@ Grid + rotating wireframe objects
 ### Mobile версия
 
 **Ключевые изменения:**
+
 - Навигация: collapse в hamburger menu (styled как терминальное меню)
 - Grid: 3 columns → 1 column
 - Шрифты: уменьшить на 30-40%
@@ -714,6 +810,7 @@ Grid + rotating wireframe objects
 - Touch-friendly кнопки: min-height 44px
 
 **Hamburger menu:**
+
 ```
 ┌─ MENU ────────────┐
 │  [●] SYSTEM_MENU  │
@@ -732,6 +829,7 @@ Grid + rotating wireframe objects
 ## 🎼 ДОПОЛНИТЕЛЬНЫЕ UI ЭЛЕМЕНТЫ
 
 ### 1. Corner Decorations
+
 ```jsx
 <!-- В углах экрана -->
 <div className="fixed top-4 left-4 text-xs font-mono text-[#36A689]">
@@ -748,6 +846,7 @@ Grid + rotating wireframe objects
 ```
 
 ### 2. Progress Indicators
+
 ```jsx
 <div className="flex items-center gap-2">
   <span>LOADING</span>
@@ -760,6 +859,7 @@ Grid + rotating wireframe objects
 ```
 
 ### 3. Status Badges
+
 ```jsx
 <span className="border border-[#36A689] px-3 py-1 text-xs uppercase tracking-wider">
   [●] ONLINE
@@ -771,6 +871,7 @@ Grid + rotating wireframe objects
 ```
 
 ### 4. Dividers
+
 ```css
 .terminal-divider {
   height: 1px;
@@ -792,31 +893,32 @@ Grid + rotating wireframe objects
 ## 🔧 ТЕХНИЧЕСКИЕ ТРЕБОВАНИЯ
 
 ### Tailwind Config
+
 ```js
 // tailwind.config.ts
 module.exports = {
   theme: {
     extend: {
       colors: {
-        'terminal-green': '#36A689',
-        'terminal-dark': '#050905',
-        'terminal-danger': '#DF2E30',
-        'terminal-warning': '#B98C13',
+        "terminal-green": "#36A689",
+        "terminal-dark": "#050905",
+        "terminal-danger": "#DF2E30",
+        "terminal-warning": "#B98C13",
       },
       fontFamily: {
-        'space': ['"Space Grotesk Expanded"', 'sans-serif'],
-        'mono': ['"Share Tech Mono"', 'monospace'],
-        'tech': ['"Inter"', 'sans-serif'],
+        space: ['"Space Grotesk Expanded"', "sans-serif"],
+        mono: ['"Share Tech Mono"', "monospace"],
+        tech: ['"Inter"', "sans-serif"],
       },
       animation: {
-        'blink': 'blink 1s step-end infinite',
-        'glitch': 'glitch 0.3s infinite',
-        'scanline': 'scanline 8s linear infinite',
-        'glow-pulse': 'glow-pulse 2s infinite',
+        blink: "blink 1s step-end infinite",
+        glitch: "glitch 0.3s infinite",
+        scanline: "scanline 8s linear infinite",
+        "glow-pulse": "glow-pulse 2s infinite",
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(54, 166, 137, 0.3)',
-        'glow-lg': '0 0 40px rgba(54, 166, 137, 0.5)',
+        glow: "0 0 20px rgba(54, 166, 137, 0.3)",
+        "glow-lg": "0 0 40px rgba(54, 166, 137, 0.5)",
       },
     },
   },
@@ -824,11 +926,12 @@ module.exports = {
 ```
 
 ### Fonts Import
+
 ```css
 /* globals.css */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
 ```
 
 ---
@@ -836,6 +939,7 @@ module.exports = {
 ## 📋 ЧЕКЛИСТ КОМПОНЕНТОВ ДЛЯ РЕДИЗАЙНА
 
 ### High Priority ✅
+
 - [ ] Header/Navigation → Terminal style navbar
 - [ ] Hero/Head → System boot screen
 - [ ] Projects Grid → Archive cards с терминальными рамками
@@ -846,6 +950,7 @@ module.exports = {
 - [ ] Background effects → CRT scanlines + grid
 
 ### Medium Priority ⚠️
+
 - [ ] About/Team → Operator profile досье
 - [ ] Contact Form → Communication terminal
 - [ ] Applications → System utilities modules
@@ -854,6 +959,7 @@ module.exports = {
 - [ ] Animations → Typing, glitch, glow effects
 
 ### Low Priority (но важно для атмосферы) 📌
+
 - [ ] Corner decorations → System status indicators
 - [ ] Loading states → Progress bars
 - [ ] Hover effects → Glitch + glow
@@ -865,18 +971,21 @@ module.exports = {
 ## 🚀 ЭТАПЫ РЕАЛИЗАЦИИ
 
 ### Phase 1: Foundation (день 1-2)
+
 - [ ] Установка шрифтов
 - [ ] Настройка цветовой палитры в Tailwind
 - [ ] Создание базовых анимаций (blink, glitch, glow)
 - [ ] Редизайн Header и Footer
 
 ### Phase 2: Core Components (день 3-4)
+
 - [ ] Hero секция с typing effect
 - [ ] Projects grid с новым стилем карточек
 - [ ] About секция как operator profile
 - [ ] Contact форма как terminal
 
 ### Phase 3: Details & Polish (день 5-6)
+
 - [ ] Applications модули редизайн
 - [ ] 3D background переделка
 - [ ] Corner decorations
@@ -884,6 +993,7 @@ module.exports = {
 - [ ] CRT эффекты (scanlines, flicker)
 
 ### Phase 4: Optimization (день 7)
+
 - [ ] Mobile адаптация
 - [ ] Performance оптимизация
 - [ ] Accessibility проверка
@@ -894,27 +1004,35 @@ module.exports = {
 ## 💡 ФИНАЛЬНЫЕ РЕКОМЕНДАЦИИ
 
 ### Консистентность
+
 Все элементы должны выглядеть как части единой "операционной системы"
 
 ### Детали
+
 Добавь много маленьких "системных" деталей (коды, координаты, метки)
 
 ### Анимации
+
 Плавные, но с "техническим" характером (не слишком smooth)
 
 ### Performance
+
 Оптимизируй эффекты для mobile (отключи тяжелые анимации)
 
 ### Accessibility
+
 Сохрани контраст текста (зеленый на черном должен быть достаточно ярким)
 
 ### Typography
+
 UPPERCASE для labels, monospace для важной информации
 
 ### Spacing
+
 Четкая сетка, все выровнено по пикселям
 
 ### Interactive feedback
+
 Каждое действие должно давать визуальный/звуковой фидбек
 
 ---
@@ -922,9 +1040,11 @@ UPPERCASE для labels, monospace для важной информации
 ## 🎨 РЕФЕРЕНСЫ ДЛЯ ВДОХНОВЕНИЯ
 
 ### Основной
+
 - **Time Machine UI by Sergio Butov** (Behance)
 
 ### Дополнительные
+
 - Fallout Pip-Boy интерфейс (зеленый монохром)
 - Alien (1979) - MOTHER компьютер интерфейс
 - Robocop (1987) - HUD интерфейсы
@@ -934,6 +1054,7 @@ UPPERCASE для labels, monospace для важной информации
 - Sci-fi UI от Territory Studio
 
 ### Ключевые слова для поиска
+
 - "retro futuristic UI"
 - "terminal interface design"
 - "CRT screen aesthetic"
@@ -947,6 +1068,7 @@ UPPERCASE для labels, monospace для важной информации
 ## 📝 ЗАМЕТКИ
 
 ### Важные моменты
+
 - Все цвета должны быть из палитры терминала
 - Шрифты должны быть техническими и моноширинными
 - Каждый элемент должен иметь "системный" вид
@@ -954,6 +1076,7 @@ UPPERCASE для labels, monospace для важной информации
 - Mobile версия должна сохранять атмосферу
 
 ### Проблемы для решения
+
 - Performance на мобильных устройствах
 - Контрастность текста для accessibility
 - Баланс между деталями и читаемостью
@@ -964,5 +1087,3 @@ UPPERCASE для labels, monospace для важной информации
 **Дата создания:** 2024  
 **Версия:** 1.0  
 **Статус:** В разработке
-
-

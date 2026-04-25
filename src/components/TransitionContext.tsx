@@ -22,7 +22,7 @@ export const TransitionProvider = ({ children }: { children: React.ReactNode }) 
   const [isTransitioning, setIsTransitioning] = useState(false)
 
   // Function to start the transition (animate OUT of current page)
-  const startTransition = () => {
+  const startTransition = React.useCallback(() => {
     return new Promise<void>((resolve) => {
       setIsTransitioning(true)
       // Wait for the "curtain down" animation to complete (600ms)
@@ -30,18 +30,24 @@ export const TransitionProvider = ({ children }: { children: React.ReactNode }) 
         resolve()
       }, 800)
     })
-  }
+  }, [])
 
   // Function to end the transition (animate IN to new page)
-  const endTransition = () => {
+  const endTransition = React.useCallback(() => {
     // Short delay so the next page paints under curtain before lift animation.
     setTimeout(() => {
       setIsTransitioning(false)
     }, 80)
-  }
+  }, [])
+
+  const value = React.useMemo(() => ({
+    isTransitioning,
+    startTransition,
+    endTransition
+  }), [isTransitioning, startTransition, endTransition])
 
   return (
-    <TransitionContext.Provider value={{ isTransitioning, startTransition, endTransition }}>
+    <TransitionContext.Provider value={value}>
       {children}
     </TransitionContext.Provider>
   )

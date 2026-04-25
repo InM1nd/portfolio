@@ -14,7 +14,7 @@ interface TransitionLinkProps extends React.ComponentProps<typeof Link> {
 const TransitionLink = ({ children, href, onClick, ...props }: TransitionLinkProps) => {
   const router = useRouter()
   const pathname = usePathname()
-  const { startTransition } = useTransition()
+  const { isTransitioning, startTransition } = useTransition()
 
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (onClick) {
@@ -26,8 +26,13 @@ const TransitionLink = ({ children, href, onClick, ...props }: TransitionLinkPro
       return
     }
 
-    // If linking to same page, just ignore
-    if (pathname === href) {
+    // Normalize paths for comparison (remove trailing slashes)
+    const normalize = (p: string) => p.replace(/\/$/, '') || '/'
+    const currentPath = normalize(pathname)
+    const targetPath = normalize(href)
+
+    // If linking to same page or already transitioning, just ignore
+    if (currentPath === targetPath || isTransitioning) {
       e.preventDefault()
       return
     }

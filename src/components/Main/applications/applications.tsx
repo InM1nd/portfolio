@@ -1,10 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TicTac from './tictac/tictac'
 import Weather from './weather/weather'
 import InteractiveCanvas from './testim/testim'
 
 const Applications = () => {
   const [activeModule, setActiveModule] = useState<'WEATHER' | 'TICTAC' | 'DRAWING'>('WEATHER')
+  const [isOnline, setIsOnline] = useState(true)
+
+  useEffect(() => {
+    const updateStatus = () => {
+      const now = new Date()
+      const hour = now.getHours()
+      setIsOnline(hour >= 9 && hour < 18)
+    }
+    updateStatus()
+    const interval = setInterval(updateStatus, 60000)
+    return () => clearInterval(interval)
+  }, [])
 
   const modules = [
     { id: 'WEATHER' as const, label: 'WEATHER', code: 'WEATHER_SCANNER' },
@@ -35,7 +47,9 @@ const Applications = () => {
               </div>
               <div className="border border-terminal-green/40 bg-terminal-dark/20 px-3 py-2">
                 <span className="text-terminal-green/60">STATUS:</span>{' '}
-                <span className="text-terminal-green">ONLINE</span>
+                <span className={isOnline ? "text-terminal-online" : "text-terminal-danger"}>
+                  {isOnline ? 'ONLINE' : 'OFFLINE'}
+                </span>
               </div>
             </div>
           </div>

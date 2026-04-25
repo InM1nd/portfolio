@@ -94,12 +94,12 @@ const Search = ({ setWeatherData, setIsLoading }: SearchProps) => {
       <form onSubmit={handleSubmit} className="flex items-center gap-3">
         <Input
           type="text"
-          placeholder=""
+          placeholder="ENTER CITY"
           required
           autoComplete="off"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="terminal-input flex-1 bg-transparent border-none border-b border-terminal-green text-terminal-green font-mono text-sm px-0 py-2 focus:border-terminal-green focus:border-b-2 focus:outline-none focus:shadow-[0_2px_10px_rgba(54,166,137,0.3)]"
+          className="flex-1 rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm px-4 py-2 focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-green/20"
         />
         <Button
           type="submit"

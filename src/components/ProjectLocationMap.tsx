@@ -25,10 +25,23 @@ const ProjectLocationMap = ({ coordinates, distortion, projectCode, city }: Proj
   const statusColor = getStatusColor(distortion)
   const statusLabel = getStatusLabel(distortion)
 
-  // Normalize coordinates to map viewport.
-  const normalize = (value: number) => ((value % 100) + 100) % 100
-  const mapX = normalize(coordinates.x)
-  const mapY = normalize(coordinates.y)
+  // Map known cities to their exact percentage coordinates on the world.svg
+  // world.svg has a viewBox of 0 0 2000 857
+  const cityPositions: Record<string, { x: number; y: number }> = {
+    'Warsaw': { x: 54.0, y: 18.0 },
+    'Berlin': { x: 52.7, y: 18.5 },
+    'Wroclaw': { x: 53.5, y: 18.6 },
+    'Kyiv': { x: 57.8, y: 20.3 },
+    'Prague': { x: 53.0, y: 20.4 },
+  }
+
+  // Fallback to a rough Equirectangular projection if city is not in the list
+  const fallbackX = ((coordinates.y + 180) / 360) * 100
+  const fallbackY = (1 - (coordinates.x + 90) / 180) * 100
+
+  const position = cityPositions[city] || { x: fallbackX, y: fallbackY }
+  const mapX = position.x
+  const mapY = position.y
 
   return (
     <div className="border border-terminal-green/50 bg-terminal-dark/20 p-3">
@@ -49,16 +62,12 @@ const ProjectLocationMap = ({ coordinates, distortion, projectCode, city }: Proj
           }}
         />
 
-        <svg className="absolute inset-0 w-full h-full opacity-45" viewBox="0 0 1000 500" preserveAspectRatio="none">
-          <path d="M91 174l21-18 49 4 30 31-8 37-32 20-14 23-31 10-32-9-11-20 3-39 25-39z" fill="#36A68920" stroke="#36A689AA" strokeWidth="2" />
-          <path d="M195 252l33 15 23 34-6 51-32 72-23-4 6-67-23-44 8-31 14-26z" fill="#36A6891A" stroke="#36A689AA" strokeWidth="2" />
-          <path d="M438 136l42-17 56 20 13 35-35 22-48 7-28-20 0-47z" fill="#36A68920" stroke="#36A689AA" strokeWidth="2" />
-          <path d="M485 205l38 7 36 51-8 72-45 91-44 0-25-80 10-77 38-64z" fill="#36A68918" stroke="#36A689AA" strokeWidth="2" />
-          <path d="M556 118l61-17 117 17 118 45 53 64-12 56-52 22-78-12-72 12-74-28-55-50-21-58 15-51z" fill="#36A6891E" stroke="#36A689AA" strokeWidth="2" />
-          <path d="M827 320l43 10 38 29-11 44-41 15-43-19-7-42 21-37z" fill="#36A6891C" stroke="#36A689AA" strokeWidth="2" />
-          <path d="M390 93l26-9 19 9-5 17-30 8-15-8 5-17z" fill="#36A68924" stroke="#36A689AA" strokeWidth="2" />
-          <path d="M528 98l27-8 22 9-9 15-25 8-18-7 3-17z" fill="#36A68924" stroke="#36A689AA" strokeWidth="2" />
-        </svg>
+        <img
+          src="/world.svg"
+          alt="World Map"
+          className="absolute inset-0 w-full h-full opacity-45"
+          style={{ objectFit: 'fill' }}
+        />
 
         <div 
           className="absolute w-full h-0.5 border-t border-dashed"

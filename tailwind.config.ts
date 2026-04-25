@@ -55,6 +55,7 @@ const config = {
         // Terminal color palette
         'terminal-green': '#36A689',
         'terminal-accent': '#3FC89C',
+        'terminal-online': '#4AF626',
         'terminal-dark': '#050905',
         'terminal-darker': '#1a4029',
         'terminal-danger': '#DF2E30',

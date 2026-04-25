@@ -9,7 +9,7 @@ const Filmoteka = () => {
   const projectId = '004'
   const status = 100
   const distortion = 1.8
-  const coordinates = { x: 15.8, y: 13.2, z: 433.0 }
+  const coordinates = { x: 50.4, y: 30.5, z: 433.0 }
   const city = 'Kyiv'
   const projectDate = '2023-11-05'
   const techStack = ['JavaScript', 'HTML/CSS']

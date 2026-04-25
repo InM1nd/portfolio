@@ -9,7 +9,7 @@ const Dashboard = () => {
   const projectId = '001'
   const status = 100
   const distortion = 0.01 // Стабильность проекта
-  const coordinates = { x: 75.8, y: 335.2, z: 435.0 }
+  const coordinates = { x: 52.2, y: 21.0, z: 435.0 }
   const city = 'Warsaw'
   const projectDate = '2024-03-15'
   const techStack = ['React', 'TypeScript', 'Three.js']

@@ -9,7 +9,7 @@ const Boardy = () => {
   const projectId = '003'
   const status = 100
   const distortion = 2.1
-  const coordinates = { x: 77.7, y: 874.1, z: 478.8 }
+  const coordinates = { x: 50.1, y: 14.4, z: 478.8 }
   const city = 'Prague'
   const projectDate = '2024-06-10'
   const techStack = ['React', 'TypeScript'] 

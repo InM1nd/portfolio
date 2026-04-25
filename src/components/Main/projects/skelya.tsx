@@ -9,7 +9,7 @@ const Skelya = () => {
   const projectId = '005'
   const status = 85
   const distortion = 12.8
-  const coordinates = { x: 238.8, y: 485.2, z: 232.3 }
+  const coordinates = { x: 51.1, y: 17.0, z: 232.3 }
   const city = 'Wroclaw'
   const projectDate = '2024-09-01'
   const techStack = ['React', 'TypeScript']

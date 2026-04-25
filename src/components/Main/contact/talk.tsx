@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState, FormEvent } from 'react'
+import React, { useRef, useState, useEffect, FormEvent } from 'react'
 import emailjs from '@emailjs/browser'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,6 +11,18 @@ const Talk = () => {
   const [isSuccess, setSuccess] = useState(false)
   const [isSending, setIsSending] = useState(false)
   const [status, setStatus] = useState<'READY' | 'SENDING' | 'SENT' | 'ERROR'>('READY')
+  const [isOnline, setIsOnline] = useState(true)
+
+  useEffect(() => {
+    const updateStatus = () => {
+      const now = new Date()
+      const hour = now.getHours()
+      setIsOnline(hour >= 9 && hour < 18)
+    }
+    updateStatus()
+    const interval = setInterval(updateStatus, 60000) // Update every minute
+    return () => clearInterval(interval)
+  }, [])
 
   const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -68,7 +80,9 @@ const Talk = () => {
             </div>
             <div className="border border-terminal-green/40 bg-terminal-dark/20 px-3 py-2">
               <span className="text-terminal-green/60">STATUS:</span>{' '}
-              <span className="text-terminal-green">ONLINE</span>
+              <span className={isOnline ? "text-terminal-online" : "text-terminal-danger"}>
+                {isOnline ? 'ONLINE' : 'OFFLINE'}
+              </span>
             </div>
           </div>
         </div>
@@ -106,8 +120,8 @@ const Talk = () => {
                   <Input
                     type="text"
                     name="user_name"
-                    className="terminal-input w-full bg-transparent border-none border-b border-terminal-green text-terminal-green font-mono text-sm md:text-base px-0 py-2 focus:border-terminal-green focus:border-b-2 focus:outline-none focus:shadow-[0_2px_10px_rgba(54,166,137,0.3)]"
-                    placeholder=""
+                    className="w-full rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm md:text-base px-4 py-3 focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-green/20"
+                    placeholder="ENTER NAME"
                     required
                   />
                 </div>
@@ -119,8 +133,8 @@ const Talk = () => {
                   <Input
                     type="email"
                     name="user_email"
-                    className="terminal-input w-full bg-transparent border-none border-b border-terminal-green text-terminal-green font-mono text-sm md:text-base px-0 py-2 focus:border-terminal-green focus:border-b-2 focus:outline-none focus:shadow-[0_2px_10px_rgba(54,166,137,0.3)]"
-                    placeholder=""
+                    className="w-full rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm md:text-base px-4 py-3 focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-green/20"
+                    placeholder="ENTER EMAIL"
                     required
                   />
                 </div>
@@ -132,8 +146,8 @@ const Talk = () => {
                 </label>
                 <Textarea
                   name="message"
-                  className="terminal-input w-full bg-transparent border-none border-b border-terminal-green text-terminal-green font-mono text-sm md:text-base px-0 py-2 min-h-[220px] resize-none focus:border-terminal-green focus:border-b-2 focus:outline-none focus:shadow-[0_2px_10px_rgba(54,166,137,0.3)]"
-                  placeholder=""
+                  className="w-full rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm md:text-base px-4 py-3 min-h-[220px] resize-none focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-green/20"
+                  placeholder="TYPE MESSAGE HERE..."
                   required
                 />
               </div>
@@ -142,9 +156,9 @@ const Talk = () => {
                 <Button
                   type="submit"
                   disabled={isSending}
-                  className="px-6 py-3 border border-terminal-green bg-terminal-green text-black font-mono text-sm uppercase tracking-wider hover:bg-terminal-green/80 transition-all duration-300 shadow-glow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full md:w-auto"
                 >
-                  {isSending ? '[⚡] TRANSMITTING...' : '[&gt;] TRANSMIT_MESSAGE'}
+                  {isSending ? '[⚡] TRANSMITTING...' : '[>] TRANSMIT_MESSAGE'}
                 </Button>
 
                 <div className="flex items-center gap-2 font-mono text-xs text-terminal-green">

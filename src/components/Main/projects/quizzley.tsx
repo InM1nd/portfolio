@@ -9,7 +9,7 @@ const Quizzley = () => {
   const projectId = '002'
   const status = 100
   const distortion = 0.05
-  const coordinates = { x: 80.0, y: 365.8, z: 499.1 }
+  const coordinates = { x: 52.5, y: 13.4, z: 499.1 }
   const city = 'Berlin'
   const projectDate = '2024-05-20'
   const techStack = ['React', 'TypeScript', 'AI']

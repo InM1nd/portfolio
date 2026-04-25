@@ -6,9 +6,16 @@ const Footer = () => {
   const [currentDate, setCurrentDate] = useState('')
   const [currentTime, setCurrentTime] = useState('')
 
+  const [isOnline, setIsOnline] = useState(true)
+
   useEffect(() => {
     const updateDateTime = () => {
       const now = new Date()
+      const hour = now.getHours()
+      
+      // Online between 09:00 and 18:00
+      setIsOnline(hour >= 9 && hour < 18)
+
       setCurrentDate(now.toLocaleDateString('en-GB', {
         day: '2-digit',
         month: '2-digit',
@@ -41,7 +48,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="w-full border-t-2 border-terminal-green bg-black/95 mt-14">
+    <footer className="w-full bg-black/95 mt-14">
       <div className="px-5 md:px-8 py-8 md:py-10">
         <div className="border-2 border-terminal-green bg-black p-4 md:p-6 shadow-glow-sm">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
@@ -54,7 +61,7 @@ const Footer = () => {
                   <li key={link.name}>
                     <a
                       href={link.url}
-                      className="flex items-center justify-between border border-terminal-green/30 px-3 py-2 text-terminal-green hover:bg-terminal-green/10 hover:border-terminal-green transition-all"
+                      className="terminal-button flex items-center justify-between px-3 py-2 w-full"
                     >
                       <span>[&gt;] {link.name}</span>
                     </a>
@@ -74,7 +81,7 @@ const Footer = () => {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between border border-terminal-green/30 px-3 py-2 text-terminal-green hover:bg-terminal-green/10 hover:border-terminal-green transition-all"
+                      className="terminal-button flex items-center justify-between px-3 py-2 w-full"
                     >
                       <span>[•] {link.name}</span>
                       <span className="text-[10px] text-terminal-green/60">{link.code}</span>
@@ -104,8 +111,10 @@ const Footer = () => {
                 <div className="flex items-center justify-between pt-2 mt-2 border-t border-terminal-green/30">
                   <span className="text-terminal-green/70">STATUS:</span>
                   <span className="flex items-center gap-1">
-                    <span className="text-terminal-green animate-pulse">[●]</span>
-                    <span>ONLINE</span>
+                    <span className={isOnline ? "text-terminal-online animate-pulse" : "text-terminal-danger animate-pulse"}>[●]</span>
+                    <span className={isOnline ? "text-terminal-online" : "text-terminal-danger"}>
+                      {isOnline ? 'ONLINE' : 'OFFLINE'}
+                    </span>
                   </span>
                 </div>
               </div>

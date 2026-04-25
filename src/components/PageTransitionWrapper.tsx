@@ -44,7 +44,17 @@ const PageTransitionInner = ({ children }: { children: React.ReactNode }) => {
     if (isTransitioning) {
       setOverlayPhase('closing')
       prevTransitioningRef.current = true
-      return
+
+      // Safety fallback: if navigation takes too long or fails to trigger route change,
+      // end transition after 5s to avoid permanent lock.
+      const safetyTimer = setTimeout(() => {
+        if (isTransitioning) {
+          console.warn('Transition safety timeout reached.')
+          endTransition()
+        }
+      }, 5000)
+
+      return () => clearTimeout(safetyTimer)
     }
 
     if (prevTransitioningRef.current) {
@@ -55,7 +65,7 @@ const PageTransitionInner = ({ children }: { children: React.ReactNode }) => {
       }, 650)
       return () => clearTimeout(timer)
     }
-  }, [isTransitioning])
+  }, [isTransitioning, endTransition])
 
   return (
     <>

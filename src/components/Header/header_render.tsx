@@ -12,9 +12,16 @@ const Header = () => {
   const [systemLoad, setSystemLoad] = useState(98)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
+  const [isOnline, setIsOnline] = useState(true)
+
   useEffect(() => {
     const updateTime = () => {
       const now = new Date()
+      const hour = now.getHours()
+      
+      // Online between 09:00 and 18:00
+      setIsOnline(hour >= 9 && hour < 18)
+
       const timeString = now.toLocaleTimeString('en-US', {
         hour12: false,
         hour: '2-digit',
@@ -49,8 +56,10 @@ const Header = () => {
             <div className="hidden lg:flex items-center gap-3 md:gap-4 font-mono text-xs md:text-sm text-terminal-green">
               <span>CODE: 487</span>
               <span className="flex items-center gap-1">
-                <span className="text-terminal-green animate-pulse">[●]</span>
-                <span>ONLINE</span>
+                <span className={cn("animate-pulse", isOnline ? "text-terminal-online" : "text-terminal-danger")}>[●]</span>
+                <span className={isOnline ? "text-terminal-online" : "text-terminal-danger"}>
+                  {isOnline ? 'ONLINE' : 'OFFLINE'}
+                </span>
               </span>
             </div>
             {/* Mobile menu button */}
@@ -72,12 +81,9 @@ const Header = () => {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "px-4 md:px-5 py-2 border border-terminal-green",
+                      "terminal-button px-4 md:px-5 py-2",
                       "font-mono text-xs md:text-sm uppercase tracking-wider whitespace-nowrap",
-                      "transition-all duration-300",
-                      "hover:bg-terminal-green hover:text-black hover:shadow-glow",
-                      "glitch-hover",
-                      isActive && "bg-terminal-green text-black shadow-glow"
+                      isActive && "bg-terminal-green/20 text-terminal-accent border-terminal-accent shadow-glow"
                     )}
                   >
                     {item.label}
@@ -119,11 +125,9 @@ const Header = () => {
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
-                        "block px-4 py-2 border border-terminal-green",
-                        "font-mono text-xs uppercase tracking-wider",
-                        "transition-all duration-300",
-                        "hover:bg-terminal-green hover:text-black hover:shadow-glow",
-                        isActive && "bg-terminal-green text-black shadow-glow"
+                        "terminal-button block w-full px-4 py-2",
+                        "font-mono text-xs uppercase tracking-wider text-left",
+                        isActive && "bg-terminal-green/20 text-terminal-accent border-terminal-accent shadow-glow"
                       )}
                     >
                       {item.label}
