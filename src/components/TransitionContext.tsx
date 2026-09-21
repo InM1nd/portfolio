@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
 type TransitionContextType = {
+  isBootComplete: boolean
+  completeBoot: () => void
   isTransitioning: boolean
   startTransition: () => Promise<void>
   endTransition: () => void
@@ -19,7 +21,10 @@ export const useTransition = () => {
 }
 
 export const TransitionProvider = ({ children }: { children: React.ReactNode }) => {
+  const [isBootComplete, setIsBootComplete] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
+
+  const completeBoot = React.useCallback(() => setIsBootComplete(true), [])
 
   // Function to start the transition (animate OUT of current page)
   const startTransition = React.useCallback(() => {
@@ -41,10 +46,12 @@ export const TransitionProvider = ({ children }: { children: React.ReactNode }) 
   }, [])
 
   const value = React.useMemo(() => ({
+    isBootComplete,
+    completeBoot,
     isTransitioning,
     startTransition,
     endTransition
-  }), [isTransitioning, startTransition, endTransition])
+  }), [isBootComplete, completeBoot, isTransitioning, startTransition, endTransition])
 
   return (
     <TransitionContext.Provider value={value}>

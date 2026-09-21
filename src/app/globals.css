@@ -55,7 +55,7 @@
   }
   
   :root {
-    font-family: var(--font-tech), Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
     line-height: 1.5;
     font-weight: 400;
     color-scheme: light dark;
@@ -393,15 +393,55 @@
     100% { top: 200%; }
   }
 
+
+  /* CRT row ignition — rows light up when the register is refiltered.
+     Staggered via inline animation-delay. Killed by the reduced-motion block above. */
+  @keyframes row-ignite {
+    0% {
+      opacity: 0;
+      transform: translateX(-4px);
+      filter: brightness(2.2);
+    }
+    55% {
+      opacity: 1;
+      filter: brightness(1.35);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+      filter: brightness(1);
+    }
+  }
+
+  .row-ignite {
+    animation: row-ignite 260ms ease-out backwards;
+  }
+
+  /* Detail panel coming up under a tapped row on phones. */
+  @keyframes detail-open {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .detail-open {
+    animation: detail-open 200ms ease-out;
+  }
+
   /* Global Link Styling & Hover Animation */
-  a:not(.terminal-button) {
+  a:not(.terminal-button):not(.sr-only) {
     position: relative;
     transition: all 0.3s ease;
     color: #36A689;
     text-decoration: none;
   }
 
-  a:not(.terminal-button)::after {
+  a:not(.terminal-button):not(.sr-only)::after {
     content: '';
     position: absolute;
     bottom: -2px;
@@ -413,12 +453,12 @@
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  a:not(.terminal-button):hover {
+  a:not(.terminal-button):not(.sr-only):hover {
     color: #4FD4B0;
     text-shadow: 0 0 10px rgba(54, 166, 137, 0.7);
   }
 
-  a:not(.terminal-button):hover::after {
+  a:not(.terminal-button):not(.sr-only):hover::after {
     width: 100%;
   }
 

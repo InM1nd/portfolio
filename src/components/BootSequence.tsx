@@ -46,62 +46,63 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
       return
     }
 
-    let stepIndex = 0
-    let charIndex = 0
+    let clockInterval: NodeJS.Timeout
     let cursorBlinkInterval: NodeJS.Timeout
-    let isCancelled = false
+    let lastStep = -1
+    let lastText = ''
+    let complete = false
+    const startAt = performance.now() + 200
 
-    const typeText = () => {
-      if (isCancelled) return
+    const sync = (step: number, text: string) => {
+      if (step !== lastStep) {
+        lastStep = step
+        setCurrentStep(step)
+      }
+      if (text !== lastText) {
+        lastText = text
+        setDisplayText(text)
+      }
+    }
 
-      if (stepIndex >= bootSteps.length) {
-        setIsComplete(true)
-        setCurrentStep(bootSteps.length)
-        return
+    const advance = (now: number) => {
+      let elapsed = Math.max(0, now - startAt)
+
+      for (let step = 0; step < bootSteps.length; step++) {
+        const { text, delay } = bootSteps[step]
+        const typingDuration = text.length * 50
+
+        if (elapsed < typingDuration) {
+          sync(step, text.slice(0, Math.floor(elapsed / 50) + 1))
+          return
+        }
+
+        elapsed -= typingDuration
+        if (elapsed < delay) {
+          sync(step, text)
+          return
+        }
+
+        elapsed -= delay
       }
 
-      const currentStepData = bootSteps[stepIndex]
-      const fullText = currentStepData.text
-
-      if (charIndex < fullText.length) {
-        setDisplayText(fullText.slice(0, charIndex + 1))
-        charIndex++
-        setTimeout(typeText, 50) // Скорость печати
-      } else {
-        // Переход к следующему шагу
-        setTimeout(() => {
-          if (isCancelled) return
-          stepIndex++
-          charIndex = 0
-          setCurrentStep(stepIndex)
-          setDisplayText('')
-          if (stepIndex < bootSteps.length) {
-            typeText()
-          } else {
-            // Все шаги завершены
-            setIsComplete(true)
-          }
-        }, currentStepData.delay)
+      if (!complete) {
+        complete = true
+        clearInterval(clockInterval)
+        sync(bootSteps.length, '')
+        setIsComplete(true)
       }
     }
 
     // Cursor blink
     cursorBlinkInterval = setInterval(() => {
-      if (!isCancelled) {
-        setShowCursor((prev) => !prev)
-      }
+      setShowCursor((prev) => !prev)
     }, 530)
 
-    // Начинаем анимацию
-    const startTimer = setTimeout(() => {
-      if (!isCancelled) {
-        typeText()
-      }
-    }, 200)
+    clockInterval = setInterval(() => advance(performance.now()), 50)
+    advance(performance.now())
 
     return () => {
-      isCancelled = true
-      clearTimeout(startTimer)
+      clearInterval(clockInterval)
       if (cursorBlinkInterval) {
         clearInterval(cursorBlinkInterval)
       }
@@ -133,7 +134,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
         padding: '2rem',
         opacity: isComplete ? 0 : 1,
         visibility: isComplete ? 'hidden' : 'visible',
-        transition: 'opacity 1s ease-out, visibility 0s linear 1s'
+        transition: 'opacity 500ms ease-out, visibility 0s linear 500ms'
       }}
     >
       {/* CRT Scanlines overlay */}
@@ -255,4 +256,3 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
 }
 
 export default BootSequence
-

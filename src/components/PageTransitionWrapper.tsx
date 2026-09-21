@@ -6,28 +6,25 @@ import dynamic from 'next/dynamic'
 import { TransitionProvider, useTransition } from './TransitionContext'
 
 const BootSequence = dynamic(() => import('@/components/BootSequence'), { ssr: false })
-const InterfaceDraw = dynamic(() => import('@/components/InterfaceDraw'), { ssr: false })
 
 // Inner component that consumes the context
 const PageTransitionInner = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
-  const { isTransitioning, endTransition } = useTransition()
-  const [isBootComplete, setIsBootComplete] = useState(false)
+  const { completeBoot, isTransitioning, endTransition } = useTransition()
+  // true from the first frame on "/" so the overlay never arrives after the content paints
+  const [showBoot, setShowBoot] = useState(pathname === '/')
   const [overlayPhase, setOverlayPhase] = useState<'hidden' | 'closing' | 'opening'>('hidden')
   const prevTransitioningRef = useRef(false)
   const prevPathnameRef = useRef(pathname)
 
-  // Boot sequence logic
+  // Boot sequence runs client-only, as an overlay on top of already-rendered content,
+  // so the markup stays in the prerendered HTML.
   useEffect(() => {
-    // Check if we should show the boot sequence
-    const hasSeenBoot = sessionStorage.getItem('hasSeenBoot') === 'true'
-
-    if (hasSeenBoot || pathname !== '/') {
-      setIsBootComplete(true)
-    } else {
-      setIsBootComplete(false)
+    if (pathname !== '/' || sessionStorage.getItem('hasSeenBoot') === 'true') {
+      setShowBoot(false)
+      completeBoot()
     }
-  }, []) // Run once on mount
+  }, [pathname, completeBoot])
 
   // End transition only after route actually changed.
   useEffect(() => {
@@ -69,12 +66,13 @@ const PageTransitionInner = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      {/* Boot Sequence */}
-      {!isBootComplete && (
+      {/* Boot Sequence — fixed fullscreen overlay, z-index 999999 */}
+      {showBoot && (
         <BootSequence
           onComplete={() => {
-            setIsBootComplete(true)
+            setShowBoot(false)
             sessionStorage.setItem('hasSeenBoot', 'true')
+            completeBoot()
           }}
         />
       )}
@@ -156,13 +154,7 @@ const PageTransitionInner = ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
 
-      {/* Content Area */}
-      {/* Always render children but hide them if boot is not complete, 
-          or simpler: just conditionally render. 
-          If we conditionally render, animations might not trigger correctly on mount if they depend on mount.
-          But for boot sequence, we usually want to block content.
-      */}
-      {isBootComplete && <>{children}</>}
+      {children}
     </>
   )
 }

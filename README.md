@@ -1,94 +1,62 @@
-# Portfolio
+# Portfolio — Oleksandr Zabolotnyi
 
-Современное портфолио на Next.js с TypeScript, Tailwind CSS и shadcn/ui.
+Frontend / product engineer, Vienna. Live at **https://inm1nd.vercel.app**
 
-## 🚀 Технологии
+A retro-terminal portfolio built as a Pip-Boy style device: the page itself never scrolls,
+the panel inside it does. Tabs are real routes, so all five pages stay indexable.
 
-- **Next.js 14** - React фреймворк с App Router
-- **TypeScript** - Типизация
-- **Tailwind CSS** - Утилитарный CSS фреймворк
-- **shadcn/ui** - Компонентная библиотека на основе Radix UI
-- **Three.js** - 3D графика и анимации
-- **@react-three/fiber** - React рендерер для Three.js
-- **EmailJS** - Отправка форм
+> **Working on this repo — human or agent — read [AGENTS.md](./AGENTS.md) first.**
+> It holds the content-honesty rules, the layout contract and the traps.
 
-## 📁 Структура проекта (Best Practices)
+## Stack
 
-```
-portfolio/
-├── src/                          # Исходный код
-│   ├── app/                      # Next.js App Router
-│   │   ├── page.tsx              # Главная страница (Projects)
-│   │   ├── about/                # Страница About
-│   │   ├── applications/         # Страница Applications
-│   │   ├── contact/              # Страница Contact
-│   │   ├── layout.tsx            # Корневой layout
-│   │   ├── not-found.tsx         # 404 страница
-│   │   └── globals.css           # Глобальные стили (Tailwind)
-│   ├── components/               # React компоненты
-│   │   ├── Header/              # Навигация
-│   │   ├── Footer/              # Футер
-│   │   ├── Main/                # Основные секции
-│   │   │   ├── projects/        # Проекты (TypeScript + Tailwind)
-│   │   │   ├── team/            # О себе
-│   │   │   ├── contact/         # Форма контакта
-│   │   │   ├── head/            # Hero секция
-│   │   │   └── applications/    # Интерактивные приложения
-│   │   ├── sauce/               # Общие компоненты (Background)
-│   │   └── ui/                  # shadcn/ui компоненты
-│   ├── lib/                      # Утилиты
-│   │   └── utils.ts              # Утилиты (cn для Tailwind)
-│   └── img/                      # Статические изображения
-└── public/                       # Публичные файлы
-```
+Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS 3 ·
+static export (`output: 'export'`) deployed on Vercel.
 
-## 🛠️ Установка
+The WebGL background is [`ogl`](https://github.com/oframe/ogl). That is the only rendering
+dependency — no Three.js, no animation libraries.
+
+## Run
 
 ```bash
 npm install
+npm run dev        # http://localhost:3000
+npm run build      # static export into ./out
+npx tsc --noEmit   # typecheck
 ```
 
-## 🚀 Разработка
+## Routes
 
-```bash
-npm run dev
+| Route | Tab | What |
+|---|---|---|
+| `/` | — | Boot sequence and terminal activation |
+| `/projects` | WORK | Project register with filters and detail preview |
+| `/about` | PROFILE | Experience, stack, education, languages |
+| `/applications` | LAB | Small browser experiments |
+| `/contact` | CONTACT | Channels and a message form |
+
+## Layout
+
+```
+src/
+├── app/
+│   ├── <route>/layout.tsx      per-route metadata (server component)
+│   ├── <route>/page.tsx        <PipBoyShell><Content/></PipBoyShell>
+│   ├── sitemap.ts robots.ts    force-static under output: 'export'
+│   └── globals.css
+├── components/
+│   ├── pipboy/PipBoyShell.tsx  device frame, tabs, status bar
+│   ├── Main/projects/
+│   │   ├── projects.data.ts    single source of truth for project content
+│   │   └── ProjectRegister.tsx
+│   ├── FaultyTerminal.tsx      WebGL background
+│   └── BootSequence.tsx
+└── img/
 ```
 
-Откройте [http://localhost:3000](http://localhost:3000) в браузере.
+## Docs
 
-## 📦 Сборка
-
-```bash
-npm run build
-```
-
-## 🚢 Деплой
-
-Проект настроен для статического экспорта и деплоя на GitHub Pages:
-
-```bash
-npm run build
-npm run deploy
-```
-
-## 📝 Роутинг
-
-- `/portfolio` - Главная страница (Projects)
-- `/portfolio/about` - О себе
-- `/portfolio/applications` - Интерактивные приложения
-- `/portfolio/contact` - Форма обратной связи
-
-## ✨ Особенности
-
-- ✅ Полностью на TypeScript
-- ✅ Tailwind CSS для всех стилей
-- ✅ shadcn/ui компоненты
-- ✅ 3D фон с Three.js
-- ✅ Адаптивный дизайн
-- ✅ Оптимизированный bundle (~89 kB First Load JS)
-- ✅ Статический экспорт для GitHub Pages
-- ✅ Правильная структура src/ по best practices
-
-## 📄 Лицензия
-
-Private project
+- [AGENTS.md](./AGENTS.md) — project rules. Start here.
+- [PORTFOLIO_ANALYSIS.md](./PORTFOLIO_ANALYSIS.md) — audit and the hiring-priority plan.
+- [PIPBOY_PLAN.md](./PIPBOY_PLAN.md) — design direction and implementation status.
+- `REDESIGN_PLAN.md` — **obsolete**, describes a 2024 concept. Kept for history only.

@@ -1,218 +1,164 @@
 'use client'
 
-import React, { useRef, useState, useEffect, FormEvent } from 'react'
+import React, { useRef, useState, FormEvent } from 'react'
 import emailjs from '@emailjs/browser'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { glow, glowStrong } from '@/components/pipboy/PipBoyShell'
+
+const CHANNELS = [
+  { label: 'EMAIL', handle: 'iamzabolotnyi@gmail.com', url: 'mailto:iamzabolotnyi@gmail.com' },
+  { label: 'GITHUB', handle: 'github.com/InM1nd', url: 'https://github.com/InM1nd' },
+  {
+    label: 'LINKEDIN',
+    handle: 'in/oleksandr-zabolotnyi1',
+    url: 'https://www.linkedin.com/in/oleksandr-zabolotnyi1/',
+  },
+  { label: 'TELEGRAM', handle: '@InM1nd', url: 'https://t.me/InM1nd' },
+]
+
+const fieldClass =
+  'w-full rounded-none border border-terminal-green/30 bg-terminal-green/[0.04] px-3 py-2 font-mono text-sm text-terminal-green placeholder:text-terminal-green/20 focus:border-terminal-green/70 focus:bg-terminal-green/10 focus:outline-none'
 
 const Talk = () => {
   const form = useRef<HTMLFormElement>(null)
-  const [isSuccess, setSuccess] = useState(false)
-  const [isSending, setIsSending] = useState(false)
   const [status, setStatus] = useState<'READY' | 'SENDING' | 'SENT' | 'ERROR'>('READY')
-  const [isOnline, setIsOnline] = useState(true)
-
-  useEffect(() => {
-    const updateStatus = () => {
-      const now = new Date()
-      const hour = now.getHours()
-      setIsOnline(hour >= 9 && hour < 18)
-    }
-    updateStatus()
-    const interval = setInterval(updateStatus, 60000) // Update every minute
-    return () => clearInterval(interval)
-  }, [])
 
   const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSending(true)
-    setStatus('SENDING')
-
     if (!form.current) return
+    setStatus('SENDING')
 
     emailjs
       .sendForm('service_akm93ow', 'template_0d6shyb', form.current, 'zbsLT_FXTpYzv9OGr')
       .then(
-        (result) => {
-          console.log(result.text)
-          setSuccess(true)
+        () => {
           setStatus('SENT')
-          setTimeout(() => {
-            setSuccess(false)
-            setStatus('READY')
-            if (form.current) {
-              form.current.reset()
-            }
-          }, 3000)
-          setIsSending(false)
+          form.current?.reset()
+          setTimeout(() => setStatus('READY'), 3000)
         },
-        (error) => {
-          console.log(error.text)
+        () => {
           setStatus('ERROR')
-          setIsSending(false)
-          setTimeout(() => {
-            setStatus('READY')
-          }, 3000)
+          setTimeout(() => setStatus('READY'), 3000)
         }
       )
   }
 
   return (
-    <section className="flex flex-col w-full max-w-[1700px] px-4 md:px-6 mb-12 mx-auto pt-36 md:pt-40">
-      <div className="border-2 border-terminal-green bg-black p-5 md:p-7 lg:p-8 shadow-glow-sm">
-        <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-4 mb-6 pb-5 border-b border-terminal-green/30">
+    <div className="min-h-0 flex-1 overflow-y-auto">
+      <div className="grid grid-cols-1 gap-5 p-4 md:grid-cols-[280px_1fr] md:p-5">
+        {/* channels */}
+        <aside className="flex flex-col gap-4">
           <div>
-            <div className="font-mono text-xs text-terminal-green/70 uppercase tracking-[0.2em] mb-2">
-              COMMUNICATION TERMINAL
-            </div>
-            <h1 className="font-mono text-3xl md:text-5xl text-terminal-green uppercase tracking-wider">
-              CONTACT / LINK
+            <h1
+              className="font-mono text-2xl uppercase tracking-wide text-terminal-green"
+              style={glowStrong}
+            >
+              CONTACT
             </h1>
-            <p className="font-mono text-sm md:text-base text-terminal-green/75 mt-2 max-w-3xl">
-              Send a message for collaboration, product work or technical consulting.
+            <p className="mt-1.5 font-mono text-[11px] leading-relaxed text-terminal-green/60" style={glow}>
+              Open to frontend / product engineering roles. Also available for product work and
+              technical consulting.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-2 font-mono text-xs md:text-sm">
-            <div className="border border-terminal-green/40 bg-terminal-dark/20 px-3 py-2">
-              <span className="text-terminal-green/60">CHANNEL:</span>{' '}
-              <span className="text-terminal-green">EMAILJS</span>
+
+          <div>
+            <h2 className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.25em] text-terminal-green/30">
+              CHANNELS
+            </h2>
+            <ul className="space-y-1">
+              {CHANNELS.map((c) => (
+                <li key={c.label}>
+                  <a
+                    href={c.url}
+                    {...(c.url.startsWith('http')
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                    className="flex items-baseline gap-2 py-0.5 font-mono transition-colors hover:text-terminal-green"
+                  >
+                    <span className="w-16 shrink-0 text-[9px] uppercase tracking-wider text-terminal-green/30">
+                      {c.label}
+                    </span>
+                    <span className="min-w-0 break-all text-[11px] text-terminal-green/70">
+                      {c.handle}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.25em] text-terminal-green/30">
+              DETAILS
+            </h2>
+            <p className="font-mono text-[11px] text-terminal-green/60">Based in Vienna, Austria</p>
+            <p className="font-mono text-[11px] text-terminal-green/60">English fluent · German A2</p>
+          </div>
+        </aside>
+
+        {/* transmission */}
+        <div className="border-l border-terminal-green/20 md:pl-5">
+          <h2 className="mb-3 font-mono text-[9px] uppercase tracking-[0.25em] text-terminal-green/30">
+            ESTABLISH CONNECTION
+          </h2>
+
+          <form ref={form} onSubmit={sendEmail} className="space-y-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <label className="block">
+                <span className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-terminal-green/40">
+                  SENDER_NAME
+                </span>
+                <input type="text" name="user_name" required placeholder="ENTER NAME" className={fieldClass} />
+              </label>
+              <label className="block">
+                <span className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-terminal-green/40">
+                  SENDER_EMAIL
+                </span>
+                <input type="email" name="user_email" required placeholder="ENTER EMAIL" className={fieldClass} />
+              </label>
             </div>
-            <div className="border border-terminal-green/40 bg-terminal-dark/20 px-3 py-2">
-              <span className="text-terminal-green/60">STATUS:</span>{' '}
-              <span className={isOnline ? "text-terminal-online" : "text-terminal-danger"}>
-                {isOnline ? 'ONLINE' : 'OFFLINE'}
+
+            <label className="block">
+              <span className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-terminal-green/40">
+                MESSAGE
+              </span>
+              <textarea
+                name="message"
+                required
+                placeholder="TYPE MESSAGE HERE..."
+                className={`${fieldClass} min-h-[150px] resize-none`}
+              />
+            </label>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="submit"
+                disabled={status === 'SENDING'}
+                className="border border-terminal-green/60 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-green transition-colors hover:bg-terminal-green hover:text-black disabled:opacity-40"
+                style={glow}
+              >
+                {status === 'SENDING' ? 'TRANSMITTING…' : 'TRANSMIT ►'}
+              </button>
+
+              <span
+                className={`font-mono text-[10px] uppercase tracking-wider ${
+                  status === 'SENT'
+                    ? 'text-terminal-online'
+                    : status === 'ERROR'
+                      ? 'text-terminal-danger'
+                      : 'text-terminal-green/35'
+                }`}
+                role="status"
+              >
+                {status === 'READY' && 'READY_TO_SEND'}
+                {status === 'SENDING' && 'UPLINK_ACTIVE…'}
+                {status === 'SENT' && '● MESSAGE_RECEIVED'}
+                {status === 'ERROR' && '● TRANSMISSION_FAILED — use email above'}
               </span>
             </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 xl:grid-cols-[320px_1fr] gap-5 md:gap-6">
-          <aside className="border border-terminal-green/50 bg-terminal-dark/20 p-4 md:p-5 space-y-3">
-            <div className="font-mono text-xs text-terminal-green/70 uppercase tracking-wider border-b border-terminal-green/30 pb-2">
-              CONTACT CHANNELS
-            </div>
-            <a href="mailto:oleksandr.zabolotnyi1@gmail.com" className="block border border-terminal-green/35 px-3 py-2 font-mono text-xs md:text-sm text-terminal-green hover:bg-terminal-green/10 transition-all">
-              [•] EMAIL
-            </a>
-            <a href="https://github.com/InM1nd" target="_blank" rel="noopener noreferrer" className="block border border-terminal-green/35 px-3 py-2 font-mono text-xs md:text-sm text-terminal-green hover:bg-terminal-green/10 transition-all">
-              [•] GITHUB
-            </a>
-            <a href="https://www.linkedin.com/in/oleksandr-zabolotnyi1/" target="_blank" rel="noopener noreferrer" className="block border border-terminal-green/35 px-3 py-2 font-mono text-xs md:text-sm text-terminal-green hover:bg-terminal-green/10 transition-all">
-              [•] LINKEDIN
-            </a>
-            <a href="https://t.me/InM1nd" target="_blank" rel="noopener noreferrer" className="block border border-terminal-green/35 px-3 py-2 font-mono text-xs md:text-sm text-terminal-green hover:bg-terminal-green/10 transition-all">
-              [•] TELEGRAM
-            </a>
-          </aside>
-
-          <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4 md:p-5 relative">
-            <div className="mb-5 font-mono text-sm text-terminal-green uppercase tracking-wider">
-              ESTABLISH_CONNECTION
-            </div>
-
-            <form ref={form} onSubmit={sendEmail} className="space-y-5">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="block font-mono text-xs text-terminal-green/70 uppercase tracking-wider">
-                    SENDER_NAME
-                  </label>
-                  <Input
-                    type="text"
-                    name="user_name"
-                    className="w-full rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm md:text-base px-4 py-3 focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-green/20"
-                    placeholder="ENTER NAME"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block font-mono text-xs text-terminal-green/70 uppercase tracking-wider">
-                    SENDER_EMAIL
-                  </label>
-                  <Input
-                    type="email"
-                    name="user_email"
-                    className="w-full rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm md:text-base px-4 py-3 focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-green/20"
-                    placeholder="ENTER EMAIL"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="block font-mono text-xs text-terminal-green/70 uppercase tracking-wider">
-                  MESSAGE_CONTENT
-                </label>
-                <Textarea
-                  name="message"
-                  className="w-full rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm md:text-base px-4 py-3 min-h-[220px] resize-none focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-green/20"
-                  placeholder="TYPE MESSAGE HERE..."
-                  required
-                />
-              </div>
-
-              <div className="flex flex-col md:flex-row md:items-center gap-3 pt-2">
-                <Button
-                  type="submit"
-                  disabled={isSending}
-                  className="w-full md:w-auto"
-                >
-                  {isSending ? '[⚡] TRANSMITTING...' : '[>] TRANSMIT_MESSAGE'}
-                </Button>
-
-                <div className="flex items-center gap-2 font-mono text-xs text-terminal-green">
-                  <span className="uppercase tracking-wider text-terminal-green/70">STATUS:</span>
-                  <span className="flex items-center gap-1">
-                    {status === 'READY' && (
-                      <>
-                        <span className="text-terminal-green animate-pulse">[●]</span>
-                        <span>READY_TO_SEND</span>
-                      </>
-                    )}
-                    {status === 'SENDING' && (
-                      <>
-                        <span className="text-terminal-warning animate-pulse">[◆]</span>
-                        <span>SENDING...</span>
-                      </>
-                    )}
-                    {status === 'SENT' && (
-                      <>
-                        <span className="text-terminal-green">[✓]</span>
-                        <span>TRANSMISSION_SUCCESS</span>
-                      </>
-                    )}
-                    {status === 'ERROR' && (
-                      <>
-                        <span className="text-terminal-danger animate-pulse">[✗]</span>
-                        <span>TRANSMISSION_FAILED</span>
-                      </>
-                    )}
-                  </span>
-                </div>
-              </div>
-            </form>
-          </div>
+          </form>
         </div>
       </div>
-
-      {/* Success Modal */}
-      {isSuccess && (
-        <div className="fixed inset-0 bg-black/95 flex flex-col justify-center items-center z-50">
-          <div className="border-2 border-terminal-green bg-terminal-dark/50 p-8 shadow-glow max-w-md text-center">
-            <div className="font-mono text-2xl text-terminal-green mb-4 uppercase tracking-wider">
-              [✓] MESSAGE TRANSMITTED
-            </div>
-            <div className="font-mono text-sm text-terminal-green/80">
-              MESSAGE SENT SUCCESSFULLY!
-            </div>
-            <div className="font-mono text-xs text-terminal-green/60 mt-2">
-              FORM WILL BE CLEARED SHORTLY.
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
+    </div>
   )
 }
 

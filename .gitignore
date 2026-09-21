@@ -49,3 +49,9 @@ dist/
 *.njsproj
 *.sln
 *.sw?
+
+# build/tooling artifacts
+tsconfig.tsbuildinfo
+.serena/
+.playwright-mcp/
+.codebase-memory/

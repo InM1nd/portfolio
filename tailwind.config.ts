@@ -69,9 +69,7 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        'space': ['"Space Grotesk"', 'sans-serif'],
         'mono': ['"Share Tech Mono"', 'monospace'],
-        'tech': ['"Inter"', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {

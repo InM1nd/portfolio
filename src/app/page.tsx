@@ -1,179 +1,133 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import TransitionLink from '@/components/TransitionLink'
-import dynamic from 'next/dynamic'
+import { useTransition } from '@/components/TransitionContext'
+import PipBoyShell from '@/components/pipboy/PipBoyShell'
 
-const CRTEffect = dynamic(() => import('@/components/CRTEffect'), { ssr: false })
-const FaultyTerminal = dynamic(() => import('@/components/FaultyTerminal'), { ssr: false })
-
-const TERMINAL_GRID_MUL: [number, number] = [2, 1]
-const TERMINAL_TINT = "#36A689"
+const fullText = 'OLEKSANDR ZABOLOTNYI'
+const subtitle = 'FRONTEND / PRODUCT ENGINEER — VIENNA'
 
 export default function Home() {
+  const { isBootComplete } = useTransition()
   const [displayText, setDisplayText] = useState('')
   const [showCursor, setShowCursor] = useState(true)
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [systemReady, setSystemReady] = useState(false)
 
-  const fullText = "HI. I'M ALEX."
-  const subtitle = "WEB DEVELOPER / INTERFACE ENGINEER"
-
   useEffect(() => {
-    // Typing effect for main text
-    let index = 0
-    const typingInterval = setInterval(() => {
-      if (index <= fullText.length) {
-        setDisplayText(fullText.slice(0, index))
-        index++
-      } else {
-        clearInterval(typingInterval)
-      }
-    }, 100)
+    if (!isBootComplete) return
 
-    // Loading progress bars
-    const progressInterval = setInterval(() => {
-      setLoadingProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval)
-          setTimeout(() => setSystemReady(true), 500)
-          return 100
-        }
-        return prev + 2
-      })
-    }, 50)
+    const startAt = performance.now()
+    const typingDuration = fullText.length * 100
+    const readyAt = 25 * 30 + 200
 
-    // Cursor blink
-    const cursorInterval = setInterval(() => {
-      setShowCursor((prev) => !prev)
-    }, 530)
+    const advance = () => {
+      const elapsed = performance.now() - startAt
+      setDisplayText(fullText.slice(0, Math.min(fullText.length, Math.floor(elapsed / 100))))
+      setLoadingProgress(Math.min(100, Math.floor(elapsed / 30) * 4))
+
+      if (elapsed >= readyAt) setSystemReady(true)
+      if (elapsed >= Math.max(typingDuration, readyAt)) clearInterval(animationInterval)
+    }
+
+    const animationInterval = setInterval(advance, 30)
+    advance()
+
+    const cursorInterval = setInterval(() => setShowCursor((visible) => !visible), 530)
 
     return () => {
-      clearInterval(typingInterval)
-      clearInterval(progressInterval)
+      clearInterval(animationInterval)
       clearInterval(cursorInterval)
     }
-  }, [])
+  }, [isBootComplete])
 
   return (
-    <div className="fixed inset-0 overflow-hidden" style={{ backgroundColor: '#000000' }}>
-      {/* CRT Effect */}
-      <CRTEffect />
+    <PipBoyShell meter={<span className="text-terminal-green/45">HOME / IDENTITY</span>}>
+      <section className="flex min-h-0 flex-1 flex-col p-4 sm:p-6 md:p-8">
+        <header className="flex shrink-0 items-center justify-between gap-4 border-b border-terminal-green/20 pb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-terminal-green/45">
+          <span>PERSONAL TERMINAL</span>
+          <span className={systemReady ? 'text-terminal-online' : undefined}>
+            {systemReady ? 'SYSTEM READY' : `SYNC ${loadingProgress}%`}
+          </span>
+        </header>
 
-      {/* FaultyTerminal Background */}
-      <div className="fixed inset-0" style={{ zIndex: 1, pointerEvents: 'none', opacity: 0.4 }}>
-        <FaultyTerminal
-          scale={1.5}
-          gridMul={TERMINAL_GRID_MUL}
-          digitSize={1.2}
-          timeScale={0.5}
-          pause={false}
-          scanlineIntensity={0.5}
-          glitchAmount={1}
-          flickerAmount={1}
-          noiseAmp={1}
-          chromaticAberration={0}
-          dither={0}
-          curvature={0.1}
-          tint={TERMINAL_TINT}
-          mouseReact={true}
-          mouseStrength={0.5}
-          pageLoadAnimation={false}
-          brightness={0.6}
-        />
-      </div>
-
-      {/* Main Terminal Screen */}
-      <div
-        className="flex items-center justify-center min-h-screen p-4 relative"
-        style={{
-          zIndex: 50
-        }}
-      >
-        <div className="w-full max-w-4xl border-2 border-terminal-green bg-black/90 shadow-glow p-8 md:p-12 relative z-10">
-          {/* Triple frame effect */}
-          <div className="absolute inset-0 border border-terminal-green/50 pointer-events-none" style={{ margin: '4px' }} />
-          <div className="absolute inset-0 border border-terminal-green/30 pointer-events-none" style={{ margin: '8px' }} />
-
-          <div className="relative z-10 space-y-6">
-            {/* Loading Messages */}
-            <div className="font-mono text-xs md:text-sm text-terminal-green/80 space-y-2 mb-6">
-              <div className="flex items-center gap-2">
-                <span className="text-terminal-green">&gt;</span>
-                <span>INITIALIZING INTERFACE...</span>
-              </div>
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-terminal-green">&gt;</span>
-                  <span>LOADING USER PROFILE...</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-24 h-2 border border-terminal-green bg-terminal-dark">
-                    <div
-                      className="h-full bg-terminal-green transition-all duration-300"
-                      style={{ width: `${loadingProgress}%` }}
-                    />
-                  </div>
-                  <span className="text-[10px]">{loadingProgress}%</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-terminal-green">&gt;</span>
-                <span>CONNECTION ESTABLISHED</span>
-                <span className="text-terminal-green">[<span className="inline-block w-4 h-2 bg-terminal-green"></span>]</span>
-              </div>
-            </div>
-
-            {/* Main Title */}
-            <div className="border-2 border-terminal-green p-8 bg-terminal-dark/20 mb-6">
-              <div className="text-center space-y-4">
-                <h1 className="font-mono text-4xl md:text-6xl lg:text-7xl text-terminal-green uppercase tracking-wider">
+        <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.45fr)_minmax(16rem,.55fr)]">
+          <div className="flex min-h-0 flex-col justify-center py-8 lg:pr-10">
+            <div className="space-y-5">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-terminal-green/55">
+                &gt; PORTFOLIO ACCESS GRANTED
+              </p>
+              <h1 className="font-mono text-4xl uppercase tracking-[0.1em] text-terminal-green sm:text-5xl md:text-6xl xl:text-7xl">
+                <span className="sr-only">{fullText}</span>
+                <span aria-hidden="true">
                   {displayText}
                   <span className={showCursor ? 'opacity-100' : 'opacity-0'}>▮</span>
-                </h1>
-                <p className="font-mono text-lg md:text-xl text-terminal-green/70 uppercase tracking-wider">
-                  {subtitle}
-                </p>
-              </div>
+                </span>
+              </h1>
+              <p className="font-mono text-sm uppercase tracking-[0.14em] text-terminal-green/70 sm:text-base md:text-lg">
+                {subtitle}
+              </p>
+              <p className="max-w-2xl font-mono text-xs leading-relaxed text-terminal-green/60 sm:text-sm">
+                I build production web products end to end — retention platforms, dashboards and
+                developer tooling. React, Next.js, TypeScript.
+              </p>
+              <TransitionLink
+                href="/projects"
+                className="terminal-button inline-flex border border-terminal-green bg-terminal-green px-4 py-2.5 font-mono text-xs uppercase tracking-[0.16em] text-black transition-colors hover:bg-terminal-green/80"
+              >
+                [▸] OPEN WORK
+              </TransitionLink>
+            </div>
+          </div>
+
+          <aside className="flex shrink-0 flex-col border-t border-terminal-green/20 py-5 lg:border-l lg:border-t-0 lg:py-8 lg:pl-8">
+            <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-terminal-green/40">
+              DIRECTORY
+            </div>
+            <div className="border-t border-terminal-green/20">
+              <TransitionLink
+                href="/projects"
+                className="terminal-button flex items-center justify-between border-b border-terminal-green/20 py-3 font-mono text-xs uppercase tracking-[0.14em] text-terminal-green transition-colors hover:bg-terminal-green hover:px-3 hover:text-black"
+              >
+                <span>[►] WORK</span>
+                <span className="text-terminal-green/45">PROJECTS</span>
+              </TransitionLink>
+              <TransitionLink
+                href="/about"
+                className="terminal-button flex items-center justify-between border-b border-terminal-green/20 py-3 font-mono text-xs uppercase tracking-[0.14em] text-terminal-green/75 transition-colors hover:bg-terminal-green hover:px-3 hover:text-black"
+              >
+                <span>[O] PROFILE</span>
+                <span className="text-terminal-green/45">ABOUT</span>
+              </TransitionLink>
+              <TransitionLink
+                href="/contact"
+                className="terminal-button flex items-center justify-between border-b border-terminal-green/20 py-3 font-mono text-xs uppercase tracking-[0.14em] text-terminal-green/75 transition-colors hover:bg-terminal-green hover:px-3 hover:text-black"
+              >
+                <span>[@] CONTACT</span>
+                <span className="text-terminal-green/45">MESSAGE</span>
+              </TransitionLink>
             </div>
 
-            {/* System Status */}
-            {systemReady && (
-              <div className="space-y-4 animate-fade-in">
-                <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4">
-                  <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
-                    SYSTEM STATUS
-                  </div>
-                  <div className="flex items-center gap-2 font-mono text-sm text-terminal-green">
-                    <span className="text-terminal-green animate-pulse">[●]</span>
-                    <span>SYSTEM READY</span>
-                  </div>
-                </div>
-
-                {/* Navigation Buttons */}
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <TransitionLink
-                    href="/projects"
-                    className="px-6 py-3 border-2 border-terminal-green bg-terminal-dark/50 font-mono text-sm uppercase tracking-wider text-terminal-green hover:bg-terminal-green hover:text-black transition-all duration-300 shadow-glow-sm hover:shadow-glow"
-                  >
-                    [&gt;] EXPLORE PROJECTS
-                  </TransitionLink>
-                  <TransitionLink
-                    href="/about"
-                    className="px-6 py-3 border-2 border-terminal-green bg-terminal-dark/50 font-mono text-sm uppercase tracking-wider text-terminal-green hover:bg-terminal-green hover:text-black transition-all duration-300 shadow-glow-sm hover:shadow-glow"
-                  >
-                    [O] SYSTEM INFO
-                  </TransitionLink>
-                </div>
-              </div>
-            )}
-
-            {/* Corner Decorations moved to top level */}
-          </div>
+            <div className="mt-auto hidden pt-8 font-mono text-[10px] uppercase tracking-[0.16em] text-terminal-green/40 lg:block">
+              <p>&gt; INITIALIZING INTERFACE</p>
+              <p className="mt-2">&gt; CONNECTION ESTABLISHED</p>
+            </div>
+          </aside>
         </div>
-      </div>
 
-      {/* HUD Elements - Removed as per user request */}
-    </div>
+        <footer className="flex shrink-0 flex-wrap gap-x-4 gap-y-2 border-t border-terminal-green/20 pt-3 font-mono text-[10px] uppercase tracking-[0.15em] text-terminal-green/45">
+          <a href="mailto:iamzabolotnyi@gmail.com" className="hover:text-terminal-green">
+            EMAIL
+          </a>
+          <a href="https://github.com/InM1nd" target="_blank" rel="noopener noreferrer" className="hover:text-terminal-green">
+            GITHUB
+          </a>
+          <a href="https://www.linkedin.com/in/oleksandr-zabolotnyi1/" target="_blank" rel="noopener noreferrer" className="hover:text-terminal-green">
+            LINKEDIN
+          </a>
+        </footer>
+      </section>
+    </PipBoyShell>
   )
 }
