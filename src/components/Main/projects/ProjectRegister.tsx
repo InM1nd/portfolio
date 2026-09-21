@@ -14,6 +14,9 @@ const matches = (p: Project, f: Filter) =>
   (f === 'CODE' && p.links.some((l) => l.label === 'REPO')) ||
   (f === 'PRIVATE' && (p.status === 'NDA' || p.status === 'PRIVATE'))
 
+const listed = (f: Filter) =>
+  GROUPS.flatMap((g) => PROJECTS.filter((p) => p.group === g && matches(p, f)))
+
 /** Status is monochrome; only restricted work gets the amber warning tone. */
 const STATUS_TONE: Record<Project['status'], string> = {
   LIVE: 'border-terminal-green/45 text-terminal-text/80',
@@ -63,16 +66,27 @@ const host = (p: Project) => {
   return url ? new URL(url).host + new URL(url).pathname.replace(/\/$/, '') : p.name.toLowerCase()
 }
 
+const SchematicTicks = () => (
+  <>
+    <span className="pointer-events-none absolute left-0 top-0 h-2.5 w-2.5 border-l border-t border-terminal-green/55" />
+    <span className="pointer-events-none absolute right-0 top-0 h-2.5 w-2.5 border-r border-t border-terminal-green/55" />
+    <span className="pointer-events-none absolute bottom-0 left-0 h-2.5 w-2.5 border-b border-l border-terminal-green/55" />
+    <span className="pointer-events-none absolute bottom-0 right-0 h-2.5 w-2.5 border-b border-r border-terminal-green/55" />
+  </>
+)
+
 /**
  * Screenshot as a browser window — real colour, native resolution, nothing painted over it.
- * The window keeps a 16:10 frame and fits whichever side of the box runs out first.
+ * `fill` sizes to the desktop pane; `card` is width-true for the mobile expand.
  */
-const Media = ({ p, sizes }: { p: Project; sizes: string }) =>
-  p.image ? (
-    <div className="flex h-full min-h-0 items-center justify-center [container-type:size]">
+const Media = ({ p, sizes, variant = 'fill' }: { p: Project; sizes: string; variant?: 'fill' | 'card' }) => {
+  if (p.image) {
+    const figure = (
       <figure
         key={p.id}
-        className="detail-open w-[min(100cqw,calc((100cqh-26px)*1.6))] overflow-hidden rounded-md border border-terminal-green/20 bg-black shadow-[0_18px_50px_rgba(0,0,0,.6)]"
+        className={`detail-open overflow-hidden rounded-md border border-terminal-green/20 bg-black shadow-[0_18px_50px_rgba(0,0,0,.6)] ${
+          variant === 'fill' ? 'w-[min(100cqw,calc((100cqh-26px)*1.6))]' : 'w-full'
+        }`}
       >
         <div className="flex h-[26px] items-center gap-1.5 border-b border-terminal-green/15 px-2.5">
           {[0, 1, 2].map((i) => (
@@ -86,13 +100,37 @@ const Media = ({ p, sizes }: { p: Project; sizes: string }) =>
           <Image src={p.image} alt={`${p.name} — ${p.tagline}`} fill sizes={sizes} className="object-cover object-left-top" />
         </div>
       </figure>
-    </div>
-  ) : (
-    <div className="relative flex h-full min-h-0 items-center justify-center overflow-hidden border border-dashed border-terminal-green/20">
+    )
+    return variant === 'fill' ? (
+      <div className="flex h-full min-h-0 items-center justify-center [container-type:size]">{figure}</div>
+    ) : (
+      figure
+    )
+  }
+
+  return (
+    <div
+      className={`relative flex min-h-0 flex-col items-center justify-center gap-2.5 overflow-x-auto border border-terminal-green/20 px-3 py-3 ${
+        variant === 'fill' ? 'h-full' : ''
+      }`}
+    >
+      <SchematicTicks />
+      <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-terminal-text/60">
+        schematic · {p.code}
+      </p>
+      {p.mark && (
+        <Image
+          src={p.mark}
+          alt=""
+          width={96}
+          height={96}
+          className="h-12 w-12 rounded-[10px]"
+        />
+      )}
       <pre
         key={p.id}
         aria-label={`${p.name} schematic`}
-        className="detail-open overflow-x-auto p-4 text-[11px] leading-[1.35] text-terminal-text/80 sm:text-xs lg:text-[13px]"
+        className="detail-open overflow-x-auto text-[11px] leading-[1.35] text-terminal-text/80 sm:text-xs lg:text-[13px]"
         // Share Tech Mono has no box-drawing glyphs; a system mono keeps the lines aligned (nothing is downloaded)
         style={{ fontFamily: 'Menlo, Monaco, Consolas, "DejaVu Sans Mono", monospace', ...glow }}
       >
@@ -100,35 +138,24 @@ const Media = ({ p, sizes }: { p: Project; sizes: string }) =>
       </pre>
     </div>
   )
+}
 
-const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) => (
-  <div key={p.id} className="detail-open">
-    <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text/70">
-      <Lamp accent={p.accent} />
-      <span>{p.code}</span>
-      <StatusChip status={p.status} />
-      <span className="ml-auto tabular-nums text-terminal-text/60">{p.year}</span>
-    </div>
-    {!compact && (
-      <h2 className="mt-1.5 font-mono text-2xl uppercase tracking-wide text-terminal-green lg:text-[28px]" style={glowStrong}>
-        {p.name}
-      </h2>
-    )}
-    <p className="mt-1 font-mono text-[11px] uppercase tracking-wide text-terminal-text/70">{p.role}</p>
-    <p className="mt-2 max-w-2xl font-mono text-[13px] leading-relaxed text-terminal-text/80" style={glow}>
-      {p.outcome}
-    </p>
-    <ul className="mt-2 space-y-0.5">
-      {p.highlights.map((h) => (
-        <li key={h} className="flex gap-2 font-mono text-[13px] leading-relaxed text-terminal-text/80">
-          <span aria-hidden="true" className="text-terminal-text/60">
-            ▸
-          </span>
-          <span>{h}</span>
-        </li>
-      ))}
-    </ul>
-    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) =>
+  compact ? (
+    <div key={p.id} className="detail-open space-y-2">
+      <p className="font-mono text-[13px] leading-relaxed text-terminal-text/80" style={glow}>
+        {p.outcome}
+      </p>
+      <ul className="space-y-0.5">
+        {p.highlights.map((h) => (
+          <li key={h} className="flex gap-2 font-mono text-[12px] leading-snug text-terminal-text/80">
+            <span aria-hidden="true" className="text-terminal-text/60">
+              ▸
+            </span>
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
       <div className="flex flex-wrap gap-1.5">
         {p.stack.map((s) => (
           <span
@@ -141,15 +168,53 @@ const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) => (
       </div>
       <LinkRow p={p} />
     </div>
-  </div>
-)
+  ) : (
+    <div key={p.id} className="detail-open">
+      <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text/70">
+        <Lamp accent={p.accent} />
+        <span>{p.code}</span>
+        <StatusChip status={p.status} />
+        <span className="ml-auto tabular-nums text-terminal-text/60">{p.year}</span>
+      </div>
+      <h2 className="mt-1.5 font-mono text-2xl uppercase tracking-wide text-terminal-green lg:text-[28px]" style={glowStrong}>
+        {p.name}
+      </h2>
+      <p className="mt-1 font-mono text-[11px] uppercase tracking-wide text-terminal-text/70">{p.role}</p>
+      <p className="mt-2 max-w-2xl font-mono text-[13px] leading-relaxed text-terminal-text/80" style={glow}>
+        {p.outcome}
+      </p>
+      <ul className="mt-2 space-y-0.5">
+        {p.highlights.map((h) => (
+          <li key={h} className="flex gap-2 font-mono text-[13px] leading-relaxed text-terminal-text/80">
+            <span aria-hidden="true" className="text-terminal-text/60">
+              ▸
+            </span>
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <div className="flex flex-wrap gap-1.5">
+          {p.stack.map((s) => (
+            <span
+              key={s}
+              className="border border-terminal-green/15 px-1.5 py-px font-mono text-[11px] text-terminal-text/70"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+        <LinkRow p={p} />
+      </div>
+    </div>
+  )
 
 const ProjectRegister = () => {
   const [filter, setFilter] = useState<Filter>('ALL')
   const [sel, setSel] = useState(0)
 
   // grouped order is also the keyboard order
-  const list = GROUPS.flatMap((g) => PROJECTS.filter((p) => p.group === g && matches(p, filter)))
+  const list = listed(filter)
   const idx = Math.min(sel, list.length - 1)
   const current = list[idx]
 
@@ -188,7 +253,7 @@ const ProjectRegister = () => {
       <div className="grid min-h-0 flex-1 grid-cols-1 md:grid-cols-[minmax(0,380px)_1fr]">
         {/* ── register ── */}
         <div className="flex min-h-0">
-          <div className="relative w-4 shrink-0 border-r border-terminal-green/15">
+          <div className="relative hidden w-4 shrink-0 border-r border-terminal-green/15 md:block">
             <div className="absolute inset-y-2 left-1/2 w-px -translate-x-1/2 bg-terminal-green/15" />
             <div
               className="absolute left-1/2 h-6 w-[3px] -translate-x-1/2 transition-all duration-300"
@@ -250,10 +315,8 @@ const ProjectRegister = () => {
                   </button>
 
                   {on && (
-                    <div className="detail-open space-y-3 border-b border-terminal-green/15 px-3 pb-4 pt-2 md:hidden">
-                      <div className="h-44">
-                        <Media p={item} sizes="100vw" />
-                      </div>
+                    <div className="detail-open space-y-2.5 border-b border-terminal-green/15 px-3 pb-3 pt-1 md:hidden">
+                      <Media p={item} sizes="92vw" variant="card" />
                       <Details p={item} compact />
                     </div>
                   )}

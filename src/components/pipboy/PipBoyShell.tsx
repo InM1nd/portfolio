@@ -38,7 +38,7 @@ const TabBar = () => {
             key={tab.href}
             href={tab.href}
             aria-current={active ? 'page' : undefined}
-            className={`flex-1 border-b px-2 py-2.5 text-center font-mono text-[11px] uppercase tracking-[0.2em] transition-colors md:text-xs ${
+            className={`flex flex-1 items-center justify-center border-b py-2.5 pl-[0.28em] pr-1 text-center font-mono text-[11px] uppercase leading-none tracking-[0.14em] transition-colors md:px-2 md:pl-[0.4em] md:text-xs md:tracking-[0.2em] ${
               active
                 ? 'border-terminal-green text-terminal-text'
                 : 'border-terminal-green/25 text-terminal-text/60 hover:text-terminal-text/80'
@@ -53,32 +53,25 @@ const TabBar = () => {
   )
 }
 
-/** Page-specific left slot of the status bar. */
-const METERS: Record<string, string> = { '/': 'HOME / IDENTITY' }
-
 /** Bottom readout. Stands in for the Pip-Boy HP/AP bar, but every value is real. */
-const StatusBar = () => {
-  const meter = METERS[usePathname() ?? '']
-  return (
-    <div className="pipboy-part flex shrink-0 items-center gap-4 border-t border-terminal-green/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em]">
-      {meter && <span className="text-terminal-text/70">{meter}</span>}
-      <div className="hidden flex-1 items-center gap-2 sm:flex">
-        <span className="text-terminal-text/60">EXP</span>
-        <span className="h-[6px] max-w-[180px] flex-1 border border-terminal-green/40">
-          <span className="block h-full w-[80%] bg-terminal-green/55" />
-        </span>
-        <span className="text-terminal-text/70">SINCE 2021</span>
-      </div>
-      <a
-        href="mailto:iamzabolotnyi@gmail.com"
-        className="ml-auto flex items-center gap-1.5 text-terminal-online transition-opacity hover:opacity-80"
-        style={{ textShadow: '0 0 6px rgba(74,246,38,.5)' }}
-      >
-        <span className="animate-pulse">●</span> OPEN TO WORK
-      </a>
+const StatusBar = () => (
+  <div className="pipboy-part flex shrink-0 items-center gap-4 border-t border-terminal-green/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em]">
+    <div className="hidden flex-1 items-center gap-2 sm:flex">
+      <span className="text-terminal-text/60">EXP</span>
+      <span className="h-[6px] max-w-[180px] flex-1 border border-terminal-green/40">
+        <span className="block h-full w-[80%] bg-terminal-green/55" />
+      </span>
+      <span className="text-terminal-text/70">SINCE 2021</span>
     </div>
-  )
-}
+    <a
+      href="mailto:iamzabolotnyi@gmail.com"
+      className="ml-auto flex items-center gap-1.5 text-terminal-online transition-opacity hover:opacity-80"
+      style={{ textShadow: '0 0 6px rgba(74,246,38,.5)' }}
+    >
+      <span className="animate-pulse">●</span> OPEN TO WORK
+    </a>
+  </div>
+)
 
 /**
  * The device. Lives in the root layout so the frame, tabs and WebGL world persist across routes;

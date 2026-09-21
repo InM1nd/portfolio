@@ -1,285 +1,273 @@
 'use client'
 
-import React, { useRef, useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { useEffect, useRef, useState } from 'react'
 
-interface Point {
-  x: number
-  y: number
+type Point = { x: number; y: number }
+
+const COLORS = [
+  { name: 'GREEN', value: '#36A689' },
+  { name: 'LIGHT', value: '#8FDCC2' },
+  { name: 'AMBER', value: '#FFB642' },
+  { name: 'WHITE', value: '#D6EAE3' },
+  { name: 'ERASER', value: '#000000' },
+] as const
+
+/** Map pointer → CSS pixels of the canvas box. Bitmap is sized to that box × DPR, so 1 CSS px = 1 drawing unit. */
+const pointFromEvent = (e: PointerEvent, canvas: HTMLCanvasElement): Point => {
+  const rect = canvas.getBoundingClientRect()
+  return {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top,
+  }
 }
 
 function InteractiveCanvas() {
+  const wrapRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const cursorSmallRef = useRef<HTMLDivElement>(null)
-  const [isDrawing, setIsDrawing] = useState(false)
-  const [prevPoint, setPrevPoint] = useState<Point | null>(null)
-  const [currentColor, setCurrentColor] = useState('#36A689')
-  const [cursorBorderColor, setCursorBorderColor] = useState('#36A689')
-  const [brushSize, setBrushSize] = useState(8)
-  const [cursorPosition, setCursorPosition] = useState<Point>({ x: 0, y: 0 })
+  const drawing = useRef(false)
+  const last = useRef<Point | null>(null)
+  const colorRef = useRef('#36A689')
+  const sizeRef = useRef(8)
 
-  const [canvasWidth, setCanvasWidth] = useState(1200)
-  const [canvasHeight, setCanvasHeight] = useState(900)
+  const [color, setColor] = useState('#36A689')
+  const [brush, setBrush] = useState(8)
+  const [hover, setHover] = useState(false)
+  const [cursor, setCursor] = useState<Point>({ x: 0, y: 0 })
+  const [surface, setSurface] = useState({ w: 0, h: 0 })
+  const [inking, setInking] = useState(false)
 
-  // Initialize canvas
+  colorRef.current = color
+  sizeRef.current = brush
+
+  /** Bitmap matches the visible box. No CSS stretch → no cursor/brush drift. */
+  useEffect(() => {
+    const wrap = wrapRef.current
+    const canvas = canvasRef.current
+    if (!wrap || !canvas) return
+
+    const fit = () => {
+      const dpr = Math.max(1, window.devicePixelRatio || 1)
+      const cssW = Math.max(1, Math.floor(wrap.clientWidth))
+      const cssH = Math.max(1, Math.floor(wrap.clientHeight))
+      if (canvas.width === Math.round(cssW * dpr) && canvas.height === Math.round(cssH * dpr)) {
+        return
+      }
+
+      const snapshot = document.createElement('canvas')
+      snapshot.width = canvas.width
+      snapshot.height = canvas.height
+      const snapCtx = snapshot.getContext('2d')
+      if (snapCtx && canvas.width > 0 && canvas.height > 0) {
+        snapCtx.drawImage(canvas, 0, 0)
+      }
+
+      canvas.width = Math.round(cssW * dpr)
+      canvas.height = Math.round(cssH * dpr)
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
+      ctx.fillStyle = '#000000'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      if (snapshot.width > 0 && snapshot.height > 0) {
+        ctx.drawImage(snapshot, 0, 0)
+      }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      setSurface({ w: cssW, h: cssH })
+    }
+
+    fit()
+    const ro = new ResizeObserver(fit)
+    ro.observe(wrap)
+    return () => ro.disconnect()
+  }, [])
+
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const context = canvas.getContext('2d')
-    if (context) {
-      context.fillStyle = '#000000'
-      context.fillRect(0, 0, canvas.width, canvas.height)
-    }
-  }, [canvasWidth, canvasHeight])
-
-  useEffect(() => {
-    const handleResize = () => {
-      const viewportWidth = window.innerWidth
-      if (viewportWidth <= 500) {
-        setCanvasWidth(320)
-        setCanvasHeight(600)
-      } else if (viewportWidth <= 960) {
-        setCanvasWidth(420)
-        setCanvasHeight(600)
-      } else if (viewportWidth <= 1500) {
-        setCanvasWidth(900)
-        setCanvasHeight(600)
-      } else {
-        setCanvasWidth(1200)
-        setCanvasHeight(900)
-      }
+    const stroke = (from: Point, to: Point) => {
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return
+      ctx.strokeStyle = colorRef.current
+      ctx.fillStyle = colorRef.current
+      ctx.lineWidth = sizeRef.current
+      ctx.beginPath()
+      ctx.moveTo(from.x, from.y)
+      ctx.lineTo(to.x, to.y)
+      ctx.stroke()
     }
 
-    window.addEventListener('resize', handleResize)
-    handleResize()
+    const dot = (p: Point) => {
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return
+      ctx.fillStyle = colorRef.current
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, sizeRef.current / 2, 0, Math.PI * 2)
+      ctx.fill()
+    }
 
+    const onDown = (e: PointerEvent) => {
+      if (e.button !== undefined && e.button !== 0) return
+      e.preventDefault()
+      canvas.setPointerCapture(e.pointerId)
+      const p = pointFromEvent(e, canvas)
+      drawing.current = true
+      last.current = p
+      setInking(true)
+      setHover(true)
+      setCursor(p)
+      dot(p)
+    }
+
+    const onMove = (e: PointerEvent) => {
+      const p = pointFromEvent(e, canvas)
+      setCursor(p)
+      setHover(true)
+      if (!drawing.current || !last.current) return
+      stroke(last.current, p)
+      last.current = p
+    }
+
+    const onUp = (e: PointerEvent) => {
+      if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId)
+      drawing.current = false
+      last.current = null
+      setInking(false)
+    }
+
+    const onLeave = () => {
+      if (!drawing.current) setHover(false)
+    }
+
+    canvas.addEventListener('pointerdown', onDown)
+    canvas.addEventListener('pointermove', onMove)
+    canvas.addEventListener('pointerup', onUp)
+    canvas.addEventListener('pointercancel', onUp)
+    canvas.addEventListener('pointerleave', onLeave)
     return () => {
-      window.removeEventListener('resize', handleResize)
+      canvas.removeEventListener('pointerdown', onDown)
+      canvas.removeEventListener('pointermove', onMove)
+      canvas.removeEventListener('pointerup', onUp)
+      canvas.removeEventListener('pointercancel', onUp)
+      canvas.removeEventListener('pointerleave', onLeave)
     }
   }, [])
 
-  const drawLine = (context: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number) => {
-    context.beginPath()
-    context.moveTo(x1, y1)
-    context.lineTo(x2, y2)
-    context.stroke()
-    context.closePath()
-  }
-
-  const drawPoint = (context: CanvasRenderingContext2D, x: number, y: number) => {
-    context.beginPath()
-    context.arc(x, y, brushSize / 2, 0, 2 * Math.PI)
-    context.fill()
-  }
-
-  // Mouse event handlers
-  useEffect(() => {
-    const canvas = canvasRef.current
-    const cursorSmall = cursorSmallRef.current
-    if (!canvas) return
-
-    const context = canvas.getContext('2d')
-    if (!context) return
-
-    // Set default drawing styles
-    context.strokeStyle = currentColor
-    context.fillStyle = currentColor
-    context.lineWidth = brushSize
-    context.lineCap = 'round'
-    context.lineJoin = 'round'
-    context.imageSmoothingEnabled = true
-
-    const getCoordinates = (e: MouseEvent | React.MouseEvent<HTMLCanvasElement>) => {
-      const rect = canvas.getBoundingClientRect()
-      const scaleX = canvas.width / rect.width
-      const scaleY = canvas.height / rect.height
-      return {
-        x: (e.clientX - rect.left) * scaleX,
-        y: (e.clientY - rect.top) * scaleY,
-      }
-    }
-
-    const handleMouseDown = (e: MouseEvent | React.MouseEvent<HTMLCanvasElement>) => {
-      const coords = getCoordinates(e)
-      setIsDrawing(true)
-      setPrevPoint(coords)
-      setCursorPosition(coords)
-      
-      // Draw initial point
-      drawPoint(context, coords.x, coords.y)
-    }
-
-    const handleMouseMove = (e: MouseEvent | React.MouseEvent<HTMLCanvasElement>) => {
-      const coords = getCoordinates(e)
-      
-      if (cursorSmall) {
-        const rect = canvas.getBoundingClientRect()
-        cursorSmall.style.left = `${e.clientX - rect.left}px`
-        cursorSmall.style.top = `${e.clientY - rect.top}px`
-      }
-
-      setCursorPosition(coords)
-
-      if (isDrawing && prevPoint) {
-        context.strokeStyle = currentColor
-        context.fillStyle = currentColor
-        context.lineWidth = brushSize
-        drawLine(context, prevPoint.x, prevPoint.y, coords.x, coords.y)
-        setPrevPoint(coords)
-      }
-    }
-
-    const handleMouseUp = () => {
-      setIsDrawing(false)
-      setPrevPoint(null)
-    }
-
-    const handleMouseLeave = () => {
-      setIsDrawing(false)
-      setPrevPoint(null)
-    }
-
-    // Add event listeners
-    canvas.addEventListener('mousedown', handleMouseDown as EventListener)
-    canvas.addEventListener('mousemove', handleMouseMove as EventListener)
-    canvas.addEventListener('mouseup', handleMouseUp)
-    canvas.addEventListener('mouseleave', handleMouseLeave)
-
-    return () => {
-      canvas.removeEventListener('mousedown', handleMouseDown as EventListener)
-      canvas.removeEventListener('mousemove', handleMouseMove as EventListener)
-      canvas.removeEventListener('mouseup', handleMouseUp)
-      canvas.removeEventListener('mouseleave', handleMouseLeave)
-    }
-  }, [brushSize, currentColor, isDrawing, prevPoint])
-
   const clearCanvas = () => {
     const canvas = canvasRef.current
-    if (!canvas) return
-    const context = canvas.getContext('2d')
-    if (!context) return
-    context.fillStyle = '#000000'
-    context.fillRect(0, 0, canvas.width, canvas.height)
-    setPrevPoint(null)
-    setIsDrawing(false)
+    const ctx = canvas?.getContext('2d')
+    if (!canvas || !ctx) return
+    const dpr = Math.max(1, window.devicePixelRatio || 1)
+    ctx.save()
+    ctx.setTransform(1, 0, 0, 1, 0, 0)
+    ctx.fillStyle = '#000000'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.restore()
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    drawing.current = false
+    last.current = null
+    setInking(false)
   }
 
-  const colors = [
-    { name: 'TERMINAL_GREEN', value: '#36A689', label: 'GREEN' },
-    { name: 'TERMINAL_ACCENT', value: '#3FC89C', label: 'ACCENT' },
-    { name: 'TERMINAL_DANGER', value: '#DF2E30', label: 'RED' },
-    { name: 'TERMINAL_WARNING', value: '#B98C13', label: 'YELLOW' },
-    { name: 'ERASER', value: '#000000', label: 'ERASER' },
-  ]
+  const ringColor = color === '#000000' ? '#36A689' : color
 
   return (
-    <div className="space-y-4">
-      {/* Toolbar */}
-      <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4">
-        <div className="font-mono text-xs text-terminal-text/80 mb-4 uppercase tracking-wider">
-          DRAWING_TOOLBAR
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Brush Size */}
-          <div>
-            <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-              BRUSH_SIZE: {brushSize}px
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs text-terminal-green">MIN: 1</span>
+    <div className="flex min-h-0 flex-1 flex-col gap-3">
+      <section className="shrink-0 border-b border-terminal-green/20 pb-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+          <div className="min-w-0">
+            <label htmlFor="brush-size" className="font-mono text-[11px] uppercase tracking-wider text-terminal-text/60">
+              Brush <span className="text-terminal-text">{brush}px</span>
+            </label>
+            <div className="mt-1 flex items-center gap-3">
+              <span className="font-mono text-[11px] text-terminal-text/60">1</span>
               <input
+                id="brush-size"
                 type="range"
                 min="1"
                 max="40"
                 step="1"
-                value={brushSize}
-                onChange={(e) => setBrushSize(parseInt(e.target.value))}
-                className="flex-1 h-2 bg-terminal-dark border border-terminal-green appearance-none cursor-pointer"
+                value={brush}
+                onChange={(e) => setBrush(Number(e.target.value))}
+                className="h-1 flex-1 cursor-pointer appearance-none border-0 accent-terminal-green"
                 style={{
-                  background: `linear-gradient(to right, #36A689 0%, #36A689 ${((brushSize - 1) / 39) * 100}%, #050905 ${((brushSize - 1) / 39) * 100}%, #050905 100%)`,
+                  background: `linear-gradient(to right, #36A689 0%, #36A689 ${((brush - 1) / 39) * 100}%, #050905 ${((brush - 1) / 39) * 100}%, #050905 100%)`,
                 }}
               />
-              <span className="font-mono text-xs text-terminal-green">MAX: 40</span>
+              <span className="font-mono text-[11px] text-terminal-text/60">40</span>
             </div>
           </div>
 
-          {/* Color Selection */}
-          <div>
-            <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-              COLOR_PALETTE:
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {colors.map((color) => (
-                <button
-                  key={color.name}
-                  onClick={() => {
-                    if (color.name === 'ERASER') {
-                      setCurrentColor('#000000')
-                      setCursorBorderColor('#36A689')
-                    } else {
-                      setCurrentColor(color.value)
-                      setCursorBorderColor(color.value)
-                    }
-                  }}
-                  className={`px-3 py-1 border-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
-                    currentColor === color.value
-                      ? 'border-terminal-green bg-terminal-green text-black shadow-glow'
-                      : 'border-terminal-green/50 bg-terminal-dark/50 text-terminal-green hover:bg-terminal-green/20'
-                  }`}
-                >
-                  [{color.label}]
-                </button>
-              ))}
-            </div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {COLORS.map((c) => (
+              <button
+                key={c.name}
+                type="button"
+                aria-pressed={color === c.value}
+                onClick={() => setColor(c.value)}
+                className={`border px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-colors ${
+                  color === c.value
+                    ? 'border-terminal-green bg-terminal-green text-black'
+                    : 'border-terminal-green/30 bg-transparent text-terminal-text/70 hover:border-terminal-green/60 hover:text-terminal-text'
+                }`}
+              >
+                {c.name}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={clearCanvas}
+              className="border border-terminal-green/45 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-terminal-green hover:bg-terminal-green hover:text-black"
+            >
+              Clear
+            </button>
           </div>
         </div>
+      </section>
 
-        {/* Actions */}
-        <div className="mt-4 flex gap-2">
-          <Button
-            onClick={clearCanvas}
-            className="px-4 py-2 border border-terminal-green bg-terminal-dark/50 font-mono text-xs uppercase tracking-wider text-terminal-green hover:bg-terminal-green hover:text-black transition-all duration-300"
-          >
-            [×] CLEAR_CANVAS
-          </Button>
+      <section className="flex min-h-[min(56dvh,28rem)] flex-1 flex-col md:min-h-0">
+        <div className="mb-1.5 flex items-baseline justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text/60">
+          <h2>Surface</h2>
+          <span className="tabular-nums">
+            {surface.w} × {surface.h}
+            {inking ? ` · ${Math.round(cursor.x)},${Math.round(cursor.y)}` : ''}
+          </span>
         </div>
-      </div>
 
-      {/* Canvas */}
-      <div className="border-2 border-terminal-green bg-terminal-dark/20 p-4 relative">
-        <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-          CANVAS_AREA:
-        </div>
-        <div className="relative inline-block">
+        <div
+          ref={wrapRef}
+          className="relative min-h-0 flex-1 overflow-hidden border border-terminal-green/35 bg-black"
+        >
+          <span className="pointer-events-none absolute left-0 top-0 z-10 h-2.5 w-2.5 border-l border-t border-terminal-green/55" />
+          <span className="pointer-events-none absolute right-0 top-0 z-10 h-2.5 w-2.5 border-r border-t border-terminal-green/55" />
+          <span className="pointer-events-none absolute bottom-0 left-0 z-10 h-2.5 w-2.5 border-b border-l border-terminal-green/55" />
+          <span className="pointer-events-none absolute bottom-0 right-0 z-10 h-2.5 w-2.5 border-b border-r border-terminal-green/55" />
+
           <canvas
             ref={canvasRef}
-            width={canvasWidth}
-            height={canvasHeight}
-            className="border border-terminal-green bg-black cursor-crosshair max-w-full h-auto block"
-            style={{ imageRendering: 'pixelated' }}
+            aria-label="Drawing canvas"
+            className="absolute inset-0 h-full w-full touch-none cursor-none"
           />
-          <div
-            ref={cursorSmallRef}
-            className="absolute pointer-events-none z-10"
-            style={{
-              width: brushSize,
-              height: brushSize,
-              borderRadius: '50%',
-              border: `2px solid ${cursorBorderColor}`,
-              transform: 'translate(-50%, -50%)',
-              boxShadow: `0 0 10px ${cursorBorderColor}`,
-              display: 'block',
-            }}
-          />
+
+          {hover && (
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute rounded-full"
+              style={{
+                width: brush,
+                height: brush,
+                left: cursor.x,
+                top: cursor.y,
+                transform: 'translate(-50%, -50%)',
+                border: `1.5px solid ${ringColor}`,
+                boxShadow: `0 0 8px ${ringColor}`,
+              }}
+            />
+          )}
         </div>
-        {isDrawing && (
-          <div className="mt-2 font-mono text-xs text-terminal-text/80">
-            DRAWING... X: {Math.round(cursorPosition.x)} Y: {Math.round(cursorPosition.y)}
-          </div>
-        )}
-      </div>
+      </section>
     </div>
   )
 }

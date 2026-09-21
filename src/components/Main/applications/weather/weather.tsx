@@ -45,7 +45,7 @@ const Weather = () => {
   }, [])
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <Search setWeatherData={setWeatherData} setIsLoading={setIsLoading} />
       <Result weatherData={weatherData} isLoading={isLoading} />
     </div>
@@ -87,34 +87,37 @@ const Search = ({ setWeatherData, setIsLoading }: SearchProps) => {
   }
 
   return (
-    <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4">
-      <div className="font-mono text-xs text-terminal-text/80 mb-3 uppercase tracking-wider">
-        INPUT_LOCATION:
-      </div>
-      <form onSubmit={handleSubmit} className="flex items-center gap-3">
-        <Input
-          type="text"
-          placeholder="ENTER CITY"
-          required
-          autoComplete="off"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          className="flex-1 rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm px-4 py-2 focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-text/60"
-        />
-        <Button
-          type="submit"
-          disabled={status === 'SCANNING'}
-          className="px-4 py-2 border border-terminal-green bg-terminal-dark/50 font-mono text-xs uppercase tracking-wider text-terminal-green hover:bg-terminal-green hover:text-black transition-all duration-300 disabled:opacity-50"
-        >
-          {status === 'SCANNING' ? '[⚡] SCANNING...' : '[⚡] SCAN'}
-        </Button>
+    <section className="border-b border-terminal-green/20 pb-5">
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="weather-city" className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text/60">
+          Location query
+        </label>
+        <div className="mt-2 flex gap-2 sm:gap-3">
+          <Input
+            id="weather-city"
+            type="text"
+            placeholder="ENTER CITY"
+            required
+            autoComplete="off"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            className="h-10 min-w-0 flex-1 rounded-none border-x-0 border-b border-t-0 border-terminal-green/35 bg-transparent px-0 font-mono text-sm text-terminal-text placeholder:text-terminal-text/60 focus-visible:border-terminal-green focus-visible:ring-0"
+          />
+          <Button
+            type="submit"
+            disabled={status === 'SCANNING'}
+            className="h-10 rounded-none border border-terminal-green/55 bg-transparent px-4 font-mono text-[12px] uppercase tracking-[0.16em] text-terminal-green hover:bg-terminal-green hover:text-black disabled:opacity-60"
+          >
+            {status === 'SCANNING' ? 'Scanning…' : 'Scan'}
+          </Button>
+        </div>
       </form>
       {status === 'ERROR' && (
-        <div className="mt-2 font-mono text-xs text-terminal-danger">
-          [✗] ERROR: LOCATION NOT FOUND
-        </div>
+        <p role="alert" className="mt-2 font-mono text-[12px] uppercase tracking-wide text-terminal-danger">
+          Location not found. Check the city name and try again.
+        </p>
       )}
-    </div>
+    </section>
   )
 }
 
@@ -126,11 +129,9 @@ interface ResultProps {
 const Result = ({ weatherData, isLoading }: ResultProps) => {
   if (isLoading) {
     return (
-      <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4">
-        <div className="font-mono text-sm text-terminal-text/80 uppercase tracking-wider">
-          SCANNING...
-        </div>
-        <div className="mt-2 flex gap-1">
+      <div className="flex min-h-48 flex-col items-center justify-center">
+        <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-terminal-text/70">Scanning atmosphere</p>
+        <div className="mt-3 flex gap-1" aria-hidden="true">
           <span className="animate-pulse text-terminal-green">█</span>
           <span className="animate-pulse delay-100 text-terminal-green">█</span>
           <span className="animate-pulse delay-200 text-terminal-green">█</span>
@@ -141,11 +142,9 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
 
   if (!weatherData) {
     return (
-      <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4">
-        <div className="font-mono text-sm text-terminal-text/80 uppercase tracking-wider">
-          NO DATA AVAILABLE
-        </div>
-      </div>
+      <p className="py-12 text-center font-mono text-[12px] uppercase tracking-[0.2em] text-terminal-text/70">
+        No weather data available
+      </p>
     )
   }
 
@@ -164,109 +163,44 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
   const month = date.toLocaleString('en-US', { month: 'long' })
   const dayDate = date.getDate()
 
-  // Calculate percentages for progress bars
-  const tempPercent = Math.min(100, ((temp + 20) / 50) * 100) // -20 to 30°C range
-  const humidityPercent = weatherData.main.humidity
-  const pressurePercent = ((weatherData.main.pressure - 950) / 100) * 100 // 950-1050 range
-
   return (
-    <div className="space-y-4">
-      {/* Location and Time */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-            LOCATION
-          </div>
-          <div className="font-mono text-lg text-terminal-green">
+    <section aria-live="polite">
+      <header className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end">
+        <div>
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-terminal-text/60">Current signal</p>
+          <h2 className="mt-1 font-mono text-2xl uppercase tracking-wide text-terminal-green md:text-3xl">
             {weatherData.name}, {weatherData.sys.country}
-          </div>
+          </h2>
+          <p className="mt-1 font-mono text-[13px] uppercase tracking-wide text-terminal-text/80">
+            {capitalizedDescription}
+          </p>
         </div>
-        <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-            DATE_TIME
-          </div>
-          <div className="font-mono text-sm text-terminal-green">
-            {formattedTime}
-          </div>
-          <div className="font-mono text-sm text-terminal-text/80">
-            {month} {dayDate}
-          </div>
+        <div className="sm:text-right">
+          <p className="font-mono text-5xl tabular-nums text-terminal-green md:text-6xl">{temp}°C</p>
+          <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-terminal-text/60">
+            Observed {formattedTime} · {month} {dayDate}
+          </p>
         </div>
-      </div>
+      </header>
 
-      {/* Temperature */}
-      <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-        <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-          TEMPERATURE
-        </div>
-        <div className="font-mono text-4xl text-terminal-green mb-2">
-          {temp}°C
-        </div>
-        <div className="font-mono text-sm text-terminal-text/80 mb-2">
-          FEELS LIKE: {feelsLike}°C
-        </div>
-        <div className="font-mono text-xs text-terminal-text/80 uppercase">
-          {capitalizedDescription}
-        </div>
-        <div className="mt-2 h-2 border border-terminal-green bg-terminal-dark">
-          <div 
-            className="h-full bg-terminal-green transition-all duration-300"
-            style={{ width: `${tempPercent}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Metrics Grid */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-            HUMIDITY
+      <dl className="mt-6 grid grid-cols-2 border-y border-terminal-green/20 sm:grid-cols-5">
+        {[
+          ['FEELS LIKE', `${feelsLike}°C`],
+          ['HUMIDITY', `${weatherData.main.humidity}%`],
+          ['PRESSURE', `${weatherData.main.pressure} hPa`],
+          ['WIND', `${wind} m/s`],
+          ['VISIBILITY', `${visibility.toFixed(1)} km`],
+        ].map(([label, value], index) => (
+          <div
+            key={label}
+            className={`py-3 ${index > 0 && index < 4 ? 'border-l border-terminal-green/15 pl-3' : ''} ${index === 4 ? 'col-span-2 border-t border-terminal-green/15 sm:col-span-1 sm:border-l sm:border-t-0 sm:pl-3' : ''}`}
+          >
+            <dt className="font-mono text-[11px] uppercase tracking-wider text-terminal-text/60">{label}</dt>
+            <dd className="mt-1 font-mono text-lg tabular-nums text-terminal-text md:text-xl">{value}</dd>
           </div>
-          <div className="font-mono text-2xl text-terminal-green mb-2">
-            {weatherData.main.humidity}%
-          </div>
-          <div className="h-1 border border-terminal-green bg-terminal-dark">
-            <div 
-              className="h-full bg-terminal-green transition-all duration-300"
-              style={{ width: `${humidityPercent}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-            PRESSURE
-          </div>
-          <div className="font-mono text-2xl text-terminal-green mb-2">
-            {weatherData.main.pressure} hPa
-          </div>
-          <div className="h-1 border border-terminal-green bg-terminal-dark">
-            <div 
-              className="h-full bg-terminal-green transition-all duration-300"
-              style={{ width: `${pressurePercent}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-            WIND SPEED
-          </div>
-          <div className="font-mono text-2xl text-terminal-green">
-            {wind} km/h
-          </div>
-        </div>
-
-        <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
-            VISIBILITY
-          </div>
-          <div className="font-mono text-2xl text-terminal-green">
-            {visibility.toFixed(1)} km
-          </div>
-        </div>
-      </div>
-    </div>
+        ))}
+      </dl>
+    </section>
   )
 }
 

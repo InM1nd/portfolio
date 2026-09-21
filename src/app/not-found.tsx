@@ -1,24 +1,28 @@
-import Link from 'next/link'
+import TransitionLink from '@/components/TransitionLink'
+import { glow, glowStrong } from '@/components/pipboy/PipBoyShell'
 
 export default function NotFound() {
   return (
     <div className="flex min-h-0 flex-1 items-center justify-center p-4">
-      <div className="w-full max-w-2xl text-center">
-        <div className="font-mono text-6xl md:text-8xl text-terminal-green mb-4">
-          404
-        </div>
-        <div className="font-mono text-xl md:text-2xl text-terminal-green/80 mb-6 uppercase tracking-wider">
-          ERROR: PAGE NOT FOUND
-        </div>
-        <div className="font-mono text-sm text-terminal-green/70 mb-8">
-          THE REQUESTED RESOURCE DOES NOT EXIST IN THE SYSTEM.
-        </div>
-        <Link
-          href="/"
-          className="inline-block px-6 py-3 border-2 border-terminal-green bg-terminal-dark/50 font-mono text-sm uppercase tracking-wider text-terminal-green hover:bg-terminal-green hover:text-black transition-all duration-300 shadow-glow-sm hover:shadow-glow"
+      <div className="max-w-lg space-y-5 text-center">
+        <h1
+          className="font-mono text-6xl uppercase tracking-[0.1em] text-terminal-green md:text-7xl"
+          style={glowStrong}
         >
-          [◂] RETURN TO MAIN TERMINAL
-        </Link>
+          404
+        </h1>
+        <p className="font-mono text-sm uppercase tracking-[0.2em] text-terminal-text/70">
+          PAGE NOT FOUND
+        </p>
+        <p className="font-mono text-[13px] leading-relaxed text-terminal-text/80" style={glow}>
+          The requested resource does not exist in the system.
+        </p>
+        <TransitionLink
+          href="/"
+          className="terminal-button inline-flex border border-terminal-green bg-terminal-green px-4 py-2.5 font-mono text-xs uppercase tracking-[0.16em] text-black transition-colors hover:bg-terminal-green/80"
+        >
+          [◂] RETURN HOME
+        </TransitionLink>
       </div>
     </div>
   )

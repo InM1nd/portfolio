@@ -181,7 +181,7 @@ Do not reintroduce `basePath`, `gh-pages`, or a Pages workflow.
   specificity of a bare `a`. Keep it that way. Tailwind 3's `@layer` is ordering, not real cascade
   layers — as `a:not(.terminal-button):not(.sr-only)` it outranked every colour utility on every
   link, so inactive tabs glowed like the active one and OPEN TO WORK lost its green.
-- **EmailJS keys in `talk.tsx` are publishable** — not a leak. The real safeguard is the domain
-  allowlist in the EmailJS dashboard.
+- **Contact has no mail relay.** Channels are `mailto:` / external links plus a clipboard copy.
+  Do not reintroduce EmailJS, Formspree, or any send-email SDK unless the owner actually uses it.
 - `PORTFOLIO_ANALYSIS.md` and `PIPBOY_PLAN.md` are current. **`REDESIGN_PLAN.md` is obsolete** —
   it describes a 2024 concept that no longer matches the code. Don't take direction from it.
