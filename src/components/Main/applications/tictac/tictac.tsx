@@ -1,21 +1,23 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
 
 type SquareValue = 'X' | 'O' | null
 
 function Square({
+  index,
   value,
   onSquareClick,
 }: {
+  index: number
   value: SquareValue
   onSquareClick: () => void
 }) {
   return (
     <button
       onClick={onSquareClick}
-      className="w-20 h-20 md:w-24 md:h-24 border-2 border-terminal-green bg-terminal-dark/50 font-mono text-3xl md:text-4xl font-bold text-terminal-green hover:bg-terminal-green hover:text-black transition-all duration-300 hover:shadow-glow disabled:opacity-50 disabled:cursor-not-allowed"
+      aria-label={`Square ${index + 1}: ${value ? `marked ${value}` : 'empty'}`}
+      className="h-20 w-20 border border-terminal-green/45 bg-terminal-green/[0.03] font-mono text-3xl text-terminal-green transition-colors hover:bg-terminal-green/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-terminal-green disabled:cursor-default disabled:opacity-100 md:h-24 md:w-24 md:text-4xl"
       disabled={value !== null}
     >
       {value}
@@ -70,30 +72,27 @@ function Board({
 
   const winner = calculateWinner(squares)
   let status: string
-  let statusClass = 'text-terminal-green'
+  let statusClass = 'text-terminal-text'
   
   if (winner) {
     status = `WINNER: ${winner}`
-    statusClass = 'text-terminal-green animate-pulse'
+    statusClass = 'text-terminal-online'
+  } else if (squares.every(Boolean)) {
+    status = 'DRAW'
   } else {
     status = `NEXT_PLAYER: ${xIsNext ? 'X' : 'O'}`
   }
 
   return (
-    <div className="space-y-4">
-      <div className="font-mono text-sm text-terminal-text/80 uppercase tracking-wider border-b border-terminal-green/30 pb-2">
-        GAME_STATUS: <span className={statusClass}>{status}</span>
+    <div>
+      <div className="flex items-baseline justify-between gap-4 border-b border-terminal-green/20 pb-2 font-mono uppercase">
+        <span className="text-[11px] tracking-[0.22em] text-terminal-text/60">Game status</span>
+        <span className={`text-[13px] tracking-wider ${statusClass}`}>{status}</span>
       </div>
-      <div className="grid grid-cols-3 gap-2 w-fit mx-auto">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      <div className="mx-auto mt-5 grid w-fit grid-cols-3 gap-2">
+        {squares.map((value, index) => (
+          <Square key={index} index={index} value={value} onSquareClick={() => handleClick(index)} />
+        ))}
       </div>
     </div>
   )
@@ -120,7 +119,7 @@ const TicTac = () => {
     setCurrentMove(0)
   }
 
-  const moves = history.map((squares, move) => {
+  const moves = history.map((_, move) => {
     let description: string
     if (move > 0) {
       description = `MOVE_#${move}`
@@ -128,39 +127,40 @@ const TicTac = () => {
       description = 'GAME_START'
     }
     return (
-      <li key={move} className="mb-2">
-        <Button
+      <li key={move}>
+        <button
           onClick={() => jumpTo(move)}
-          className={`px-3 py-1 border border-terminal-green font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+          className={`w-full border-l-2 px-3 py-2 text-left font-mono text-[12px] uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-terminal-green ${
             currentMove === move
-              ? 'bg-terminal-green text-black shadow-glow'
-              : 'bg-terminal-dark/50 text-terminal-green hover:bg-terminal-green/20'
+              ? 'border-terminal-green bg-terminal-green/[0.08] text-terminal-text'
+              : 'border-transparent text-terminal-text/60 hover:bg-terminal-green/[0.05] hover:text-terminal-text/80'
           }`}
         >
-          [▸] {description}
-        </Button>
+          {String(move).padStart(2, '0')} / {description}
+        </button>
       </li>
     )
   })
 
   return (
-    <div className="space-y-6">
-      <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      
-      <div className="border-t border-terminal-green/30 pt-4">
-        <div className="font-mono text-xs text-terminal-text/80 mb-3 uppercase tracking-wider">
-          MOVE_HISTORY:
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {moves}
-        </div>
-        <Button
-          onClick={resetGame}
-          className="px-4 py-2 border-2 border-terminal-green bg-terminal-dark/50 font-mono text-xs uppercase tracking-wider text-terminal-green hover:bg-terminal-green hover:text-black transition-all duration-300"
-        >
-          [↻] RESET_GAME
-        </Button>
+    <div className="grid gap-6 md:grid-cols-[minmax(280px,1fr)_230px] md:gap-0">
+      <div className="md:pr-6">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
+
+      <aside className="border-t border-terminal-green/20 pt-4 md:border-l md:border-t-0 md:pl-5 md:pt-0">
+        <div className="mb-2 flex items-baseline justify-between gap-3 font-mono uppercase">
+          <h2 className="text-[11px] tracking-[0.22em] text-terminal-text/60">Move history</h2>
+          <span className="text-[11px] tabular-nums text-terminal-text/60">{currentMove}/{history.length - 1}</span>
+        </div>
+        <ol className="space-y-0.5">{moves}</ol>
+        <button
+          onClick={resetGame}
+          className="mt-4 border border-terminal-green/50 px-3 py-2 font-mono text-[12px] uppercase tracking-[0.16em] text-terminal-green transition-colors hover:bg-terminal-green hover:text-black focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-terminal-green"
+        >
+          Reset game
+        </button>
+      </aside>
     </div>
   )
 }

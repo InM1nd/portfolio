@@ -33,7 +33,7 @@ npx tsc --noEmit   # typecheck
 | `/projects` | WORK | Project register with filters and detail preview |
 | `/about` | PROFILE | Experience, stack, education, languages |
 | `/applications` | LAB | Small browser experiments |
-| `/contact` | CONTACT | Channels and a message form |
+| `/contact` | CONTACT | Channels — email, LinkedIn, GitHub, Telegram |
 
 ## Layout
 

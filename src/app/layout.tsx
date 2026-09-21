@@ -12,7 +12,7 @@ const shareTechMono = Share_Tech_Mono({
 
 const SITE_URL = "https://inm1nd.vercel.app";
 const DESCRIPTION =
-  "Frontend / product engineer in Vienna. React, Next.js, TypeScript — retention platforms, dashboards and developer tooling, shipped to production.";
+  "Frontend / product engineer in Vienna. React, Next.js, TypeScript — production sites, products and developer tooling, shipped since 2021.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
