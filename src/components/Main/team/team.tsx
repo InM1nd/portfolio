@@ -2,7 +2,16 @@ import Image from 'next/image'
 import Sanya from '@/img/other/SANYA.jpg'
 import { glow, glowStrong } from '@/components/pipboy/PipBoyShell'
 
-const EXPERIENCE = [
+type Job = {
+  from?: string
+  to?: string
+  role: string
+  company: string
+  points: string[]
+  stack?: string
+}
+
+const EXPERIENCE: Job[] = [
   {
     from: 'SEP 2025',
     to: 'NOW',
@@ -16,6 +25,28 @@ const EXPERIENCE = [
       'Built landing-page funnels for lead generation, working with the CTO and a cross-functional team.',
     ],
     stack: 'Next.js · React · TypeScript · Tailwind · Sanity · GSAP · Three.js',
+  },
+  {
+    from: 'JAN 2025',
+    to: 'JUL 2025',
+    role: 'Frontend / Product Engineer (Contract)',
+    company: 'OBRIO',
+    points: [
+      'Designed and built an internal org-structure dashboard used by 300+ employees (Next.js, TypeScript, Google SSO).',
+    ],
+    stack: 'Next.js · TypeScript · Google SSO',
+  },
+  {
+    from: 'JAN 2024',
+    to: 'DEC 2024',
+    role: 'Freelance Frontend Developer',
+    company: 'Landing pages for early-stage brands',
+    points: [
+      'Skelya (career consultation platform), Verus Property (Dubai real estate), Skeptic (fitness platform).',
+      'Built and shipped responsive landing pages from design to production.',
+      'Integrated Telegram-based client-consultant matching flow for Skelya.',
+      'Verus and Skeptic: email capture plus DNS and basic hosting — no extra product logic.',
+    ],
   },
   {
     from: 'MAR 2023',
@@ -53,8 +84,7 @@ const STACK: [string, string][] = [
 
 const EDUCATION = [
   ['MSc Information Systems and Technologies', 'KNEU, Kyiv · Feb 2024—May 2025'],
-  ['MSc Applied Economics', 'University of Vienna · Sep 2021—now'],
-  ['MSc International Economics', 'KNEU, Kyiv · Sep 2017—Jun 2021'],
+  ['MSc Applied Economics · MSc International Economics', 'University of Vienna; KNEU, Kyiv'],
   ['Frontend Developer Certification', 'GoIT, Kyiv · Sep 2021—Aug 2022'],
 ]
 
@@ -144,10 +174,12 @@ const Team = () => (
         <Block label="EXPERIENCE">
           <ol className="space-y-3">
             {EXPERIENCE.map((job) => (
-              <li key={`${job.company}-${job.from}`} className="border-l border-terminal-green/25 pl-3">
-                <p className="font-mono text-[11px] uppercase tabular-nums text-terminal-text/60">
-                  {job.from === job.to ? job.from : `${job.from} — ${job.to}`}
-                </p>
+              <li key={`${job.company}-${job.from ?? job.role}`} className="border-l border-terminal-green/25 pl-3">
+                {job.from && job.to && (
+                  <p className="font-mono text-[11px] uppercase tabular-nums text-terminal-text/60">
+                    {job.from === job.to ? job.from : `${job.from} — ${job.to}`}
+                  </p>
+                )}
                 <p className="mt-0.5 font-mono text-sm uppercase tracking-wide text-terminal-text" style={glow}>
                   {job.role}
                 </p>
@@ -160,7 +192,9 @@ const Team = () => (
                     </li>
                   ))}
                 </ul>
-                <p className="mt-1 font-mono text-[11px] text-terminal-text/60">{job.stack}</p>
+                {job.stack && (
+                  <p className="mt-1 font-mono text-[11px] text-terminal-text/60">{job.stack}</p>
+                )}
               </li>
             ))}
           </ol>
