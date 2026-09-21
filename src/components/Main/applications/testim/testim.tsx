@@ -177,14 +177,14 @@ function InteractiveCanvas() {
     <div className="space-y-4">
       {/* Toolbar */}
       <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4">
-        <div className="font-mono text-xs text-terminal-green/70 mb-4 uppercase tracking-wider">
+        <div className="font-mono text-xs text-terminal-text/80 mb-4 uppercase tracking-wider">
           DRAWING_TOOLBAR
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Brush Size */}
           <div>
-            <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+            <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
               BRUSH_SIZE: {brushSize}px
             </div>
             <div className="flex items-center gap-3">
@@ -207,7 +207,7 @@ function InteractiveCanvas() {
 
           {/* Color Selection */}
           <div>
-            <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+            <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
               COLOR_PALETTE:
             </div>
             <div className="flex flex-wrap gap-2">
@@ -249,7 +249,7 @@ function InteractiveCanvas() {
 
       {/* Canvas */}
       <div className="border-2 border-terminal-green bg-terminal-dark/20 p-4 relative">
-        <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+        <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
           CANVAS_AREA:
         </div>
         <div className="relative inline-block">
@@ -275,7 +275,7 @@ function InteractiveCanvas() {
           />
         </div>
         {isDrawing && (
-          <div className="mt-2 font-mono text-xs text-terminal-green/70">
+          <div className="mt-2 font-mono text-xs text-terminal-text/80">
             DRAWING... X: {Math.round(cursorPosition.x)} Y: {Math.round(cursorPosition.y)}
           </div>
         )}

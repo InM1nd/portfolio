@@ -103,8 +103,10 @@ What caused it, and what to keep avoiding:
   `-webkit-backdrop-filter`: the minifier then keeps only the prefixed one and Chrome ignores it.
 - Decoration with no function. The HP bar and diamonds were cut. The filter sub-tabs stayed —
   they actually filter.
-- Everything at one visual weight. Build hierarchy with opacity and size, not with borders:
-  heading 100% → body 70% → meta 35% → label 25%.
+- Everything at one visual weight. Build hierarchy with size, case and opacity, not with borders.
+  Text uses `terminal-text` (#8FDCC2), not `terminal-green`: heading 100% → body 80% → meta 70%
+  → label 60%. **60% is the floor** (~4.9:1). The old 35%/25% steps on `#36A689` measured 1.4–1.7:1
+  and 92% of /about failed WCAG AA. `terminal-green` stays for borders, lines, glow and large headings.
 
 Pip-Boy signals that are correct because each does a job: two-level tabs (sections + filters),
 phosphor `text-shadow` glow, corner ticks, vertical position track, bottom status bar.
@@ -118,7 +120,9 @@ viewport (UI stays legible when scaled down), save as 16:10, `sips -Z 1600` — 
 screen get an ASCII `schematic` (rendered in a system mono — Share Tech Mono has no box-drawing
 glyphs), built only from facts in the README or commit history.
 
-Minimum body text size is 12px. Shrink padding and chrome, not legibility.
+Minimum body text size is 12px (descriptions 13px); uppercase labels and meta may go to 11px,
+nothing smaller. Shrink padding and chrome, not legibility. Verify by measuring contrast of every
+text node in `<main>` against the screen (#060A08) — 0% of text may fall under 4.5:1.
 
 ---
 
@@ -173,9 +177,10 @@ Do not reintroduce `basePath`, `gh-pages`, or a Pages workflow.
 
 ## 8. Known traps
 
-- **Global anchor rule.** `a:not(.terminal-button)` in `globals.css` sets `position: relative`
-  and outranks `.sr-only` by specificity. Any new utility-positioned link needs an exclusion,
-  or it will silently occupy space in the flow.
+- **Global anchor rule.** The link rule in `globals.css` is wrapped in `:where()` so it has the
+  specificity of a bare `a`. Keep it that way. Tailwind 3's `@layer` is ordering, not real cascade
+  layers — as `a:not(.terminal-button):not(.sr-only)` it outranked every colour utility on every
+  link, so inactive tabs glowed like the active one and OPEN TO WORK lost its green.
 - **EmailJS keys in `talk.tsx` are publishable** — not a leak. The real safeguard is the domain
   allowlist in the EmailJS dashboard.
 - `PORTFOLIO_ANALYSIS.md` and `PIPBOY_PLAN.md` are current. **`REDESIGN_PLAN.md` is obsolete** —

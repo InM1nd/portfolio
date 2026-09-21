@@ -16,17 +16,17 @@ const matches = (p: Project, f: Filter) =>
 
 /** Status is monochrome; only restricted work gets the amber warning tone. */
 const STATUS_TONE: Record<Project['status'], string> = {
-  LIVE: 'border-terminal-green/45 text-terminal-green/80',
-  DEMO: 'border-terminal-green/30 text-terminal-green/60',
+  LIVE: 'border-terminal-green/45 text-terminal-text/80',
+  DEMO: 'border-terminal-green/30 text-terminal-text/80',
   NDA: 'border-[#FFB642]/40 text-[#FFB642]/75',
   PRIVATE: 'border-[#FFB642]/40 text-[#FFB642]/75',
-  FORK: 'border-terminal-green/25 text-terminal-green/50',
-  ARCHIVED: 'border-terminal-green/20 text-terminal-green/40',
+  FORK: 'border-terminal-green/25 text-terminal-text/70',
+  ARCHIVED: 'border-terminal-green/20 text-terminal-text/70',
 }
 
 const StatusChip = ({ status }: { status: Project['status'] }) => (
   <span
-    className={`shrink-0 border px-1.5 py-px font-mono text-[9px] uppercase tracking-[0.15em] ${STATUS_TONE[status]}`}
+    className={`shrink-0 border px-1.5 py-px font-mono text-[11px] uppercase tracking-[0.15em] ${STATUS_TONE[status]}`}
   >
     {status}
   </span>
@@ -50,7 +50,7 @@ const LinkRow = ({ p }: { p: Project }) =>
           href={l.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="terminal-button border border-terminal-green/45 bg-transparent px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-terminal-green hover:bg-terminal-green hover:text-black"
+          className="terminal-button border border-terminal-green/45 bg-transparent px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-green hover:bg-terminal-green hover:text-black"
         >
           {l.label} ↗
         </a>
@@ -78,7 +78,7 @@ const Media = ({ p, sizes }: { p: Project; sizes: string }) =>
           {[0, 1, 2].map((i) => (
             <span key={i} className="h-2 w-2 rounded-full bg-terminal-green/20" />
           ))}
-          <span className="ml-2 truncate font-mono text-[10px] tracking-wide text-terminal-green/40">
+          <span className="ml-2 truncate font-mono text-[11px] tracking-wide text-terminal-text/70">
             {host(p)}
           </span>
         </div>
@@ -92,7 +92,7 @@ const Media = ({ p, sizes }: { p: Project; sizes: string }) =>
       <pre
         key={p.id}
         aria-label={`${p.name} schematic`}
-        className="detail-open overflow-x-auto p-4 text-[10px] leading-[1.35] text-terminal-green/80 sm:text-[11px] lg:text-xs"
+        className="detail-open overflow-x-auto p-4 text-[11px] leading-[1.35] text-terminal-text/80 sm:text-xs lg:text-[13px]"
         // Share Tech Mono has no box-drawing glyphs; a system mono keeps the lines aligned (nothing is downloaded)
         style={{ fontFamily: 'Menlo, Monaco, Consolas, "DejaVu Sans Mono", monospace', ...glow }}
       >
@@ -103,25 +103,25 @@ const Media = ({ p, sizes }: { p: Project; sizes: string }) =>
 
 const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) => (
   <div key={p.id} className="detail-open">
-    <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-terminal-green/40">
+    <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text/70">
       <Lamp accent={p.accent} />
       <span>{p.code}</span>
       <StatusChip status={p.status} />
-      <span className="ml-auto tabular-nums text-terminal-green/30">{p.year}</span>
+      <span className="ml-auto tabular-nums text-terminal-text/60">{p.year}</span>
     </div>
     {!compact && (
       <h2 className="mt-1.5 font-mono text-2xl uppercase tracking-wide text-terminal-green lg:text-[28px]" style={glowStrong}>
         {p.name}
       </h2>
     )}
-    <p className="mt-1 font-mono text-[11px] uppercase tracking-wide text-terminal-green/45">{p.role}</p>
-    <p className="mt-2 max-w-2xl font-mono text-xs leading-relaxed text-terminal-green/80" style={glow}>
+    <p className="mt-1 font-mono text-[11px] uppercase tracking-wide text-terminal-text/70">{p.role}</p>
+    <p className="mt-2 max-w-2xl font-mono text-[13px] leading-relaxed text-terminal-text/80" style={glow}>
       {p.outcome}
     </p>
     <ul className="mt-2 space-y-0.5">
       {p.highlights.map((h) => (
-        <li key={h} className="flex gap-2 font-mono text-xs leading-relaxed text-terminal-green/65">
-          <span aria-hidden="true" className="text-terminal-green/35">
+        <li key={h} className="flex gap-2 font-mono text-[13px] leading-relaxed text-terminal-text/80">
+          <span aria-hidden="true" className="text-terminal-text/60">
             ▸
           </span>
           <span>{h}</span>
@@ -133,7 +133,7 @@ const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) => (
         {p.stack.map((s) => (
           <span
             key={s}
-            className="border border-terminal-green/15 px-1.5 py-px font-mono text-[10px] text-terminal-green/45"
+            className="border border-terminal-green/15 px-1.5 py-px font-mono text-[11px] text-terminal-text/70"
           >
             {s}
           </span>
@@ -175,11 +175,11 @@ const ProjectRegister = () => {
                 setFilter(f)
                 setSel(0)
               }}
-              className={`px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.15em] transition-colors ${
-                on ? 'bg-terminal-green text-black' : 'text-terminal-green/40 hover:text-terminal-green/75'
+              className={`px-2.5 py-1 font-mono text-[12px] uppercase tracking-[0.15em] transition-colors ${
+                on ? 'bg-terminal-green text-black' : 'text-terminal-text/70 hover:text-terminal-text/80'
               }`}
             >
-              {f} <span className={on ? 'text-black/60' : 'text-terminal-green/25'}>{n}</span>
+              {f} <span className={on ? 'text-black/80' : 'text-terminal-text/60'}>{n}</span>
             </button>
           )
         })}
@@ -208,7 +208,7 @@ const ProjectRegister = () => {
               return (
                 <Fragment key={item.id}>
                   {groupStart && (
-                    <p className="flex items-center gap-2 px-3 pb-1 pt-3 font-mono text-[9px] uppercase tracking-[0.3em] text-terminal-green/30">
+                    <p className="flex items-center gap-2 px-3 pb-1 pt-3 font-mono text-[11px] uppercase tracking-[0.3em] text-terminal-text/60">
                       {item.group}
                       <span className="h-px flex-1 bg-terminal-green/10" />
                     </p>
@@ -225,7 +225,7 @@ const ProjectRegister = () => {
                       background: on ? 'rgba(54,166,137,.07)' : undefined,
                     }}
                   >
-                    <span className="mt-[3px] w-5 shrink-0 font-mono text-[10px] tabular-nums text-terminal-green/30">
+                    <span className="mt-[3px] w-5 shrink-0 font-mono text-[11px] tabular-nums text-terminal-text/60">
                       {item.id}
                     </span>
                     <span className="min-w-0 flex-1">
@@ -233,7 +233,7 @@ const ProjectRegister = () => {
                         <Lamp accent={item.accent} lit={on} />
                         <span
                           className={`truncate font-mono text-sm uppercase tracking-wide transition-colors md:text-[15px] ${
-                            on ? 'text-terminal-green' : 'text-terminal-green/70'
+                            on ? 'text-terminal-text' : 'text-terminal-text/70'
                           }`}
                           style={on ? glowStrong : undefined}
                         >
@@ -243,7 +243,7 @@ const ProjectRegister = () => {
                           <StatusChip status={item.status} />
                         </span>
                       </span>
-                      <span className={`mt-0.5 block truncate font-mono text-[11px] ${on ? 'text-terminal-green/65' : 'text-terminal-green/35'}`}>
+                      <span className={`mt-0.5 block font-mono text-[12px] leading-snug ${on ? 'text-terminal-text/80' : 'text-terminal-text/60'}`}>
                         {item.tagline}
                       </span>
                     </span>
@@ -263,18 +263,18 @@ const ProjectRegister = () => {
 
             {/* archive lives at the bottom of the register, deliberately quiet */}
             <div className="mt-3 border-t border-terminal-green/15 px-3 pt-2">
-              <p className="mb-1 font-mono text-[9px] uppercase tracking-[0.3em] text-terminal-green/25">ARCHIVE</p>
+              <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.3em] text-terminal-text/60">ARCHIVE</p>
               {ARCHIVE.map((a) => (
                 <a
                   key={a.id}
                   href={a.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-baseline gap-2 py-1 font-mono text-[11px] text-terminal-green/40 transition-colors hover:text-terminal-green/75"
+                  className="flex items-baseline gap-2 py-1 font-mono text-[12px] text-terminal-text/70 transition-colors hover:text-terminal-text/80"
                 >
                   <span className="uppercase">{a.name}</span>
-                  <span className="text-[10px] text-terminal-green/25">{a.tagline}</span>
-                  <span className="ml-auto text-[10px] tabular-nums text-terminal-green/25">{a.year}</span>
+                  <span className="text-[11px] text-terminal-text/60">{a.tagline}</span>
+                  <span className="ml-auto text-[11px] tabular-nums text-terminal-text/60">{a.year}</span>
                 </a>
               ))}
             </div>

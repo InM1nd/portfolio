@@ -574,14 +574,14 @@
   }
 
   /* Global Link Styling & Hover Animation */
-  a:not(.terminal-button):not(.sr-only) {
+  a:where(:not(.terminal-button):not(.sr-only)) {
     position: relative;
     transition: all 0.3s ease;
     color: #36A689;
     text-decoration: none;
   }
 
-  a:not(.terminal-button):not(.sr-only)::after {
+  a:where(:not(.terminal-button):not(.sr-only))::after {
     content: '';
     position: absolute;
     bottom: -2px;
@@ -593,12 +593,12 @@
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  a:not(.terminal-button):not(.sr-only):hover {
+  a:where(:not(.terminal-button):not(.sr-only)):hover {
     color: #4FD4B0;
     text-shadow: 0 0 10px rgba(54, 166, 137, 0.7);
   }
 
-  a:not(.terminal-button):not(.sr-only):hover::after {
+  a:where(:not(.terminal-button):not(.sr-only)):hover::after {
     width: 100%;
   }
 

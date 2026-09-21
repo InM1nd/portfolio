@@ -40,8 +40,8 @@ const TabBar = () => {
             aria-current={active ? 'page' : undefined}
             className={`flex-1 border-b px-2 py-2.5 text-center font-mono text-[11px] uppercase tracking-[0.2em] transition-colors md:text-xs ${
               active
-                ? 'border-terminal-green text-terminal-green'
-                : 'border-terminal-green/25 text-terminal-green/35 hover:text-terminal-green/70'
+                ? 'border-terminal-green text-terminal-text'
+                : 'border-terminal-green/25 text-terminal-text/60 hover:text-terminal-text/80'
             }`}
             style={active ? glowStrong : undefined}
           >
@@ -60,14 +60,14 @@ const METERS: Record<string, string> = { '/': 'HOME / IDENTITY' }
 const StatusBar = () => {
   const meter = METERS[usePathname() ?? '']
   return (
-    <div className="pipboy-part flex shrink-0 items-center gap-4 border-t border-terminal-green/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.15em]">
-      {meter && <span className="text-terminal-green/45">{meter}</span>}
+    <div className="pipboy-part flex shrink-0 items-center gap-4 border-t border-terminal-green/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em]">
+      {meter && <span className="text-terminal-text/70">{meter}</span>}
       <div className="hidden flex-1 items-center gap-2 sm:flex">
-        <span className="text-terminal-green/30">EXP</span>
+        <span className="text-terminal-text/60">EXP</span>
         <span className="h-[6px] max-w-[180px] flex-1 border border-terminal-green/40">
           <span className="block h-full w-[80%] bg-terminal-green/55" />
         </span>
-        <span className="text-terminal-green/45">SINCE 2021</span>
+        <span className="text-terminal-text/70">SINCE 2021</span>
       </div>
       <a
         href="mailto:iamzabolotnyi@gmail.com"

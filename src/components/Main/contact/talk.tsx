@@ -16,7 +16,7 @@ const CHANNELS = [
 ]
 
 const fieldClass =
-  'w-full rounded-none border border-terminal-green/30 bg-terminal-green/[0.04] px-3 py-2 font-mono text-sm text-terminal-green placeholder:text-terminal-green/20 focus:border-terminal-green/70 focus:bg-terminal-green/10 focus:outline-none'
+  'w-full rounded-none border border-terminal-green/30 bg-terminal-green/[0.04] px-3 py-2 font-mono text-sm text-terminal-green placeholder:text-terminal-text/60 focus:border-terminal-green/70 focus:bg-terminal-green/10 focus:outline-none'
 
 const Talk = () => {
   const form = useRef<HTMLFormElement>(null)
@@ -54,14 +54,14 @@ const Talk = () => {
             >
               CONTACT
             </h1>
-            <p className="mt-1.5 font-mono text-[11px] leading-relaxed text-terminal-green/60" style={glow}>
+            <p className="mt-1.5 font-mono text-[13px] leading-relaxed text-terminal-text/80" style={glow}>
               Open to frontend / product engineering roles. Also available for product work and
               technical consulting.
             </p>
           </div>
 
           <div>
-            <h2 className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.25em] text-terminal-green/30">
+            <h2 className="mb-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-terminal-text/60">
               CHANNELS
             </h2>
             <ul className="space-y-1">
@@ -74,10 +74,10 @@ const Talk = () => {
                       : {})}
                     className="flex items-baseline gap-2 py-0.5 font-mono transition-colors hover:text-terminal-green"
                   >
-                    <span className="w-16 shrink-0 text-[9px] uppercase tracking-wider text-terminal-green/30">
+                    <span className="w-16 shrink-0 text-[11px] uppercase tracking-wider text-terminal-text/60">
                       {c.label}
                     </span>
-                    <span className="min-w-0 break-all text-[11px] text-terminal-green/70">
+                    <span className="min-w-0 break-all text-[13px] text-terminal-text">
                       {c.handle}
                     </span>
                   </a>
@@ -87,30 +87,30 @@ const Talk = () => {
           </div>
 
           <div>
-            <h2 className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.25em] text-terminal-green/30">
+            <h2 className="mb-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-terminal-text/60">
               DETAILS
             </h2>
-            <p className="font-mono text-[11px] text-terminal-green/60">Based in Vienna, Austria</p>
-            <p className="font-mono text-[11px] text-terminal-green/60">English fluent · German A2</p>
+            <p className="font-mono text-[12px] text-terminal-text/80">Based in Vienna, Austria</p>
+            <p className="font-mono text-[12px] text-terminal-text/80">English fluent · German A2</p>
           </div>
         </aside>
 
         {/* transmission */}
         <div className="border-l border-terminal-green/20 md:pl-5">
-          <h2 className="mb-3 font-mono text-[9px] uppercase tracking-[0.25em] text-terminal-green/30">
+          <h2 className="mb-3 font-mono text-[11px] uppercase tracking-[0.25em] text-terminal-text/60">
             ESTABLISH CONNECTION
           </h2>
 
           <form ref={form} onSubmit={sendEmail} className="space-y-3">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <label className="block">
-                <span className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-terminal-green/40">
+                <span className="mb-1 block font-mono text-[11px] uppercase tracking-wider text-terminal-text/70">
                   SENDER_NAME
                 </span>
                 <input type="text" name="user_name" required placeholder="ENTER NAME" className={fieldClass} />
               </label>
               <label className="block">
-                <span className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-terminal-green/40">
+                <span className="mb-1 block font-mono text-[11px] uppercase tracking-wider text-terminal-text/70">
                   SENDER_EMAIL
                 </span>
                 <input type="email" name="user_email" required placeholder="ENTER EMAIL" className={fieldClass} />
@@ -118,7 +118,7 @@ const Talk = () => {
             </div>
 
             <label className="block">
-              <span className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-terminal-green/40">
+              <span className="mb-1 block font-mono text-[11px] uppercase tracking-wider text-terminal-text/70">
                 MESSAGE
               </span>
               <textarea
@@ -140,12 +140,12 @@ const Talk = () => {
               </button>
 
               <span
-                className={`font-mono text-[10px] uppercase tracking-wider ${
+                className={`font-mono text-[11px] uppercase tracking-wider ${
                   status === 'SENT'
                     ? 'text-terminal-online'
                     : status === 'ERROR'
                       ? 'text-terminal-danger'
-                      : 'text-terminal-green/35'
+                      : 'text-terminal-text/60'
                 }`}
                 role="status"
               >

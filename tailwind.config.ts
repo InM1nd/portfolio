@@ -54,6 +54,9 @@ const config = {
         },
         // Terminal color palette
         'terminal-green': '#36A689',
+        // Reading colour. #36A689 is ~6.6:1 on the screen even at full strength, so text steps
+        // (100/80/70/60%) are built on this lighter phosphor; 60% is the floor (~4.9:1, WCAG AA).
+        'terminal-text': '#8FDCC2',
         'terminal-accent': '#3FC89C',
         'terminal-online': '#4AF626',
         'terminal-dark': '#050905',

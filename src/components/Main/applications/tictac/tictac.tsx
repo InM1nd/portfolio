@@ -81,7 +81,7 @@ function Board({
 
   return (
     <div className="space-y-4">
-      <div className="font-mono text-sm text-terminal-green/70 uppercase tracking-wider border-b border-terminal-green/30 pb-2">
+      <div className="font-mono text-sm text-terminal-text/80 uppercase tracking-wider border-b border-terminal-green/30 pb-2">
         GAME_STATUS: <span className={statusClass}>{status}</span>
       </div>
       <div className="grid grid-cols-3 gap-2 w-fit mx-auto">
@@ -148,7 +148,7 @@ const TicTac = () => {
       <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       
       <div className="border-t border-terminal-green/30 pt-4">
-        <div className="font-mono text-xs text-terminal-green/70 mb-3 uppercase tracking-wider">
+        <div className="font-mono text-xs text-terminal-text/80 mb-3 uppercase tracking-wider">
           MOVE_HISTORY:
         </div>
         <div className="flex flex-wrap gap-2 mb-4">
