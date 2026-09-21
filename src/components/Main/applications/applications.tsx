@@ -24,7 +24,7 @@ const Applications = () => {
           <h1 className="font-mono text-xl uppercase tracking-wide text-terminal-green" style={glowStrong}>
             LAB
           </h1>
-          <p className="mt-1 font-mono text-[10px] leading-relaxed text-terminal-green/45">
+          <p className="mt-1 font-mono text-[13px] leading-relaxed text-terminal-text/80">
             Small interactive things built to try an idea or an API. Not client work — the sandbox.
           </p>
         </div>
@@ -36,7 +36,7 @@ const Applications = () => {
               key={m.id}
               onClick={() => setActive(m.id)}
               className={`flex w-full items-center gap-2 px-2 py-2 text-left transition-colors ${
-                on ? 'bg-terminal-green text-black' : 'text-terminal-green/70 hover:bg-terminal-green/10'
+                on ? 'bg-terminal-green text-black' : 'text-terminal-text/80 hover:bg-terminal-green/10'
               }`}
             >
               <span className={`w-3 font-mono text-[11px] ${on ? 'text-black' : 'text-transparent'}`}>
@@ -46,7 +46,7 @@ const Applications = () => {
                 <span className="block font-mono text-sm uppercase tracking-wide" style={on ? undefined : glow}>
                   {m.label}
                 </span>
-                <span className={`block font-mono text-[10px] ${on ? 'text-black/65' : 'text-terminal-green/35'}`}>
+                <span className={`block font-mono text-[12px] ${on ? 'text-black/80' : 'text-terminal-text/60'}`}>
                   {m.note}
                 </span>
               </span>
@@ -58,10 +58,10 @@ const Applications = () => {
       {/* module output */}
       <div className="flex min-h-0 flex-col border-l border-terminal-green/20">
         <div className="flex shrink-0 items-baseline justify-between border-b border-terminal-green/20 px-3 py-1.5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-terminal-green/45">
+          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text/70">
             {current.code}
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-wider text-terminal-online">
+          <span className="font-mono text-[11px] uppercase tracking-wider text-terminal-online">
             ● running in browser
           </span>
         </div>

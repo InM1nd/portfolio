@@ -88,7 +88,7 @@ const Search = ({ setWeatherData, setIsLoading }: SearchProps) => {
 
   return (
     <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4">
-      <div className="font-mono text-xs text-terminal-green/70 mb-3 uppercase tracking-wider">
+      <div className="font-mono text-xs text-terminal-text/80 mb-3 uppercase tracking-wider">
         INPUT_LOCATION:
       </div>
       <form onSubmit={handleSubmit} className="flex items-center gap-3">
@@ -99,7 +99,7 @@ const Search = ({ setWeatherData, setIsLoading }: SearchProps) => {
           autoComplete="off"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="flex-1 rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm px-4 py-2 focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-green/20"
+          className="flex-1 rounded-none bg-terminal-dark/20 border border-terminal-green/30 text-terminal-green font-mono text-sm px-4 py-2 focus:border-terminal-green/70 focus:bg-terminal-green/5 focus:outline-none focus:ring-0 transition-all placeholder:text-terminal-text/60"
         />
         <Button
           type="submit"
@@ -127,7 +127,7 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
   if (isLoading) {
     return (
       <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4">
-        <div className="font-mono text-sm text-terminal-green/70 uppercase tracking-wider">
+        <div className="font-mono text-sm text-terminal-text/80 uppercase tracking-wider">
           SCANNING...
         </div>
         <div className="mt-2 flex gap-1">
@@ -142,7 +142,7 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
   if (!weatherData) {
     return (
       <div className="border border-terminal-green/50 bg-terminal-dark/20 p-4">
-        <div className="font-mono text-sm text-terminal-green/70 uppercase tracking-wider">
+        <div className="font-mono text-sm text-terminal-text/80 uppercase tracking-wider">
           NO DATA AVAILABLE
         </div>
       </div>
@@ -174,7 +174,7 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
       {/* Location and Time */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
             LOCATION
           </div>
           <div className="font-mono text-lg text-terminal-green">
@@ -182,13 +182,13 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
           </div>
         </div>
         <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
             DATE_TIME
           </div>
           <div className="font-mono text-sm text-terminal-green">
             {formattedTime}
           </div>
-          <div className="font-mono text-sm text-terminal-green/80">
+          <div className="font-mono text-sm text-terminal-text/80">
             {month} {dayDate}
           </div>
         </div>
@@ -196,16 +196,16 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
 
       {/* Temperature */}
       <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-        <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+        <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
           TEMPERATURE
         </div>
         <div className="font-mono text-4xl text-terminal-green mb-2">
           {temp}°C
         </div>
-        <div className="font-mono text-sm text-terminal-green/80 mb-2">
+        <div className="font-mono text-sm text-terminal-text/80 mb-2">
           FEELS LIKE: {feelsLike}°C
         </div>
-        <div className="font-mono text-xs text-terminal-green/70 uppercase">
+        <div className="font-mono text-xs text-terminal-text/80 uppercase">
           {capitalizedDescription}
         </div>
         <div className="mt-2 h-2 border border-terminal-green bg-terminal-dark">
@@ -219,7 +219,7 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
       {/* Metrics Grid */}
       <div className="grid grid-cols-2 gap-4">
         <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
             HUMIDITY
           </div>
           <div className="font-mono text-2xl text-terminal-green mb-2">
@@ -234,7 +234,7 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
         </div>
 
         <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
             PRESSURE
           </div>
           <div className="font-mono text-2xl text-terminal-green mb-2">
@@ -249,7 +249,7 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
         </div>
 
         <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
             WIND SPEED
           </div>
           <div className="font-mono text-2xl text-terminal-green">
@@ -258,7 +258,7 @@ const Result = ({ weatherData, isLoading }: ResultProps) => {
         </div>
 
         <div className="border border-terminal-green bg-terminal-dark/20 p-4">
-          <div className="font-mono text-xs text-terminal-green/70 mb-2 uppercase tracking-wider">
+          <div className="font-mono text-xs text-terminal-text/80 mb-2 uppercase tracking-wider">
             VISIBILITY
           </div>
           <div className="font-mono text-2xl text-terminal-green">

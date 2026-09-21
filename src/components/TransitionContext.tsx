@@ -30,16 +30,16 @@ export const TransitionProvider = ({ children }: { children: React.ReactNode }) 
   const startTransition = React.useCallback(() => {
     return new Promise<void>((resolve) => {
       setIsTransitioning(true)
-      // Wait for the "curtain down" animation to complete (600ms)
+      // Wait for the terminal to collapse (crt-off in globals.css, data-nav="out")
       setTimeout(() => {
         resolve()
-      }, 800)
+      }, 380)
     })
   }, [])
 
   // Function to end the transition (animate IN to new page)
   const endTransition = React.useCallback(() => {
-    // Short delay so the next page paints under curtain before lift animation.
+    // Short delay so the next page paints inside the collapsed screen before it expands.
     setTimeout(() => {
       setIsTransitioning(false)
     }, 80)

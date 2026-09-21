@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Share_Tech_Mono } from "next/font/google";
 import "./globals.css";
 import ClientPageTransition from "@/components/ClientPageTransition";
+import PipBoyShell from "@/components/pipboy/PipBoyShell";
 
 const shareTechMono = Share_Tech_Mono({ 
   subsets: ["latin"],
@@ -72,7 +73,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ClientPageTransition>
-          {children}
+          <PipBoyShell>{children}</PipBoyShell>
         </ClientPageTransition>
       </body>
     </html>

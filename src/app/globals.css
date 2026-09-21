@@ -417,6 +417,146 @@
     animation: row-ignite 260ms ease-out backwards;
   }
 
+  /* CRT tube. Rounded glass, corners falling off into shadow, scanlines, a faint reflection.
+     All static layers — nothing here repaints per frame except the backdrop blur itself. */
+  .crt-screen {
+    border-radius: 18px;
+    background: rgba(2, 4, 2, 0.55);
+    backdrop-filter: blur(4px);
+    box-shadow:
+      0 0 24px rgba(54, 166, 137, 0.12),
+      inset 0 0 40px rgba(54, 166, 137, 0.06);
+  }
+
+  .crt-glass {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    border-radius: inherit;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0%, transparent 35%),
+      repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px),
+      radial-gradient(ellipse 120% 110% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .crt-screen {
+      background: #020402;
+      backdrop-filter: none;
+    }
+  }
+
+  /* Boot → portfolio handoff. The boot text collapses into a line (CRT switching off),
+     then the device screen expands out of that line (CRT switching on) and its parts ignite.
+     Transform + opacity only — a filter on a full-screen subtree re-rasterises every frame.
+     The phosphor flash is a green ::after layer fading out, which stays on the compositor. */
+  @keyframes crt-off {
+    0% { transform: scale(1, 1); opacity: 1; }
+    60% { transform: scale(1, 0.004); opacity: 1; }
+    100% { transform: scale(0, 0.004); opacity: 0; }
+  }
+
+  @keyframes crt-on {
+    0% { transform: scale(0, 0.004); opacity: 0; }
+    30% { transform: scale(1, 0.004); opacity: 1; }
+    100% { transform: none; opacity: 1; }
+  }
+
+  @keyframes crt-flash-in {
+    from { opacity: 0; }
+    to { opacity: 0.9; }
+  }
+
+  @keyframes crt-flash-out {
+    0%, 30% { opacity: 0.9; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes part-on {
+    from { opacity: 0; transform: translateX(-4px); }
+  }
+
+  @keyframes world-on {
+    from { opacity: 0; }
+  }
+
+  .crt-off,
+  html[data-boot='enter'] .pipboy-screen {
+    will-change: transform, opacity;
+  }
+
+  .crt-off {
+    animation: crt-off 420ms cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  }
+
+  .crt-off::after,
+  html[data-boot='enter'] .pipboy-screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    pointer-events: none;
+    border-radius: inherit;
+    background: #36A689;
+    opacity: 0;
+  }
+
+  .crt-off::after {
+    animation: crt-flash-in 250ms ease-in forwards;
+  }
+
+  html[data-boot='enter'] .pipboy-screen {
+    animation: crt-on 650ms cubic-bezier(0.7, 0, 0.3, 1) backwards;
+  }
+
+  html[data-boot='enter'] .pipboy-screen::after {
+    animation: crt-flash-out 650ms ease-out;
+  }
+
+  html[data-boot='enter'] .pipboy-part {
+    animation: part-on 320ms ease-out backwards;
+  }
+  html[data-boot='enter'] nav.pipboy-part { animation-delay: 550ms; }
+  html[data-boot='enter'] main.pipboy-part { animation-delay: 700ms; }
+  html[data-boot='enter'] div.pipboy-part { animation-delay: 850ms; }
+
+  html[data-boot='enter'] .pipboy-world {
+    animation: world-on 900ms ease-out 400ms backwards;
+  }
+
+  /* Route change — the same CRT off/on, scoped to the screen content. Frame, tabs and the
+     status bar stay lit; only <main> switches. Driven by html[data-nav] from PageTransitionWrapper. */
+  html[data-nav] main.pipboy-part {
+    will-change: transform, opacity;
+  }
+
+  html[data-nav='out'] main.pipboy-part {
+    animation: crt-off 380ms cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  }
+
+  html[data-nav='in'] main.pipboy-part {
+    animation: crt-on 550ms cubic-bezier(0.7, 0, 0.3, 1) backwards;
+  }
+
+  html[data-nav] main.pipboy-part::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    pointer-events: none;
+    background: #36A689;
+    opacity: 0;
+  }
+
+  html[data-nav='out'] main.pipboy-part::after {
+    animation: crt-flash-in 250ms ease-in forwards;
+  }
+
+  html[data-nav='in'] main.pipboy-part::after {
+    animation: crt-flash-out 550ms ease-out;
+  }
+
   /* Detail panel coming up under a tapped row on phones. */
   @keyframes detail-open {
     from {
@@ -434,14 +574,14 @@
   }
 
   /* Global Link Styling & Hover Animation */
-  a:not(.terminal-button):not(.sr-only) {
+  a:where(:not(.terminal-button):not(.sr-only)) {
     position: relative;
     transition: all 0.3s ease;
     color: #36A689;
     text-decoration: none;
   }
 
-  a:not(.terminal-button):not(.sr-only)::after {
+  a:where(:not(.terminal-button):not(.sr-only))::after {
     content: '';
     position: absolute;
     bottom: -2px;
@@ -453,12 +593,12 @@
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  a:not(.terminal-button):not(.sr-only):hover {
+  a:where(:not(.terminal-button):not(.sr-only)):hover {
     color: #4FD4B0;
     text-shadow: 0 0 10px rgba(54, 166, 137, 0.7);
   }
 
-  a:not(.terminal-button):not(.sr-only):hover::after {
+  a:where(:not(.terminal-button):not(.sr-only)):hover::after {
     width: 100%;
   }
 
