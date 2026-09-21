@@ -59,6 +59,9 @@ export default function Home() {
             Shipping React and Next.js since 2021. Bilingual production sites, client portals,
             and products I designed and shipped. I own the UX and the build.
           </p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-terminal-text/60">
+            Marswalk Media · OBRIO · Quizzley
+          </p>
           <div className="flex flex-wrap gap-2">
             <TransitionLink
               href="/projects"

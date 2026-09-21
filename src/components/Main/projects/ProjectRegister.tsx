@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
 import { glow, glowStrong } from '@/components/pipboy/PipBoyShell'
-import { ARCHIVE, GROUPS, PROJECTS, type Project } from './projects.data'
+import { ARCHIVE, PROJECTS, type Project } from './projects.data'
 
 const FILTERS = ['ALL', 'LIVE', 'CODE', 'PRIVATE'] as const
 type Filter = (typeof FILTERS)[number]
@@ -14,8 +14,7 @@ const matches = (p: Project, f: Filter) =>
   (f === 'CODE' && p.links.some((l) => l.label === 'REPO')) ||
   (f === 'PRIVATE' && (p.status === 'NDA' || p.status === 'PRIVATE'))
 
-const listed = (f: Filter) =>
-  GROUPS.flatMap((g) => PROJECTS.filter((p) => p.group === g && matches(p, f)))
+const listed = (f: Filter) => PROJECTS.filter((p) => matches(p, f))
 
 /** Status is monochrome; only restricted work gets the amber warning tone. */
 const STATUS_TONE: Record<Project['status'], string> = {
@@ -122,9 +121,9 @@ const Media = ({ p, sizes, variant = 'fill' }: { p: Project; sizes: string; vari
         <Image
           src={p.mark}
           alt=""
-          width={96}
-          height={96}
-          className="h-12 w-12 rounded-[10px]"
+          width={p.mark.endsWith('obrio-mark.png') ? 240 : 96}
+          height={p.mark.endsWith('obrio-mark.png') ? 52 : 96}
+          className={p.mark.endsWith('obrio-mark.png') ? 'h-8 w-auto' : 'h-12 w-12 rounded-[10px]'}
         />
       )}
       <pre
@@ -315,7 +314,7 @@ const ProjectRegister = () => {
                   </button>
 
                   {on && (
-                    <div className="detail-open space-y-2.5 border-b border-terminal-green/15 px-3 pb-3 pt-1 md:hidden">
+                    <div className="detail-open hidden space-y-2.5 border-b border-terminal-green/15 px-3 pb-3 pt-1 max-md:block">
                       <Media p={item} sizes="92vw" variant="card" />
                       <Details p={item} compact />
                     </div>

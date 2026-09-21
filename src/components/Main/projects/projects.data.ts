@@ -30,96 +30,35 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     id: '01',
-    code: 'OBRIO_NAV',
-    name: 'OBRIO',
-    group: 'COMMERCIAL',
-    tagline: 'Corporate organisational-structure dashboard',
+    code: 'QUIZZLEY_AI',
+    name: 'QUIZZLEY',
+    group: 'PRODUCTS',
+    tagline: 'AI quiz platform',
     year: '2025',
-    role: 'Product UX/UI, information architecture',
-    outcome:
-      'Designed and built an internal organisational-structure dashboard for OBRIO, helping 300+ employees navigate teams with a clear information hierarchy.',
+    role: 'Solo — product, design, build',
+    outcome: 'AI quiz platform used by 300+ users. Currently offline; source is on GitHub.',
     highlights: [
-      'Company org structure, navigable by team',
-      'Google sign-in, restricted to the company domain',
-      'Information hierarchy aimed at fast discovery',
+      'Quizzes generated with LangChain / OpenAI',
+      'Auth via NextAuth; Postgres via Drizzle, hosted on Supabase',
+      'Stripe for payments',
     ],
-    stack: ['Next.js', 'TypeScript', 'Google SSO'],
-    status: 'NDA',
-    accent: '#D6DEE6',
-    schematic: `        Google SSO
-        domain only
-             │
-             ▼
-      ┌──────┴──────┐
-      │             │
- teams               people
-      │             │
-      └──────┬──────┘
-             ▼
-          search`,
-    links: [{ label: 'SSO LOGIN', url: 'https://nebula-seven-omega.vercel.app/' }],
+    stack: ['Next.js', 'TypeScript', 'NextAuth', 'LangChain', 'Drizzle', 'PostgreSQL', 'Supabase', 'Stripe'],
+    status: 'ARCHIVED',
+    accent: '#7EC8E3',
+    schematic: `     NextAuth
+         │
+         ▼
+   quiz gen (LangChain)
+         │
+         ▼
+  Drizzle · PostgreSQL
+         │
+         ▼
+       Stripe`,
+    links: [{ label: 'REPO', url: 'https://github.com/InM1nd/quizzley' }],
   },
   {
     id: '02',
-    code: 'FITLOYALTY_OS',
-    name: 'FITLOYALTY',
-    group: 'PRODUCTS',
-    tagline: 'White-label retention platform for fitness studios',
-    year: '2026',
-    role: 'Solo — product, design, build',
-    outcome:
-      'Built for independent DACH studios: turns attendance data into a daily retention briefing. Demo, all data simulated.',
-    highlights: [
-      'Today view: who needs a touch, MRR in the save queue, WhatsApp drafts',
-      'Owner dashboard with Recharts — churn, cohorts, protected revenue',
-      'Separate member app with streaks and rewards',
-      'White-label, EN / DE; Churn-Check parses a CSV in the browser',
-    ],
-    stack: ['Next.js 16', 'TypeScript', 'Tailwind v4', 'Motion', 'Recharts', 'Zod', 'Vitest', 'EN/DE'],
-    status: 'DEMO',
-    accent: '#FF7A1A',
-    image: '/projects/fitloyalty.jpg',
-    links: [
-      { label: 'OPEN', url: 'https://fit-loyality.vercel.app/overview' },
-      { label: 'REPO', url: 'https://github.com/InM1nd/FitLoyality' },
-    ],
-  },
-  {
-    id: '03',
-    code: 'TRIPWEAVE_PLAN',
-    name: 'TRIPWEAVE',
-    group: 'PRODUCTS',
-    tagline: 'Collaborative travel planner',
-    year: '2026',
-    role: 'Solo — product, design, build',
-    outcome:
-      'Plans a trip as a group: shared itinerary, budget, documents and maps. AI suggestions and social-spot import sit on PostgreSQL via Prisma.',
-    highlights: [
-      'Shared trips with roles and voting on places',
-      'Drag-and-drop timeline; map pins on OpenStreetMap',
-      'Explore: AI place recommendations and social-post import',
-      'Installable PWA with offline fallback',
-    ],
-    stack: [
-      'Next.js 16',
-      'PostgreSQL',
-      'Prisma',
-      'Supabase',
-      'TanStack Query',
-      'Leaflet',
-      'dnd-kit',
-      'Zod',
-    ],
-    status: 'LIVE',
-    accent: '#F59A6A',
-    image: '/projects/tripweave.jpg',
-    links: [
-      { label: 'OPEN', url: 'https://tripweave-six.vercel.app/' },
-      { label: 'REPO', url: 'https://github.com/InM1nd/tripweave' },
-    ],
-  },
-  {
-    id: '04',
     code: 'APPSCANNER_PROP',
     name: 'APPSCANNER',
     group: 'PRODUCTS',
@@ -154,7 +93,158 @@ export const PROJECTS: Project[] = [
     links: [{ label: 'REPO', url: 'https://github.com/InM1nd/AppScanner' }],
   },
   {
+    id: '03',
+    code: 'OBRIO_NAV',
+    name: 'OBRIO',
+    group: 'COMMERCIAL',
+    tagline: 'Corporate organisational-structure dashboard',
+    year: '2025',
+    role: 'Product UX/UI, information architecture',
+    outcome:
+      'Designed and built an internal organisational-structure dashboard for OBRIO, helping 300+ employees navigate teams with a clear information hierarchy.',
+    highlights: [
+      'Company org structure, navigable by team',
+      'Google sign-in, restricted to the company domain',
+      'Information hierarchy aimed at fast discovery',
+    ],
+    stack: ['Next.js', 'TypeScript', 'Google SSO'],
+    status: 'NDA',
+    accent: '#D6DEE6',
+    mark: '/projects/obrio-mark.png',
+    schematic: `        Google SSO
+        domain only
+             │
+             ▼
+      ┌──────┴──────┐
+      │             │
+ teams               people
+      │             │
+      └──────┬──────┘
+             ▼
+          search`,
+    links: [{ label: 'SSO LOGIN', url: 'https://nebula-seven-omega.vercel.app/' }],
+  },
+  {
+    id: '04',
+    code: 'SKELYA_CAREERS',
+    name: 'SKELYA',
+    group: 'COMMERCIAL',
+    tagline: 'Career consultation platform',
+    year: '2024',
+    role: 'Freelance — design and frontend',
+    outcome:
+      'Landing for a career-consultation service. Client-consultant matching runs through Telegram.',
+    highlights: [
+      'Responsive landing, design through to production',
+      'Telegram flow for matching clients with consultants',
+    ],
+    stack: ['Frontend', 'Telegram'],
+    status: 'LIVE',
+    accent: '#7C5CFF',
+    image: '/projects/skelya.jpg',
+    links: [],
+  },
+  {
     id: '05',
+    code: 'VERUS_PROPERTY',
+    name: 'VERUS PROPERTY',
+    group: 'COMMERCIAL',
+    tagline: 'Dubai real estate landing',
+    year: '2024',
+    role: 'Freelance — design and frontend',
+    outcome:
+      'Launch landing for a Dubai real estate brand. No product logic beyond the site: email capture, DNS and basic hosting.',
+    highlights: [
+      'Responsive landing from design to production',
+      'Email capture, DNS and hosting setup',
+    ],
+    stack: ['Frontend', 'DNS'],
+    status: 'LIVE',
+    accent: '#1E4FD8',
+    image: '/projects/verus.jpg',
+    links: [{ label: 'OPEN', url: 'https://verusproperty.com/' }],
+  },
+  {
+    id: '06',
+    code: 'SKEPTIC_FIT',
+    name: 'SKEPTIC',
+    group: 'COMMERCIAL',
+    tagline: 'Fitness platform landing',
+    year: '2024',
+    role: 'Freelance — design and frontend',
+    outcome:
+      'Landing for a self-training fitness brand. No product logic beyond the site: email capture, DNS and basic hosting.',
+    highlights: [
+      'Responsive landing from design to production',
+      'Email capture, DNS and hosting setup',
+    ],
+    stack: ['Frontend', 'DNS'],
+    status: 'LIVE',
+    accent: '#1A1A1A',
+    image: '/projects/skeptic.jpg',
+    links: [],
+  },
+  {
+    id: '07',
+    code: 'FITLOYALTY_OS',
+    name: 'FITLOYALTY',
+    group: 'PRODUCTS',
+    tagline: 'White-label retention platform for fitness studios',
+    year: '2026',
+    role: 'Solo — product, design, build',
+    outcome:
+      'Built for independent DACH studios: turns attendance data into a daily retention briefing. Demo, all data simulated.',
+    highlights: [
+      'Today view: who needs a touch, MRR in the save queue, WhatsApp drafts',
+      'Owner dashboard with Recharts — churn, cohorts, protected revenue',
+      'Separate member app with streaks and rewards',
+      'White-label, EN / DE; Churn-Check parses a CSV in the browser',
+    ],
+    stack: ['Next.js 16', 'TypeScript', 'Tailwind v4', 'Motion', 'Recharts', 'Zod', 'Vitest', 'EN/DE'],
+    status: 'DEMO',
+    accent: '#FF7A1A',
+    image: '/projects/fitloyalty.jpg',
+    links: [
+      { label: 'OPEN', url: 'https://fit-loyality.vercel.app/overview' },
+      { label: 'REPO', url: 'https://github.com/InM1nd/FitLoyality' },
+    ],
+  },
+  {
+    id: '08',
+    code: 'TRIPWEAVE_PLAN',
+    name: 'TRIPWEAVE',
+    group: 'PRODUCTS',
+    tagline: 'Collaborative travel planner',
+    year: '2026',
+    role: 'Solo — product, design, build',
+    outcome:
+      'Plans a trip as a group: shared itinerary, budget, documents and maps. AI suggestions and social-spot import sit on PostgreSQL via Prisma.',
+    highlights: [
+      'Shared trips with roles and voting on places',
+      'Drag-and-drop timeline; map pins on OpenStreetMap',
+      'Explore: AI place recommendations and social-post import',
+      'Installable PWA with offline fallback',
+    ],
+    stack: [
+      'Next.js 16',
+      'PostgreSQL',
+      'Prisma',
+      'Supabase',
+      'TanStack Query',
+      'Leaflet',
+      'dnd-kit',
+      'Zod',
+    ],
+    status: 'LIVE',
+    accent: '#F59A6A',
+    image: '/projects/tripweave.jpg',
+    links: [
+      { label: 'OPEN', url: 'https://tripweave-six.vercel.app/' },
+      { label: 'REPO', url: 'https://github.com/InM1nd/tripweave' },
+    ],
+  },
+  {
+    id: '09',
     code: 'CODEBASE_MEM',
     name: 'CODEBASE-MEMORY-PLUS',
     group: 'DEV TOOLS',
@@ -178,7 +268,7 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    id: '06',
+    id: '10',
     code: 'T3CODE_FORK',
     name: 'T3 CODE FORK',
     group: 'DEV TOOLS',
@@ -209,7 +299,7 @@ export const PROJECTS: Project[] = [
     links: [{ label: 'REPO', url: 'https://github.com/InM1nd/t3code-jcode' }],
   },
   {
-    id: '07',
+    id: '11',
     code: 'CYCLOP_NOTCH',
     name: 'CYCLOP ENHANCED',
     group: 'DEV TOOLS',
@@ -242,7 +332,7 @@ export const GROUPS: ProjectGroup[] = ['COMMERCIAL', 'PRODUCTS', 'DEV TOOLS']
 
 export const ARCHIVE = [
   {
-    id: '08',
+    id: '12',
     code: 'FILMOTEKA_LIB',
     name: 'FILMOTEKA',
     tagline: 'Film library & tracker',
