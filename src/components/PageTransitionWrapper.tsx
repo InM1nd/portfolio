@@ -13,8 +13,7 @@ const PageTransitionInner = ({ children }: { children: React.ReactNode }) => {
   const { completeBoot, isTransitioning, endTransition } = useTransition()
   // true from the first frame on "/" so the overlay never arrives after the content paints
   const [showBoot, setShowBoot] = useState(pathname === '/')
-  const [overlayPhase, setOverlayPhase] = useState<'hidden' | 'closing' | 'opening'>('hidden')
-  const prevTransitioningRef = useRef(false)
+  const wasTransitioningRef = useRef(false)
   const prevPathnameRef = useRef(pathname)
 
   // Boot sequence runs client-only, as an overlay on top of already-rendered content,
@@ -36,30 +35,24 @@ const PageTransitionInner = ({ children }: { children: React.ReactNode }) => {
     prevPathnameRef.current = pathname
   }, [pathname, isTransitioning, endTransition])
 
-  // Control overlay phase to ensure curtain always opens (lifts up)
+  // Navigation plays inside the terminal only: <main> collapses into a line (data-nav="out"),
+  // the route swaps underneath, then the new page expands out of the line (data-nav="in").
+  // Keyframes live in globals.css next to the boot handoff they share.
   useEffect(() => {
+    const root = document.documentElement
+
     if (isTransitioning) {
-      setOverlayPhase('closing')
-      prevTransitioningRef.current = true
-
-      // Safety fallback: if navigation takes too long or fails to trigger route change,
-      // end transition after 5s to avoid permanent lock.
-      const safetyTimer = setTimeout(() => {
-        if (isTransitioning) {
-          console.warn('Transition safety timeout reached.')
-          endTransition()
-        }
-      }, 5000)
-
+      root.dataset.nav = 'out'
+      wasTransitioningRef.current = true
+      // Safety net: never leave the screen collapsed if the route change doesn't land.
+      const safetyTimer = setTimeout(endTransition, 5000)
       return () => clearTimeout(safetyTimer)
     }
 
-    if (prevTransitioningRef.current) {
-      setOverlayPhase('opening')
-      const timer = setTimeout(() => {
-        setOverlayPhase('hidden')
-        prevTransitioningRef.current = false
-      }, 650)
+    if (wasTransitioningRef.current) {
+      wasTransitioningRef.current = false
+      root.dataset.nav = 'in'
+      const timer = setTimeout(() => delete root.dataset.nav, 550)
       return () => clearTimeout(timer)
     }
   }, [isTransitioning, endTransition])
@@ -70,89 +63,16 @@ const PageTransitionInner = ({ children }: { children: React.ReactNode }) => {
       {showBoot && (
         <BootSequence
           onComplete={() => {
+            // Plays the shell's power-on (globals.css, html[data-boot='enter']) right as the boot overlay unmounts
+            const root = document.documentElement
+            root.dataset.boot = 'enter'
+            setTimeout(() => delete root.dataset.boot, 1600)
             setShowBoot(false)
             sessionStorage.setItem('hasSeenBoot', 'true')
             completeBoot()
           }}
         />
       )}
-
-      {/* Transition Overlay */}
-      <div
-        className="page-transition-overlay"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 99999,
-          pointerEvents: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          visibility: overlayPhase === 'hidden' ? 'hidden' : 'visible',
-        }}
-      >
-        {/* Main Background Panel (The Curtain) */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundColor: '#050505',
-            backgroundImage: `
-                radial-gradient(circle at 50% 50%, rgba(54, 166, 137, 0.15) 0%, rgba(0, 0, 0, 0) 70%),
-                linear-gradient(0deg, rgba(0,0,0,0.5) 50%, transparent 50%),
-                linear-gradient(90deg, rgba(54, 166, 137, 0.07) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(54, 166, 137, 0.07) 1px, transparent 1px)
-              `,
-            backgroundSize: '100% 100%, 100% 4px, 40px 40px, 40px 40px',
-
-            // CSS Transition Logic
-            transform: overlayPhase === 'hidden' ? 'scaleY(0)' : overlayPhase === 'closing' ? 'scaleY(1)' : 'scaleY(0)',
-            transformOrigin: overlayPhase === 'opening' ? 'bottom' : 'top',
-            transition: 'transform 0.6s cubic-bezier(0.8, 0, 0.2, 1)',
-
-            animation: overlayPhase !== 'hidden' ? 'cyber-grid-move 20s linear infinite' : 'none',
-
-            borderBottom: '4px solid #36A689',
-            boxShadow: '0 0 50px rgba(54, 166, 137, 0.3)'
-          }}
-        />
-
-        {/* Green Scanline Pulse */}
-        <div
-          style={{
-            position: 'absolute',
-            top: overlayPhase === 'closing' ? '100%' : overlayPhase === 'opening' ? '0%' : '100%',
-            left: 0,
-            width: '100%',
-            height: '4px',
-            background: '#36A689',
-            boxShadow: '0 0 20px #36A689, 0 0 40px #36A689',
-            zIndex: 10,
-            opacity: overlayPhase === 'hidden' ? 0 : 1,
-            transition: 'top 0.6s cubic-bezier(0.8, 0, 0.2, 1), opacity 0.2s',
-            transitionDelay: '0s'
-          }}
-        />
-
-        {/* Text Content */}
-        <div
-          className="z-20 font-mono text-[#36A689] flex flex-col items-center gap-2"
-          style={{
-            opacity: overlayPhase === 'hidden' ? 0 : 1,
-            transform: overlayPhase === 'hidden' ? 'scale(0.92)' : 'scale(1)',
-            transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
-            transitionDelay: overlayPhase === 'closing' ? '0.2s' : '0s'
-          }}
-        >
-          <div className="text-2xl font-bold bg-black/80 px-6 py-3 border border-[#36A689] shadow-[0_0_15px_rgba(54,166,137,0.4)]">
-            SYSTEM REROUTING
-          </div>
-          <div className="text-xs opacity-70 tracking-[0.2em] animate-pulse">
-            PROCESSING REQUEST...
-          </div>
-        </div>
-      </div>
 
       {children}
     </>

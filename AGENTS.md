@@ -19,8 +19,11 @@ verification (`curl` the URL, check the repo). If a number is not in one of thos
 go on the page.
 
 - Verified metrics that may be used: OBRIO "300+ employees", Quizzley "300+ users".
-- Status labels must be true: `LIVE` / `DEMO` / `NDA` / `PRIVATE` / `OSS` / `ARCHIVED`.
+- Status labels must be true: `LIVE` / `DEMO` / `NDA` / `PRIVATE` / `FORK` / `ARCHIVED`.
   FitLoyalty is `DEMO` because its own site says "all data simulated" — not `LIVE`.
+  T3 Code and Cyclop are `FORK`s of other people's repos — describe only the features in his own
+  commits, never present them as his originals. Codebase Memory Plus has no licence file, so it is
+  not "open source" / "MIT" until one is added.
 - Never add a live link without checking it responds. Dead links are worse than omissions.
 - No self-rated skill bars, no "CLEARANCE: EXPERT", no seniority claims the CV doesn't make.
 - The site must not contradict the CV. Experience starts 2021, not 2020.
@@ -94,17 +97,26 @@ What caused it, and what to keep avoiding:
 
 - Frame inside frame inside frame. **One** outer border; inside it use hairline dividers
   (`border-terminal-green/20`) and whitespace.
-- Background behind text. The device screen is opaque (`bg-[#020402]`); the WebGL background
-  lives *around* it, never under the reading area.
+- Raw background behind text. The device screen is tinted glass (`.crt-screen`: 55% dark +
+  `backdrop-filter: blur(4px)`), so the WebGL world shows through as soft glow. Never lower the
+  tint or drop the blur — the digits must not be crisp under the text. Don't hand-write
+  `-webkit-backdrop-filter`: the minifier then keeps only the prefixed one and Chrome ignores it.
 - Decoration with no function. The HP bar and diamonds were cut. The filter sub-tabs stayed —
   they actually filter.
 - Everything at one visual weight. Build hierarchy with opacity and size, not with borders:
   heading 100% → body 70% → meta 35% → label 25%.
 
 Pip-Boy signals that are correct because each does a job: two-level tabs (sections + filters),
-inverted selected row with a `►` cursor, phosphor `text-shadow` glow, corner ticks, vertical
-position track, bottom status bar. Project screenshots get pushed through
-`grayscale → sepia → hue-rotate(96deg)` so they read as terminal output.
+phosphor `text-shadow` glow, corner ticks, vertical position track, bottom status bar.
+
+Projects carry an `accent` from their own brand (`projects.data.ts`), but it is used sparingly —
+only the lamp, left bar and position track of the *selected* project. Everything else stays green;
+a rainbow of accents at once was rejected as "слишком цветасто". Screenshots are shown in real
+colour inside a browser-window frame with the product URL, nothing painted over them; the old
+green-tint filter made them unreadable. Capture them at `deviceScaleFactor: 2` on a ~1120×700
+viewport (UI stays legible when scaled down), save as 16:10, `sips -Z 1600` — never upscale. Projects with no public
+screen get an ASCII `schematic` (rendered in a system mono — Share Tech Mono has no box-drawing
+glyphs), built only from facts in the README or commit history.
 
 Minimum body text size is 12px. Shrink padding and chrome, not legibility.
 
@@ -113,12 +125,14 @@ Minimum body text size is 12px. Shrink padding and chrome, not legibility.
 ## 5. Layout
 
 ```
-src/components/pipboy/PipBoyShell.tsx     device frame, tabs, status bar; exports glow/glowStrong
+src/components/pipboy/PipBoyShell.tsx     device frame, tabs, status bar; exports glow/glowStrong.
+                                          Mounted once in src/app/layout.tsx so the frame and WebGL
+                                          world persist; route changes animate <main> only (html[data-nav])
 src/components/Main/projects/
   projects.data.ts                        single source of truth for all project content
   ProjectRegister.tsx                     the register + detail panel
 src/app/<route>/layout.tsx                per-route metadata (server component)
-src/app/<route>/page.tsx                  thin: <PipBoyShell><Content/></PipBoyShell>
+src/app/<route>/page.tsx                  thin: <Content/> (the shell is in the root layout)
 ```
 
 Project content lives in `projects.data.ts` and nowhere else. There were once six near-identical

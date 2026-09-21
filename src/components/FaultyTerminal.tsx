@@ -403,7 +403,9 @@ export default function FaultyTerminal({
     pause,
     timeScale,
     scale,
-    gridMul,
+    // by value: an inline `[2, 1]` is a new array every render and would rebuild the WebGL context
+    gridMul[0],
+    gridMul[1],
     digitSize,
     scanlineIntensity,
     glitchAmount,

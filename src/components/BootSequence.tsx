@@ -22,10 +22,10 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
   // Вызываем onComplete когда isComplete становится true
   useEffect(() => {
     if (isComplete && onCompleteRef.current) {
-      // Небольшая задержка перед вызовом для завершения анимации
+      // Ждём, пока экран схлопнется в линию (crt-off), затем PipBoyShell включается (crt-on)
       const timer = setTimeout(() => {
         onCompleteRef.current?.()
-      }, 500)
+      }, 450)
       return () => clearTimeout(timer)
     }
   }, [isComplete])
@@ -123,7 +123,9 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
         left: 0,
         width: '100%',
         height: '100%',
-        backgroundColor: '#000000',
+        // Not fully opaque on purpose: an occluded WebGL background never draws, so its shader would
+        // compile on the first visible frame and freeze the handoff. 1.5% lets it warm up unseen.
+        backgroundColor: 'rgba(0, 0, 0, 0.985)',
         zIndex: 999999,
         display: 'flex',
         flexDirection: 'column',
@@ -131,10 +133,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
         alignItems: 'center',
         fontFamily: 'var(--font-mono), monospace',
         color: '#36A689',
-        padding: '2rem',
-        opacity: isComplete ? 0 : 1,
-        visibility: isComplete ? 'hidden' : 'visible',
-        transition: 'opacity 500ms ease-out, visibility 0s linear 500ms'
+        padding: '2rem'
       }}
     >
       {/* CRT Scanlines overlay */}
@@ -158,6 +157,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
 
       {/* Boot text */}
       <div
+        className={isComplete ? 'crt-off' : undefined}
         style={{
           position: 'relative',
           zIndex: 10,
