@@ -51,7 +51,7 @@ export const PROJECTS: Project[] = [
 │ Google SSO  │─────┤             ├──▶ search
 │ domain only │     └──▶ people ──┘
 └─────────────┘`,
-    links: [{ label: 'SSO LOGIN', url: 'https://nebula-seven-omega.vercel.app/' }],
+    links: [],
   },
   {
     id: '02',

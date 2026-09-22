@@ -13,6 +13,8 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
   const [showCursor, setShowCursor] = useState(true)
   const [isComplete, setIsComplete] = useState(false)
   const onCompleteRef = useRef(onComplete)
+  // set by the running sequence; the SKIP button and Escape call it to jump straight to the handoff
+  const finishRef = useRef<() => void>(() => {})
 
   // Обновляем ref при изменении onComplete
   useEffect(() => {
@@ -30,13 +32,15 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
     }
   }, [isComplete])
 
+  // ~0.8s of typing + the 450ms handoff ≈ 1.25s in total
+  const CHAR_MS = 3
   const bootSteps = [
-    { text: 'INITIALIZING NEXUS OS...', delay: 300 },
-    { text: 'LOADING SYSTEM CORE...', delay: 400 },
-    { text: 'ESTABLISHING CONNECTION...', delay: 300 },
-    { text: 'VERIFYING USER PROFILE...', delay: 400 },
-    { text: 'LOADING INTERFACE ENGINE...', delay: 500 },
-    { text: 'SYSTEM READY', delay: 200 },
+    { text: 'INITIALIZING NEXUS OS...', delay: 50 },
+    { text: 'LOADING SYSTEM CORE...', delay: 50 },
+    { text: 'ESTABLISHING CONNECTION...', delay: 50 },
+    { text: 'VERIFYING USER PROFILE...', delay: 50 },
+    { text: 'LOADING INTERFACE ENGINE...', delay: 50 },
+    { text: 'SYSTEM READY', delay: 50 },
   ]
 
   useEffect(() => {
@@ -51,7 +55,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
     let lastStep = -1
     let lastText = ''
     let complete = false
-    const startAt = performance.now() + 200
+    const startAt = performance.now() + 100
 
     const sync = (step: number, text: string) => {
       if (step !== lastStep) {
@@ -69,10 +73,10 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
 
       for (let step = 0; step < bootSteps.length; step++) {
         const { text, delay } = bootSteps[step]
-        const typingDuration = text.length * 50
+        const typingDuration = text.length * CHAR_MS
 
         if (elapsed < typingDuration) {
-          sync(step, text.slice(0, Math.floor(elapsed / 50) + 1))
+          sync(step, text.slice(0, Math.floor(elapsed / CHAR_MS) + 1))
           return
         }
 
@@ -85,23 +89,33 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
         elapsed -= delay
       }
 
-      if (!complete) {
-        complete = true
-        clearInterval(clockInterval)
-        sync(bootSteps.length, '')
-        setIsComplete(true)
-      }
+      finish()
     }
+
+    const finish = () => {
+      if (complete) return
+      complete = true
+      clearInterval(clockInterval)
+      sync(bootSteps.length, '')
+      setIsComplete(true)
+    }
+    finishRef.current = finish
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') finish()
+    }
+    window.addEventListener('keydown', onKey)
 
     // Cursor blink
     cursorBlinkInterval = setInterval(() => {
       setShowCursor((prev) => !prev)
     }, 530)
 
-    clockInterval = setInterval(() => advance(performance.now()), 50)
+    clockInterval = setInterval(() => advance(performance.now()), 16)
     advance(performance.now())
 
     return () => {
+      window.removeEventListener('keydown', onKey)
       clearInterval(clockInterval)
       if (cursorBlinkInterval) {
         clearInterval(cursorBlinkInterval)
@@ -220,6 +234,16 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
           }
         </div>
       </div>
+
+      {!isComplete && (
+      <button
+        type="button"
+        onClick={() => finishRef.current()}
+        className="absolute bottom-6 right-6 z-20 border border-terminal-green/30 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-text/70 transition-colors hover:text-terminal-text focus-visible:text-terminal-text"
+      >
+        SKIP INTRO <span className="text-terminal-text/60">[ESC]</span>
+      </button>
+      )}
 
       {/* Flicker effect */}
       <div
