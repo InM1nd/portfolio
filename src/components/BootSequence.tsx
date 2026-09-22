@@ -32,15 +32,15 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete, skip = false })
     }
   }, [isComplete])
 
-  // ~0.8s of typing + the 450ms handoff ≈ 1.25s in total
-  const CHAR_MS = 3
+  // ~4.6s of typing + the 450ms handoff ≈ 5s in total; SKIP / Escape cut it short
+  const CHAR_MS = 25
   const bootSteps = [
-    { text: 'INITIALIZING NEXUS OS...', delay: 50 },
-    { text: 'LOADING SYSTEM CORE...', delay: 50 },
-    { text: 'ESTABLISHING CONNECTION...', delay: 50 },
-    { text: 'VERIFYING USER PROFILE...', delay: 50 },
-    { text: 'LOADING INTERFACE ENGINE...', delay: 50 },
-    { text: 'SYSTEM READY', delay: 50 },
+    { text: 'INITIALIZING NEXUS OS...', delay: 200 },
+    { text: 'LOADING SYSTEM CORE...', delay: 200 },
+    { text: 'ESTABLISHING CONNECTION...', delay: 200 },
+    { text: 'VERIFYING USER PROFILE...', delay: 200 },
+    { text: 'LOADING INTERFACE ENGINE...', delay: 200 },
+    { text: 'SYSTEM READY', delay: 200 },
   ]
 
   useEffect(() => {
