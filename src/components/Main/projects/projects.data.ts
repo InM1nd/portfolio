@@ -1,6 +1,6 @@
 export type ProjectStatus = 'LIVE' | 'DEMO' | 'NDA' | 'PRIVATE' | 'FORK' | 'ARCHIVED'
 
-export type ProjectGroup = 'COMMERCIAL' | 'PRODUCTS' | 'DEV TOOLS'
+export type ProjectGroup = 'CLIENT WORK' | 'PRODUCTS' | 'DEV TOOLS'
 
 export type Project = {
   id: string
@@ -30,78 +30,14 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     id: '01',
-    code: 'QUIZZLEY_AI',
-    name: 'QUIZZLEY',
-    group: 'PRODUCTS',
-    tagline: 'AI quiz platform',
-    year: '2025',
-    role: 'Solo — product, design, build',
-    outcome: 'AI quiz platform used by 300+ users. Currently offline; source is on GitHub.',
-    highlights: [
-      'Quizzes generated with LangChain / OpenAI',
-      'Auth via NextAuth; Postgres via Drizzle, hosted on Supabase',
-      'Stripe for payments',
-    ],
-    stack: ['Next.js', 'TypeScript', 'NextAuth', 'LangChain', 'Drizzle', 'PostgreSQL', 'Supabase', 'Stripe'],
-    status: 'ARCHIVED',
-    accent: '#7EC8E3',
-    schematic: `     NextAuth
-         │
-         ▼
-   quiz gen (LangChain)
-         │
-         ▼
-  Drizzle · PostgreSQL
-         │
-         ▼
-       Stripe`,
-    links: [{ label: 'REPO', url: 'https://github.com/InM1nd/quizzley' }],
-  },
-  {
-    id: '02',
-    code: 'APPSCANNER_PROP',
-    name: 'APPSCANNER',
-    group: 'PRODUCTS',
-    tagline: 'Vienna rental decision tool',
-    year: '2025',
-    role: 'Solo — full stack, scraper, tooling',
-    outcome:
-      'Private Vienna rental tool: imports public listings and ranks them by an explainable all-in monthly cost and score.',
-    highlights: [
-      'Public-listing import through to explainable scoring and all-in monthly cost',
-      'PostgreSQL / Prisma with a scraper worker, Dockerized services and tests',
-      'Tracks listing changes and sends deduplicated Telegram alerts',
-      'Unknown facts never earn points — completeness is part of the score',
-    ],
-    stack: ['Next.js', 'PostgreSQL', 'Prisma', 'Docker', 'Vitest', 'Playwright', 'Telegram'],
-    status: 'PRIVATE',
-    accent: '#ED2939',
-    schematic: `      public listings
-             │
-          scraper
-             ▼
-     ┌── PostgreSQL ──┐
-     │  provenance    │
-     │  change log    │
-     └────────┬───────┘
-             ▼
-    all-in cost · score
-     completeness gate
-             │
-             ▼
-     Telegram · deduped`,
-    links: [{ label: 'REPO', url: 'https://github.com/InM1nd/AppScanner' }],
-  },
-  {
-    id: '03',
     code: 'OBRIO_NAV',
     name: 'OBRIO',
-    group: 'COMMERCIAL',
+    group: 'CLIENT WORK',
     tagline: 'Corporate organisational-structure dashboard',
     year: '2025',
     role: 'Product UX/UI, information architecture',
     outcome:
-      'Designed and built an internal organisational-structure dashboard for OBRIO, helping 300+ employees navigate teams with a clear information hierarchy.',
+      'Internal org-structure dashboard used by 300+ employees. Designed and built with a clear information hierarchy for navigating teams.',
     highlights: [
       'Company org structure, navigable by team',
       'Google sign-in, restricted to the company domain',
@@ -111,78 +47,116 @@ export const PROJECTS: Project[] = [
     status: 'NDA',
     accent: '#D6DEE6',
     mark: '/projects/obrio-mark.png',
-    schematic: `        Google SSO
-        domain only
-             │
-             ▼
-      ┌──────┴──────┐
-      │             │
- teams               people
-      │             │
-      └──────┬──────┘
-             ▼
-          search`,
+    schematic: `┌─────────────┐     ┌──▶ teams  ──┐
+│ Google SSO  │─────┤             ├──▶ search
+│ domain only │     └──▶ people ──┘
+└─────────────┘`,
     links: [{ label: 'SSO LOGIN', url: 'https://nebula-seven-omega.vercel.app/' }],
   },
   {
-    id: '04',
+    id: '02',
     code: 'SKELYA_CAREERS',
     name: 'SKELYA',
-    group: 'COMMERCIAL',
+    group: 'CLIENT WORK',
     tagline: 'Career consultation platform',
     year: '2024',
     role: 'Freelance — design and frontend',
     outcome:
-      'Landing for a career-consultation service. Client-consultant matching runs through Telegram.',
+      'Next.js site for a career-consultation service, with SEO setup, WayForPay payments and Telegram-based client-consultant matching.',
     highlights: [
-      'Responsive landing, design through to production',
+      'Responsive Next.js site, design through to production',
+      'SEO setup and WayForPay payment integration',
       'Telegram flow for matching clients with consultants',
     ],
-    stack: ['Frontend', 'Telegram'],
-    status: 'LIVE',
+    stack: ['Next.js', 'SEO', 'WayForPay', 'Telegram'],
+    status: 'ARCHIVED',
     accent: '#7C5CFF',
     image: '/projects/skelya.jpg',
     links: [],
   },
   {
-    id: '05',
+    id: '03',
     code: 'VERUS_PROPERTY',
     name: 'VERUS PROPERTY',
-    group: 'COMMERCIAL',
+    group: 'CLIENT WORK',
     tagline: 'Dubai real estate landing',
     year: '2024',
     role: 'Freelance — design and frontend',
-    outcome:
-      'Launch landing for a Dubai real estate brand. No product logic beyond the site: email capture, DNS and basic hosting.',
+    outcome: 'Responsive real-estate landing experience for a Dubai property brand.',
     highlights: [
-      'Responsive landing from design to production',
+      'Responsive WordPress site from design to production',
       'Email capture, DNS and hosting setup',
     ],
-    stack: ['Frontend', 'DNS'],
+    stack: ['WordPress'],
     status: 'LIVE',
     accent: '#1E4FD8',
     image: '/projects/verus.jpg',
     links: [{ label: 'OPEN', url: 'https://verusproperty.com/' }],
   },
   {
-    id: '06',
+    id: '04',
     code: 'SKEPTIC_FIT',
     name: 'SKEPTIC',
-    group: 'COMMERCIAL',
+    group: 'CLIENT WORK',
     tagline: 'Fitness platform landing',
     year: '2024',
     role: 'Freelance — design and frontend',
-    outcome:
-      'Landing for a self-training fitness brand. No product logic beyond the site: email capture, DNS and basic hosting.',
+    outcome: 'Responsive fitness-brand landing page with a focused path to enquiry.',
     highlights: [
-      'Responsive landing from design to production',
+      'Responsive Next.js site from design to production',
       'Email capture, DNS and hosting setup',
     ],
-    stack: ['Frontend', 'DNS'],
-    status: 'LIVE',
+    stack: ['Next.js'],
+    status: 'ARCHIVED',
     accent: '#1A1A1A',
     image: '/projects/skeptic.jpg',
     links: [],
+  },
+  {
+    id: '05',
+    code: 'QUIZZLEY_AI',
+    name: 'QUIZZLEY',
+    group: 'PRODUCTS',
+    tagline: 'AI quiz platform',
+    year: '2025',
+    role: 'Solo — product, design, build',
+    outcome: 'AI quiz platform used by 300+ users. The app is currently offline; source is on GitHub.',
+    highlights: [
+      'Quizzes generated with LangChain / OpenAI',
+      'Auth via NextAuth; Postgres via Drizzle, hosted on Supabase',
+      'Stripe for payments',
+    ],
+    stack: ['Next.js', 'TypeScript', 'NextAuth', 'LangChain', 'Drizzle', 'PostgreSQL', 'Supabase', 'Stripe'],
+    status: 'ARCHIVED',
+    accent: '#EA580C',
+    image: '/projects/quizzley.jpg',
+    links: [{ label: 'REPO', url: 'https://github.com/InM1nd/quizzley' }],
+  },
+  {
+    id: '06',
+    code: 'APPSCANNER_PROP',
+    name: 'APPSCANNER',
+    group: 'PRODUCTS',
+    tagline: 'Vienna rental decision tool',
+    year: '2025',
+    role: 'Solo — full stack, scraper, tooling',
+    outcome:
+      'Private Vienna rental decision tool aggregating 6 listing sources, removing duplicates, comparing up to 4 apartments and scoring commute, amenities and custom criteria.',
+    highlights: [
+      'Scheduled crawls and listing refreshes through Inngest; changes tracked, listings never silently dropped',
+      'Explainable all-in monthly cost; unknown facts never earn points — completeness 0–100% is part of the score',
+      'AI extraction of rent and fees from listing text; deduplicated Telegram alerts and a daily digest',
+      'Owner-only login; CI runs unit, integration and Playwright E2E tests with axe WCAG checks',
+    ],
+    stack: ['Next.js 16', 'TypeScript', 'PostgreSQL', 'Prisma', 'Inngest', 'Clerk', 'AI SDK', 'Vitest', 'Playwright', 'Telegram'],
+    status: 'PRIVATE',
+    accent: '#ED2939',
+    schematic: `               ┌─ PostgreSQL ─┐   ┌─────────────────┐
+ 6 listing     │              │   │ all-in cost     │
+ sources ─────▶│ provenance   │──▶│ score           │──▶ Telegram
+ scraper       │ change log   │   │ completeness    │    deduped
+               └──────────────┘   └─────────────────┘`,
+    links: [{ label: 'REPO', url: 'https://github.com/InM1nd/AppScanner' }],
   },
   {
     id: '07',
@@ -285,17 +259,11 @@ export const PROJECTS: Project[] = [
     status: 'FORK',
     accent: '#B388FF',
     mark: '/projects/tandem-mark.png',
-    schematic: `      pingdotgg/t3code
-             │
-           fork
-             ▼
-        t3code-jcode
-   ┌────────────────────┐
-   │  jcode routing     │
-   │  Board ◀──▶ MCP    │
-   │  modes · chats     │
-   │  files · delegates │
-   └────────────────────┘`,
+    schematic: `                         ┌───────── t3code-jcode ─────────┐
+                         │ jcode routing    modes · chats │
+pingdotgg/t3code ─fork──▶│ Board ◀──▶ MCP   files         │
+                         │                  delegates     │
+                         └────────────────────────────────┘`,
     links: [{ label: 'REPO', url: 'https://github.com/InM1nd/t3code-jcode' }],
   },
   {
@@ -315,20 +283,16 @@ export const PROJECTS: Project[] = [
     stack: ['SwiftUI', 'AppKit', 'macOS'],
     status: 'FORK',
     accent: '#FFD60A',
-    schematic: `╭──────────────────────────╮
-│      ╭─── notch ───╮     │
-│      │  ●  CYCLOP  │     │
-│      ╰──────┬──────╯     │
-╰─────────────┼────────────╯
-USAGE      MEMORY   POMODORO
-claude     pressure      rim
-codex      cache       awake
-cursor     cleanup       lid`,
+    schematic: `               ┌─ USAGE     claude · codex · cursor
+╭── notch ──╮  │
+│ ● CYCLOP  │──┼─ MEMORY    pressure · cache cleanup
+╰───────────╯  │
+               └─ POMODORO  rim · awake with lid closed`,
     links: [{ label: 'REPO', url: 'https://github.com/InM1nd/cyclop_enchanced' }],
   },
 ]
 
-export const GROUPS: ProjectGroup[] = ['COMMERCIAL', 'PRODUCTS', 'DEV TOOLS']
+export const GROUPS: ProjectGroup[] = ['CLIENT WORK', 'PRODUCTS', 'DEV TOOLS']
 
 export const ARCHIVE = [
   {

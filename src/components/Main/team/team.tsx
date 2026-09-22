@@ -18,13 +18,14 @@ const EXPERIENCE: Job[] = [
     role: 'Frontend Developer & Designer',
     company: 'Marswalk Media',
     points: [
-      'Built and maintain marswalk.media — bilingual production site with Next.js, React, TypeScript, Tailwind CSS, Sanity CMS, GSAP and Three.js.',
-      'Contributed to the development and improvement of the GEO Tool.',
-      'Improved UX/UI of an internal tool used by account managers, focusing on clearer workflows.',
-      'Redesigned and rebuilt a production client portal: responsive layouts, navigation and core user flows.',
-      'Built landing-page funnels for lead generation, working with the CTO and a cross-functional team.',
+      'Designed and built an end-to-end bilingual Next.js platform to replace the agency’s Webflow site; production launch in progress.',
+      'Architected DE/EN content and rendering flows with Next.js 16, Sanity 5, Cache Components and Partial Prerendering.',
+      'Preserved search equity for the migration: Search-Console-led 308 redirects, hreflang, sitemap, JSON-LD and crawler-readable SSR content.',
+      'Built a consent-aware multi-step lead funnel with server-side validation and fail-closed Make delivery.',
+      'Established a CI quality gate with 300 Node-based contract tests covering rendering, SEO, redirects, lead delivery and architecture rules.',
+      'Redesigned and rebuilt the production client portal where clients and account managers track posting and recommendations (MongoDB).',
     ],
-    stack: 'Next.js · React · TypeScript · Tailwind · Sanity · GSAP · Three.js',
+    stack: 'Next.js · React · TypeScript · Tailwind · Sanity · MongoDB · GSAP · Three.js · CI · Node contract tests',
   },
   {
     from: 'JAN 2025',
@@ -43,9 +44,9 @@ const EXPERIENCE: Job[] = [
     company: 'Landing pages for early-stage brands',
     points: [
       'Skelya (career consultation platform), Verus Property (Dubai real estate), Skeptic (fitness platform).',
-      'Built and shipped responsive landing pages from design to production.',
-      'Integrated Telegram-based client-consultant matching flow for Skelya.',
-      'Verus and Skeptic: email capture plus DNS and basic hosting — no extra product logic.',
+      'Built and shipped responsive sites from design to production.',
+      'Skelya: Next.js site with SEO setup, WayForPay payments and a Telegram-based client-consultant matching flow.',
+      'Verus Property on WordPress; Skeptic on Next.js — both with email capture, DNS and hosting setup.',
     ],
   },
   {
@@ -72,6 +73,14 @@ const EXPERIENCE: Job[] = [
     ],
     stack: 'Next.js · Tailwind CSS',
   },
+]
+
+/** Verified facts only — Marswalk migration and OBRIO. */
+const PROOF = [
+  'WEBFLOW → NEXT.JS PLATFORM',
+  'DE / EN · SANITY CMS · SSR FOR CRAWLERS',
+  '300 CONTRACT TESTS · CI ON PR + MAIN',
+  'OBRIO · USED BY 300+ EMPLOYEES',
 ]
 
 const STACK: [string, string][] = [
@@ -104,36 +113,37 @@ const Block = ({ label, children }: { label: string; children: React.ReactNode }
   </section>
 )
 
-const IdentityMeta = () => (
-  <div className="flex flex-col gap-4">
-    <Block label="LANGUAGES">
-      <dl className="space-y-1 font-mono text-[12px]">
-        {LANGUAGES.map(([name, level]) => (
-          <div key={name} className="flex justify-between gap-2">
-            <dt className="text-terminal-text/80">{name}</dt>
-            <dd className="text-terminal-text/60">{level}</dd>
-          </div>
-        ))}
-      </dl>
-    </Block>
+const Languages = () => (
+  <Block label="LANGUAGES">
+    <dl className="max-w-xs space-y-1 font-mono text-[12px]">
+      {LANGUAGES.map(([name, level]) => (
+        <div key={name} className="flex justify-between gap-2">
+          <dt className="text-terminal-text/80">{name}</dt>
+          <dd className="text-terminal-text/60">{level}</dd>
+        </div>
+      ))}
+    </dl>
+  </Block>
+)
 
-    <Block label="EDUCATION">
-      <ul className="space-y-2 font-mono text-[12px]">
-        {EDUCATION.map(([title, place]) => (
-          <li key={title}>
-            <p className="text-terminal-text/80">{title}</p>
-            <p className="text-terminal-text/60">{place}</p>
-          </li>
-        ))}
-      </ul>
-    </Block>
-  </div>
+const Stack = ({ className }: { className: string }) => (
+  <Block label="STACK">
+    <div className={className}>
+      {STACK.map(([group, items]) => (
+        <p key={group} className="font-mono text-[12px] text-terminal-text/80">
+          <span className="text-terminal-text/60">{group} </span>
+          {/* nbsp keeps each "·" on the line of the word before it */}
+          {items.replaceAll(' · ', '\u00a0· ')}
+        </p>
+      ))}
+    </div>
+  </Block>
 )
 
 const Team = () => (
   <div className="flex min-h-0 flex-1 flex-col overflow-y-auto md:overflow-hidden">
     <div className="grid min-h-0 flex-1 grid-cols-1 gap-5 p-4 md:grid-cols-[210px_1fr] md:gap-0 md:overflow-hidden md:p-5">
-      {/* photo first on a phone — langs/edu follow the dossier so the name is still next */}
+      {/* photo first on a phone — stack follows in the dossier so the name is still next */}
       <aside className="flex shrink-0 flex-col gap-4 md:min-h-0 md:pr-5">
         <div className="relative mx-auto aspect-[4/5] w-52 border border-terminal-green/35 md:mx-0 md:w-full md:max-w-[210px]">
           <Image
@@ -146,8 +156,9 @@ const Team = () => (
           />
         </div>
 
+        {/* photo + stack only — languages and education live in the dossier so the sidebar fits without scrolling */}
         <div className="hidden md:block">
-          <IdentityMeta />
+          <Stack className="flex flex-col gap-1.5" />
         </div>
       </aside>
 
@@ -165,11 +176,24 @@ const Team = () => (
           </p>
           <p className="mt-2 max-w-2xl font-mono text-[13px] leading-relaxed text-terminal-text/80" style={glow}>
             Building for the web since 2021, based in Vienna. I own product UX and the
-            implementation: bilingual production sites, client portals, and products I ship
+            implementation: a bilingual Next.js platform, client portals, and products I ship
             myself. I also built Quizzley, an AI quiz platform used by 300+ users. Hands-on with
             PostgreSQL, MongoDB, Prisma, Docker, Vercel, and AI-assisted workflows. German A2.
           </p>
         </header>
+
+        <Block label="SELECTED PROOF">
+          <ul className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-1 border-l border-terminal-green/25 pl-3 sm:grid-cols-2">
+            {PROOF.map((fact) => (
+              <li key={fact} className="flex gap-2 font-mono text-[12px] uppercase tracking-[0.12em] text-terminal-text/80">
+                <span aria-hidden="true" className="text-terminal-text/60">
+                  ▸
+                </span>
+                <span>{fact}</span>
+              </li>
+            ))}
+          </ul>
+        </Block>
 
         <Block label="EXPERIENCE">
           <ol className="space-y-3">
@@ -186,30 +210,23 @@ const Team = () => (
                 <p className="font-mono text-[12px] text-terminal-text">{job.company}</p>
                 <ul className="mt-1 space-y-0.5">
                   {job.points.map((point) => (
-                    <li key={point} className="font-mono text-[12px] leading-snug text-terminal-text/80">
+                    <li key={point} className="font-mono text-[13px] leading-normal text-terminal-text/80">
                       <span className="text-terminal-text/60">— </span>
                       {point}
                     </li>
                   ))}
                 </ul>
                 {job.stack && (
-                  <p className="mt-1 font-mono text-[11px] text-terminal-text/60">{job.stack}</p>
+                  <p className="mt-1 font-mono text-[11px] text-terminal-text/70">{job.stack}</p>
                 )}
               </li>
             ))}
           </ol>
         </Block>
 
-        <Block label="STACK">
-          <div className="grid grid-cols-1 gap-x-6 gap-y-1 sm:grid-cols-2">
-            {STACK.map(([group, items]) => (
-              <p key={group} className="font-mono text-[12px] text-terminal-text/80">
-                <span className="text-terminal-text/60">{group} </span>
-                {items}
-              </p>
-            ))}
-          </div>
-        </Block>
+        <div className="md:hidden">
+          <Stack className="grid grid-cols-1 gap-x-6 gap-y-1 sm:grid-cols-2" />
+        </div>
 
         <div>
           <Block label="HOW I WORK">
@@ -222,9 +239,18 @@ const Team = () => (
           </Block>
         </div>
 
-        <div className="md:hidden">
-          <IdentityMeta />
-        </div>
+        <Block label="EDUCATION">
+          <ul className="grid grid-cols-1 gap-x-6 gap-y-2 font-mono text-[12px] sm:grid-cols-2">
+            {EDUCATION.map(([title, place]) => (
+              <li key={title}>
+                <p className="text-terminal-text/80">{title}</p>
+                <p className="text-terminal-text/60">{place}</p>
+              </li>
+            ))}
+          </ul>
+        </Block>
+
+        <Languages />
       </div>
     </div>
   </div>
