@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
 import { glow, glowStrong } from '@/components/pipboy/PipBoyShell'
-import { ARCHIVE, PROJECTS, type Project } from './projects.data'
+import { ARCHIVE, GROUPS, PROJECTS, type Project } from './projects.data'
 
 const FILTERS = ['ALL', 'LIVE', 'CODE', 'PRIVATE'] as const
 type Filter = (typeof FILTERS)[number]
@@ -14,7 +14,8 @@ const matches = (p: Project, f: Filter) =>
   (f === 'CODE' && p.links.some((l) => l.label === 'REPO')) ||
   (f === 'PRIVATE' && (p.status === 'NDA' || p.status === 'PRIVATE'))
 
-const listed = (f: Filter) => PROJECTS.filter((p) => matches(p, f))
+/** Grouped in GROUPS order, so each heading appears once whatever the data order. */
+const listed = (f: Filter) => GROUPS.flatMap((g) => PROJECTS.filter((p) => p.group === g && matches(p, f)))
 
 /** Status is monochrome; only restricted work gets the amber warning tone. */
 const STATUS_TONE: Record<Project['status'], string> = {
@@ -129,7 +130,7 @@ const Media = ({ p, sizes, variant = 'fill' }: { p: Project; sizes: string; vari
       <pre
         key={p.id}
         aria-label={`${p.name} schematic`}
-        className="detail-open overflow-x-auto text-[11px] leading-[1.35] text-terminal-text/80 sm:text-xs lg:text-[13px]"
+        className="detail-open max-w-full overflow-x-auto text-[11px] leading-[1.35] text-terminal-text/80 sm:text-xs lg:text-[15px]"
         // Share Tech Mono has no box-drawing glyphs; a system mono keeps the lines aligned (nothing is downloaded)
         style={{ fontFamily: 'Menlo, Monaco, Consolas, "DejaVu Sans Mono", monospace', ...glow }}
       >
@@ -147,7 +148,7 @@ const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) =>
       </p>
       <ul className="space-y-0.5">
         {p.highlights.map((h) => (
-          <li key={h} className="flex gap-2 font-mono text-[12px] leading-snug text-terminal-text/80">
+          <li key={h} className="flex gap-2 font-mono text-[13px] leading-normal text-terminal-text/80">
             <span aria-hidden="true" className="text-terminal-text/60">
               ▸
             </span>
@@ -155,16 +156,18 @@ const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) =>
           </li>
         ))}
       </ul>
-      <div className="flex flex-wrap gap-1.5">
-        {p.stack.map((s) => (
-          <span
-            key={s}
-            className="border border-terminal-green/15 px-1.5 py-px font-mono text-[11px] text-terminal-text/70"
-          >
-            {s}
-          </span>
-        ))}
-      </div>
+      {p.stack.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {p.stack.map((s) => (
+            <span
+              key={s}
+              className="border border-terminal-green/15 px-1.5 py-px font-mono text-[11px] text-terminal-text/70"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+      )}
       <LinkRow p={p} />
     </div>
   ) : (
@@ -278,7 +281,6 @@ const ProjectRegister = () => {
                     </p>
                   )}
                   <button
-                    onMouseEnter={() => setSel(i)}
                     onFocus={() => setSel(i)}
                     onClick={() => setSel(i)}
                     aria-expanded={on}
@@ -307,7 +309,7 @@ const ProjectRegister = () => {
                           <StatusChip status={item.status} />
                         </span>
                       </span>
-                      <span className={`mt-0.5 block font-mono text-[12px] leading-snug ${on ? 'text-terminal-text/80' : 'text-terminal-text/60'}`}>
+                      <span className={`mt-0.5 block font-mono text-[12px] leading-snug ${on ? 'text-terminal-text/80' : 'text-terminal-text/70'}`}>
                         {item.tagline}
                       </span>
                     </span>
