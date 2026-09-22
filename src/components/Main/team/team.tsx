@@ -18,12 +18,10 @@ const EXPERIENCE: Job[] = [
     role: 'Frontend Developer & Designer',
     company: 'Marswalk Media',
     points: [
-      'Designed and built an end-to-end bilingual Next.js platform to replace the agency’s Webflow site; production launch in progress.',
-      'Architected DE/EN content and rendering flows with Next.js 16, Sanity 5, Cache Components and Partial Prerendering.',
+      'Designed and built a bilingual Next.js 16 / Sanity 5 platform to replace the agency’s Webflow site, plus a production client portal for account managers.',
       'Preserved search equity for the migration: Search-Console-led 308 redirects, hreflang, sitemap, JSON-LD and crawler-readable SSR content.',
       'Built a consent-aware multi-step lead funnel with server-side validation and fail-closed Make delivery.',
       'Established a CI quality gate with 300 Node-based contract tests covering rendering, SEO, redirects, lead delivery and architecture rules.',
-      'Redesigned and rebuilt the production client portal where clients and account managers track posting and recommendations (MongoDB).',
     ],
     stack: 'Next.js · React · TypeScript · Tailwind · Sanity · MongoDB · GSAP · Three.js · CI · Node contract tests',
   },

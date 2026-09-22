@@ -19,7 +19,11 @@ const PageTransitionInner = ({ children }: { children: React.ReactNode }) => {
   // Boot sequence runs client-only, as an overlay on top of already-rendered content,
   // so the markup stays in the prerendered HTML.
   useEffect(() => {
-    if (pathname !== '/' || sessionStorage.getItem('hasSeenBoot') === 'true') {
+    if (
+      pathname !== '/' ||
+      sessionStorage.getItem('hasSeenBoot') === 'true' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       setShowBoot(false)
       completeBoot()
     }
