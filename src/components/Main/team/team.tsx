@@ -91,7 +91,6 @@ const STACK: [string, string][] = [
 
 const EDUCATION = [
   ['MSc Information Systems and Technologies', 'KNEU, Kyiv · Feb 2024—May 2025'],
-  ['MSc Applied Economics · MSc International Economics', 'University of Vienna; KNEU, Kyiv'],
   ['Frontend Developer Certification', 'GoIT, Kyiv · Sep 2021—Aug 2022'],
 ]
 
