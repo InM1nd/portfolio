@@ -120,7 +120,7 @@ export const PROJECTS: Project[] = [
     tagline: 'AI quiz platform',
     year: '2025',
     role: 'Solo — product, design, build',
-    outcome: 'AI quiz platform used by 300+ users. Currently offline; source is on GitHub.',
+    outcome: 'AI quiz platform used by 300+ users. The app is currently offline; source is on GitHub.',
     highlights: [
       'Quizzes generated with LangChain / OpenAI',
       'Auth via NextAuth; Postgres via Drizzle, hosted on Supabase',
@@ -128,11 +128,8 @@ export const PROJECTS: Project[] = [
     ],
     stack: ['Next.js', 'TypeScript', 'NextAuth', 'LangChain', 'Drizzle', 'PostgreSQL', 'Supabase', 'Stripe'],
     status: 'ARCHIVED',
-    accent: '#7EC8E3',
-    schematic: `┌──────────┐   ┌───────────┐   ┌────────────┐   ┌────────┐
-│ NextAuth │──▶│ quiz gen  │──▶│  Drizzle   │──▶│ Stripe │
-└──────────┘   │ LangChain │   │ PostgreSQL │   └────────┘
-               └───────────┘   └────────────┘`,
+    accent: '#EA580C',
+    image: '/projects/quizzley.jpg',
     links: [{ label: 'REPO', url: 'https://github.com/InM1nd/quizzley' }],
   },
   {

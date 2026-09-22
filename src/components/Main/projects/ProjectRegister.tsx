@@ -62,7 +62,8 @@ const LinkRow = ({ p }: { p: Project }) =>
   ) : null
 
 const host = (p: Project) => {
-  const url = p.links.find((l) => l.label === 'OPEN')?.url ?? p.links[0]?.url
+  // only a live site goes in the address bar — a repo URL over a product screenshot would mislead
+  const url = p.links.find((l) => l.label === 'OPEN')?.url
   return url ? new URL(url).host + new URL(url).pathname.replace(/\/$/, '') : p.name.toLowerCase()
 }
 
