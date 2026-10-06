@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Share_Tech_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import ClientPageTransition from "@/components/ClientPageTransition";
 import PipBoyShell from "@/components/pipboy/PipBoyShell";
@@ -40,13 +41,13 @@ export const metadata: Metadata = {
     title: "Oleksandr Zabolotnyi — Frontend / Product Engineer",
     description: DESCRIPTION,
     locale: "en_US",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Oleksandr Zabolotnyi — Frontend / Product Engineer" }],
+    images: [{ url: "/og-portfolio-live.jpg", width: 1200, height: 630, alt: "Oleksandr Zabolotnyi — Frontend / Product Engineer" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Oleksandr Zabolotnyi — Frontend / Product Engineer",
     description: DESCRIPTION,
-    images: ["/og.png"],
+    images: ["/og-portfolio-live.jpg"],
   },
   robots: { index: true, follow: true },
 };
@@ -75,8 +76,8 @@ export default function RootLayout({
         <ClientPageTransition>
           <PipBoyShell>{children}</PipBoyShell>
         </ClientPageTransition>
+        <Analytics />
       </body>
     </html>
   );
 }
-
