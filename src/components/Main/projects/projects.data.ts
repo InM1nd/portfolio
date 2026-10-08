@@ -1,6 +1,6 @@
 export type ProjectStatus = 'LIVE' | 'DEMO' | 'NDA' | 'PRIVATE' | 'FORK' | 'ARCHIVED'
 
-export type ProjectGroup = 'CLIENT WORK' | 'PRODUCTS' | 'DEV TOOLS'
+export type ProjectGroup = 'CASE STUDIES' | 'PRODUCTS' | 'DEV TOOLS'
 
 export type Project = {
   id: string
@@ -25,14 +25,86 @@ export type Project = {
   /** Brand mark shown with a schematic (not a product screenshot). */
   mark?: string
   links: { label: string; url: string }[]
+  /** Case study route under /projects, when this card has one. */
+  caseSlug?: string
 }
 
 export const PROJECTS: Project[] = [
   {
     id: '01',
+    code: 'FITLOYALTY_OS',
+    name: 'FITLOYALTY',
+    group: 'CASE STUDIES',
+    tagline: 'White-label retention platform for fitness studios',
+    year: '2026',
+    role: 'Solo — product, design, build',
+    outcome:
+      'Built for independent DACH studios: turns attendance data into a daily retention briefing. Demo, all data simulated.',
+    highlights: [
+      'Today view: who needs a touch, MRR in the save queue, WhatsApp drafts',
+      'Owner dashboard with Recharts — churn, cohorts, protected revenue',
+      'Separate member app with streaks and rewards',
+      'White-label, EN / DE; Churn-Check parses a CSV in the browser',
+    ],
+    stack: ['Next.js 16', 'TypeScript', 'Tailwind v4', 'Motion', 'Recharts', 'Zod', 'Vitest', 'EN/DE'],
+    status: 'DEMO',
+    accent: '#FF7A1A',
+    image: '/projects/fitloyalty.jpg',
+    links: [
+      { label: 'OPEN', url: 'https://fit-loyality.vercel.app/overview' },
+      { label: 'REPO', url: 'https://github.com/InM1nd/FitLoyality' },
+    ],
+    caseSlug: 'fitloyalty',
+  },
+  {
+    id: '02',
+    code: 'MARSWALK_MEDIA',
+    name: 'MARSWALK',
+    group: 'CASE STUDIES',
+    tagline: 'Agency site, rebuilt from Webflow',
+    year: '2025',
+    role: 'Frontend Developer & Designer',
+    outcome:
+      'One of two developers at a 50-person Vienna agency. Rebuilt the website from Webflow on Next.js and Sanity, in German and English: bold type, video everywhere, an interactive 3D footer, and case pages the team fills in themselves.',
+    highlights: [
+      'One component library shared with the client portal and internal tools',
+      'About 300 tests run in CI before every build; led the SEO side of the migration',
+      'Internal tools — a content portal, a community inbox, and the GEO tool interface — stay off the page, they contain client data',
+    ],
+    stack: ['Next.js App Router', 'Sanity', 'TypeScript', 'Vercel', 'Playwright', 'GitHub Actions'],
+    status: 'LIVE',
+    accent: '#F4F4F4',
+    image: '/case-studies/marswalk/01-mockup.webp',
+    links: [{ label: 'OPEN', url: 'https://www.marswalk.media/' }],
+    caseSlug: 'marswalk',
+  },
+  {
+    id: '03',
+    code: 'PIPLET_ADS',
+    name: 'PIPLET',
+    group: 'CASE STUDIES',
+    tagline: 'Command centre for AI video ads',
+    year: '2026',
+    role: 'Product design and frontend',
+    outcome:
+      'A command centre for teams producing social-media ads with AI video: one brief becomes 5–10 variants, generated through different providers and tracked until they are ready to review.',
+    highlights: [
+      'Every field on the create screen comes from what the selected model can do',
+      'Live price and queue estimate update while the batch is configured',
+      'Each job shows queued, processing, ready or failed, with retry, cancel and an automatic credit refund',
+    ],
+    stack: ['Next.js Server Actions', 'TypeScript', 'Zod domain schemas', 'provider adapters'],
+    status: 'DEMO',
+    accent: '#CF7547',
+    image: '/case-studies/piplet/01-dash.webp',
+    links: [{ label: 'OPEN', url: 'https://piplet.vercel.app/dashboard' }],
+    caseSlug: 'piplet',
+  },
+  {
+    id: '04',
     code: 'OBRIO_NAV',
     name: 'OBRIO',
-    group: 'CLIENT WORK',
+    group: 'CASE STUDIES',
     tagline: 'Corporate organisational-structure dashboard',
     year: '2025',
     role: 'Product UX/UI, information architecture',
@@ -52,68 +124,10 @@ export const PROJECTS: Project[] = [
 │ domain only │     └──▶ people ──┘
 └─────────────┘`,
     links: [],
+    caseSlug: 'obrio',
   },
   {
-    id: '02',
-    code: 'SKELYA_CAREERS',
-    name: 'SKELYA',
-    group: 'CLIENT WORK',
-    tagline: 'Career consultation platform',
-    year: '2024',
-    role: 'Freelance — design and frontend',
-    outcome:
-      'Next.js site for a career-consultation service, with SEO setup, WayForPay payments and Telegram-based client-consultant matching.',
-    highlights: [
-      'Responsive Next.js site, design through to production',
-      'SEO setup and WayForPay payment integration',
-      'Telegram flow for matching clients with consultants',
-    ],
-    stack: ['Next.js', 'SEO', 'WayForPay', 'Telegram'],
-    status: 'ARCHIVED',
-    accent: '#7C5CFF',
-    image: '/projects/skelya.jpg',
-    links: [],
-  },
-  {
-    id: '03',
-    code: 'VERUS_PROPERTY',
-    name: 'VERUS PROPERTY',
-    group: 'CLIENT WORK',
-    tagline: 'Dubai real estate landing',
-    year: '2024',
-    role: 'Freelance — design and frontend',
-    outcome: 'Responsive real-estate landing experience for a Dubai property brand.',
-    highlights: [
-      'Responsive WordPress site from design to production',
-      'Email capture, DNS and hosting setup',
-    ],
-    stack: ['WordPress'],
-    status: 'LIVE',
-    accent: '#1E4FD8',
-    image: '/projects/verus.jpg',
-    links: [{ label: 'OPEN', url: 'https://verusproperty.com/' }],
-  },
-  {
-    id: '04',
-    code: 'SKEPTIC_FIT',
-    name: 'SKEPTIC',
-    group: 'CLIENT WORK',
-    tagline: 'Fitness platform landing',
-    year: '2024',
-    role: 'Freelance — design and frontend',
-    outcome: 'Responsive fitness-brand landing page with a focused path to enquiry.',
-    highlights: [
-      'Responsive Next.js site from design to production',
-      'Email capture, DNS and hosting setup',
-    ],
-    stack: ['Next.js'],
-    status: 'ARCHIVED',
-    accent: '#1A1A1A',
-    image: '/projects/skeptic.jpg',
-    links: [],
-  },
-  {
-    id: '05',
+    id: '07',
     code: 'QUIZZLEY_AI',
     name: 'QUIZZLEY',
     group: 'PRODUCTS',
@@ -133,10 +147,10 @@ export const PROJECTS: Project[] = [
     links: [{ label: 'REPO', url: 'https://github.com/InM1nd/quizzley' }],
   },
   {
-    id: '06',
+    id: '05',
     code: 'APPSCANNER_PROP',
     name: 'APPSCANNER',
-    group: 'PRODUCTS',
+    group: 'CASE STUDIES',
     tagline: 'Vienna rental decision tool',
     year: '2025',
     role: 'Solo — full stack, scraper, tooling',
@@ -157,37 +171,13 @@ export const PROJECTS: Project[] = [
  scraper       │ change log   │   │ completeness    │    deduped
                └──────────────┘   └─────────────────┘`,
     links: [{ label: 'REPO', url: 'https://github.com/InM1nd/AppScanner' }],
+    caseSlug: 'appscanner',
   },
   {
-    id: '07',
-    code: 'FITLOYALTY_OS',
-    name: 'FITLOYALTY',
-    group: 'PRODUCTS',
-    tagline: 'White-label retention platform for fitness studios',
-    year: '2026',
-    role: 'Solo — product, design, build',
-    outcome:
-      'Built for independent DACH studios: turns attendance data into a daily retention briefing. Demo, all data simulated.',
-    highlights: [
-      'Today view: who needs a touch, MRR in the save queue, WhatsApp drafts',
-      'Owner dashboard with Recharts — churn, cohorts, protected revenue',
-      'Separate member app with streaks and rewards',
-      'White-label, EN / DE; Churn-Check parses a CSV in the browser',
-    ],
-    stack: ['Next.js 16', 'TypeScript', 'Tailwind v4', 'Motion', 'Recharts', 'Zod', 'Vitest', 'EN/DE'],
-    status: 'DEMO',
-    accent: '#FF7A1A',
-    image: '/projects/fitloyalty.jpg',
-    links: [
-      { label: 'OPEN', url: 'https://fit-loyality.vercel.app/overview' },
-      { label: 'REPO', url: 'https://github.com/InM1nd/FitLoyality' },
-    ],
-  },
-  {
-    id: '08',
+    id: '06',
     code: 'TRIPWEAVE_PLAN',
     name: 'TRIPWEAVE',
-    group: 'PRODUCTS',
+    group: 'CASE STUDIES',
     tagline: 'Collaborative travel planner',
     year: '2026',
     role: 'Solo — product, design, build',
@@ -216,9 +206,10 @@ export const PROJECTS: Project[] = [
       { label: 'OPEN', url: 'https://tripweave-six.vercel.app/' },
       { label: 'REPO', url: 'https://github.com/InM1nd/tripweave' },
     ],
+    caseSlug: 'tripweave',
   },
   {
-    id: '09',
+    id: '08',
     code: 'CODEBASE_MEM',
     name: 'CODEBASE-MEMORY-PLUS',
     group: 'DEV TOOLS',
@@ -242,7 +233,7 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    id: '10',
+    id: '09',
     code: 'T3CODE_FORK',
     name: 'T3 CODE FORK',
     group: 'DEV TOOLS',
@@ -267,7 +258,7 @@ pingdotgg/t3code ─fork──▶│ Board ◀──▶ MCP   files         │
     links: [{ label: 'REPO', url: 'https://github.com/InM1nd/t3code-jcode' }],
   },
   {
-    id: '11',
+    id: '10',
     code: 'CYCLOP_NOTCH',
     name: 'CYCLOP ENHANCED',
     group: 'DEV TOOLS',
@@ -292,11 +283,11 @@ pingdotgg/t3code ─fork──▶│ Board ◀──▶ MCP   files         │
   },
 ]
 
-export const GROUPS: ProjectGroup[] = ['CLIENT WORK', 'PRODUCTS', 'DEV TOOLS']
+export const GROUPS: ProjectGroup[] = ['CASE STUDIES', 'PRODUCTS', 'DEV TOOLS']
 
 export const ARCHIVE = [
   {
-    id: '12',
+    id: '11',
     code: 'FILMOTEKA_LIB',
     name: 'FILMOTEKA',
     tagline: 'Film library & tracker',

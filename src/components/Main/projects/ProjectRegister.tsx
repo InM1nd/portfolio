@@ -2,7 +2,9 @@
 
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
+import TransitionLink from '@/components/TransitionLink'
 import { glow, glowStrong } from '@/components/pipboy/PipBoyShell'
+import { CASE_PDF, EARLIER, HOW_I_WORK } from '@/lib/case-studies'
 import { ARCHIVE, GROUPS, PROJECTS, type Project } from './projects.data'
 
 const FILTERS = ['ALL', 'LIVE', 'CODE', 'PRIVATE'] as const
@@ -170,6 +172,14 @@ const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) =>
         </div>
       )}
       <LinkRow p={p} />
+      {p.caseSlug && (
+        <TransitionLink
+          href={`/projects/${p.caseSlug}`}
+          className="terminal-button inline-flex border border-terminal-green/45 bg-transparent px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-green hover:bg-terminal-green hover:text-black"
+        >
+          Case →
+        </TransitionLink>
+      )}
     </div>
   ) : (
     <div key={p.id} className="detail-open">
@@ -208,9 +218,42 @@ const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) =>
           ))}
         </div>
         <LinkRow p={p} />
+        {p.caseSlug && (
+          <TransitionLink
+            href={`/projects/${p.caseSlug}`}
+            className="terminal-button inline-flex border border-terminal-green/45 bg-transparent px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-green hover:bg-terminal-green hover:text-black"
+          >
+            Case →
+          </TransitionLink>
+        )}
       </div>
     </div>
   )
+
+const RegisterLabel = ({ item, on }: { item: Project; on: boolean }) => (
+  <>
+    <span className="mt-[3px] w-5 shrink-0 font-mono text-[11px] tabular-nums text-terminal-text/60">{item.id}</span>
+    <span className="min-w-0 flex-1">
+      <span className="flex items-center gap-2">
+        <Lamp accent={item.accent} lit={on} />
+        <span
+          className={`truncate font-mono text-sm uppercase tracking-wide transition-colors md:text-[15px] ${
+            on ? 'text-terminal-text' : 'text-terminal-text/70'
+          }`}
+          style={on ? glowStrong : undefined}
+        >
+          {item.name}
+        </span>
+        <span className="ml-auto">
+          <StatusChip status={item.status} />
+        </span>
+      </span>
+      <span className={`mt-0.5 block font-mono text-[12px] leading-snug ${on ? 'text-terminal-text/80' : 'text-terminal-text/70'}`}>
+        {item.tagline}
+      </span>
+    </span>
+  </>
+)
 
 const ProjectRegister = () => {
   const [filter, setFilter] = useState<Filter>('ALL')
@@ -251,6 +294,13 @@ const ProjectRegister = () => {
             </button>
           )
         })}
+        <a
+          href={CASE_PDF}
+          download
+          className="terminal-button ml-auto border border-terminal-green/45 bg-transparent px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-terminal-green hover:bg-terminal-green hover:text-black"
+        >
+          Case studies (PDF)
+        </a>
       </div>
 
       <div className="grid min-h-0 flex-1 grid-cols-1 md:grid-cols-[minmax(0,380px)_1fr]">
@@ -281,40 +331,35 @@ const ProjectRegister = () => {
                       <span className="h-px flex-1 bg-terminal-green/10" />
                     </p>
                   )}
-                  <button
-                    onFocus={() => setSel(i)}
-                    onClick={() => setSel(i)}
-                    aria-expanded={on}
-                    className="row-ignite relative flex w-full items-start gap-2.5 border-l-2 py-2 pl-2.5 pr-3 text-left transition-colors focus-visible:translate-y-0 focus-visible:shadow-none focus-visible:outline-none"
-                    style={{
-                      animationDelay: `${i * 45}ms`,
-                      borderColor: on ? item.accent : 'transparent',
-                      background: on ? 'rgba(54,166,137,.07)' : undefined,
-                    }}
-                  >
-                    <span className="mt-[3px] w-5 shrink-0 font-mono text-[11px] tabular-nums text-terminal-text/60">
-                      {item.id}
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="flex items-center gap-2">
-                        <Lamp accent={item.accent} lit={on} />
-                        <span
-                          className={`truncate font-mono text-sm uppercase tracking-wide transition-colors md:text-[15px] ${
-                            on ? 'text-terminal-text' : 'text-terminal-text/70'
-                          }`}
-                          style={on ? glowStrong : undefined}
-                        >
-                          {item.name}
-                        </span>
-                        <span className="ml-auto">
-                          <StatusChip status={item.status} />
-                        </span>
-                      </span>
-                      <span className={`mt-0.5 block font-mono text-[12px] leading-snug ${on ? 'text-terminal-text/80' : 'text-terminal-text/70'}`}>
-                        {item.tagline}
-                      </span>
-                    </span>
-                  </button>
+                  {item.caseSlug ? (
+                    <TransitionLink
+                      href={`/projects/${item.caseSlug}`}
+                      onFocus={() => setSel(i)}
+                      onMouseEnter={() => setSel(i)}
+                      className="row-ignite relative flex w-full items-start gap-2.5 border-l-2 py-2 pl-2.5 pr-3 text-left transition-colors"
+                      style={{
+                        animationDelay: `${i * 45}ms`,
+                        borderColor: on ? item.accent : 'transparent',
+                        background: on ? 'rgba(54,166,137,.07)' : undefined,
+                      }}
+                    >
+                      <RegisterLabel item={item} on={on} />
+                    </TransitionLink>
+                  ) : (
+                    <button
+                      onFocus={() => setSel(i)}
+                      onClick={() => setSel(i)}
+                      aria-expanded={on}
+                      className="row-ignite relative flex w-full items-start gap-2.5 border-l-2 py-2 pl-2.5 pr-3 text-left transition-colors focus-visible:translate-y-0 focus-visible:shadow-none focus-visible:outline-none"
+                      style={{
+                        animationDelay: `${i * 45}ms`,
+                        borderColor: on ? item.accent : 'transparent',
+                        background: on ? 'rgba(54,166,137,.07)' : undefined,
+                      }}
+                    >
+                      <RegisterLabel item={item} on={on} />
+                    </button>
+                  )}
 
                   {on && (
                     <div className="detail-open hidden space-y-2.5 border-b border-terminal-green/15 px-3 pb-3 pt-1 max-md:block">
@@ -325,6 +370,52 @@ const ProjectRegister = () => {
                 </Fragment>
               )
             })}
+
+            <section className="mt-4 border-t border-terminal-green/15 px-3 pt-3">
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.3em] text-terminal-text/60">{EARLIER.title}</h2>
+              <p className="mt-1 font-mono text-[13px] leading-relaxed text-terminal-text/80">{EARLIER.lead}</p>
+              <ul className="mt-3 space-y-4">
+                {EARLIER.images.map((image) => (
+                  <li key={image.src}>
+                    <Image
+                      src={image.src}
+                      alt={image.caption}
+                      width={image.width}
+                      height={image.height}
+                      sizes="(max-width: 768px) 92vw, 360px"
+                      className="h-auto w-full border border-terminal-green/20"
+                    />
+                    {image.href ? (
+                      <a
+                        href={image.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1.5 block font-mono text-[12px] leading-snug text-terminal-text/70 hover:text-terminal-text"
+                      >
+                        {image.caption} ↗
+                      </a>
+                    ) : (
+                      <p className="mt-1.5 font-mono text-[12px] leading-snug text-terminal-text/70">{image.caption}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="mt-4 border-t border-terminal-green/15 px-3 pt-3">
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.3em] text-terminal-text/60">How I work</h2>
+              <ul className="mt-2 space-y-2">
+                {HOW_I_WORK.map((line) => {
+                  const rest = line.text.startsWith(line.emphasis) ? line.text.slice(line.emphasis.length) : ''
+                  return (
+                    <li key={line.emphasis} className="font-mono text-[13px] leading-relaxed">
+                      <span className="text-terminal-green">{line.emphasis}</span>
+                      <span className="text-terminal-text/80">{rest}</span>
+                    </li>
+                  )
+                })}
+              </ul>
+            </section>
 
             {/* archive lives at the bottom of the register, deliberately quiet */}
             <div className="mt-3 border-t border-terminal-green/15 px-3 pt-2">
