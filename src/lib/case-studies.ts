@@ -239,42 +239,17 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
 ]
 
-export type EarlierShot = CaseImage & { href?: string }
-
-export const EARLIER: { title: string; lead: string; images: EarlierShot[] } = {
-  title: 'Earlier work · 2022 – 2024',
-  lead: 'Small teams, working directly with founders; design and frontend development.',
-  images: [
-    img('earlier/01-skelya.webp', 1722, 826, 'Skelya — brand and platform for a career-support service in Ukraine'),
-    {
-      ...img('earlier/02-verus.webp', 1985, 1157, 'Verus Property — brand identity and website for a Dubai real-estate firm'),
-      href: 'https://verusproperty.com/',
-    },
-    img('earlier/03-skeptic.webp', 1623, 861, 'Skeptic — brand and website for an independent fitness platform'),
-    img('earlier/04-menudget.webp', 1913, 1002, 'Menudget — digital menu and ordering app for restaurants'),
-  ],
-}
-
-export const HOW_I_WORK: CaseLine[] = [
-  {
-    emphasis: 'Start with the people',
-    text: "Start with the people — I show early versions to the people who will use them — colleagues, clients, friends — collect their feedback and change what doesn't work.",
-  },
-  {
-    emphasis: 'Design and build in one loop',
-    text: 'Design and build in one loop — Figma, components and production code stay close, so a design decision can be tested in the real product the same week, and every product shares one component library.',
-  },
-  {
-    emphasis: 'Fast, but careful',
-    text: 'Fast, but careful — AI tools help me prototype and ship quickly; accessibility, tests and reviews keep the quality. Complex processes should feel simple to the person using them.',
-  },
-]
-
 export const CASE_PDF = '/Oleksandr_Zabolotnyi_Case_Studies.pdf'
 
 export const getCase = (slug: string) => CASE_STUDIES.find((item) => item.slug === slug)
 
-export const nextCase = (slug: string) => {
+export const caseNav = (slug: string) => {
   const index = CASE_STUDIES.findIndex((item) => item.slug === slug)
-  return CASE_STUDIES[(index + 1) % CASE_STUDIES.length]
+  const total = CASE_STUDIES.length
+  return {
+    index,
+    total,
+    prev: CASE_STUDIES[(index + total - 1) % total],
+    next: CASE_STUDIES[(index + 1) % total],
+  }
 }

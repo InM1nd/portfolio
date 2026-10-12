@@ -285,14 +285,43 @@ pingdotgg/t3code ─fork──▶│ Board ◀──▶ MCP   files         │
 
 export const GROUPS: ProjectGroup[] = ['CASE STUDIES', 'PRODUCTS', 'DEV TOOLS']
 
-export const ARCHIVE = [
+export const ARCHIVE: {
+  id: string
+  name: string
+  tagline: string
+  year: string
+  url?: string
+}[] = [
   {
     id: '11',
-    code: 'FILMOTEKA_LIB',
     name: 'FILMOTEKA',
     tagline: 'Film library & tracker',
-    year: '2023',
-    stack: ['JavaScript', 'HTML/CSS'],
+    year: '2021',
     url: 'https://okolobaha-me.github.io/quentin-filmotino/#en',
+  },
+  {
+    id: '15',
+    name: 'MENUDGET',
+    tagline: 'Menu & ordering app',
+    year: 'OCT 2022 — APR 2023',
+  },
+  {
+    id: '12',
+    name: 'SKELYA',
+    tagline: 'Career-support platform',
+    year: 'JAN 2024 — DEC 2024',
+  },
+  {
+    id: '13',
+    name: 'VERUS',
+    tagline: 'Dubai real-estate site',
+    year: 'JAN 2024 — DEC 2024',
+    url: 'https://verusproperty.com/',
+  },
+  {
+    id: '14',
+    name: 'SKEPTIC',
+    tagline: 'Fitness platform',
+    year: 'JAN 2024 — DEC 2024',
   },
 ]

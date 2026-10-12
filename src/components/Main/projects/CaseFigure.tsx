@@ -16,8 +16,8 @@ const CaseFigure = ({ image, priority = false }: { image: CaseImage; priority?: 
           dialog?.showModal()
           dialog?.querySelector('button')?.focus()
         }}
-        className={`block cursor-zoom-in border border-terminal-green/20 bg-black text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terminal-green ${
-          image.narrow ? 'mx-auto w-full max-w-[280px]' : 'w-full'
+        className={`block w-full cursor-zoom-in border border-terminal-green/20 bg-black text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terminal-green ${
+          image.narrow ? 'mx-auto max-w-[280px]' : 'max-w-full'
         }`}
       >
         <Image
@@ -26,8 +26,8 @@ const CaseFigure = ({ image, priority = false }: { image: CaseImage; priority?: 
           width={image.width}
           height={image.height}
           priority={priority}
-          sizes={image.narrow ? '280px' : '(max-width: 768px) 92vw, 840px'}
-          className="h-auto w-full"
+          sizes={image.narrow ? '280px' : '(max-width: 1024px) 92vw, 70vw'}
+          className={image.narrow ? 'mx-auto h-auto w-full max-w-[280px]' : 'h-auto w-full'}
         />
       </button>
       <figcaption className="mt-1.5 font-mono text-[12px] leading-snug text-terminal-text/70">{image.caption}</figcaption>
