@@ -2,7 +2,9 @@
 
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
+import TransitionLink from '@/components/TransitionLink'
 import { glow, glowStrong } from '@/components/pipboy/PipBoyShell'
+import { CASE_PDF } from '@/lib/case-studies'
 import { ARCHIVE, GROUPS, PROJECTS, type Project } from './projects.data'
 
 const FILTERS = ['ALL', 'LIVE', 'CODE', 'PRIVATE'] as const
@@ -44,20 +46,23 @@ const Lamp = ({ accent, lit = true }: { accent: string; lit?: boolean }) => (
   />
 )
 
-const LinkRow = ({ p }: { p: Project }) =>
-  p.links.length > 0 ? (
-    <div className="ml-auto flex flex-wrap gap-2">
+const actionClass =
+  'terminal-button inline-flex border border-terminal-green/45 bg-transparent px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-green hover:bg-terminal-green hover:text-black'
+
+/** Open, repo and case stay together in the right corner, whatever the stack does. */
+const Actions = ({ p }: { p: Project }) =>
+  p.links.length > 0 || p.caseSlug ? (
+    <div className="ml-auto flex shrink-0 flex-wrap justify-end gap-2">
       {p.links.map((l) => (
-        <a
-          key={l.label}
-          href={l.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="terminal-button border border-terminal-green/45 bg-transparent px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-terminal-green hover:bg-terminal-green hover:text-black"
-        >
+        <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer" className={actionClass}>
           {l.label} ↗
         </a>
       ))}
+      {p.caseSlug && (
+        <TransitionLink href={`/projects/${p.caseSlug}`} className={actionClass}>
+          Case →
+        </TransitionLink>
+      )}
     </div>
   ) : null
 
@@ -157,19 +162,21 @@ const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) =>
           </li>
         ))}
       </ul>
-      {p.stack.length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
-          {p.stack.map((s) => (
-            <span
-              key={s}
-              className="border border-terminal-green/15 px-1.5 py-px font-mono text-[11px] text-terminal-text/70"
-            >
-              {s}
-            </span>
-          ))}
-        </div>
-      )}
-      <LinkRow p={p} />
+      <div className="flex items-center gap-3">
+        {p.stack.length > 0 && (
+          <div className="flex min-w-0 flex-1 flex-wrap gap-1.5">
+            {p.stack.map((s) => (
+              <span
+                key={s}
+                className="border border-terminal-green/15 px-1.5 py-px font-mono text-[11px] text-terminal-text/70"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
+        )}
+        <Actions p={p} />
+      </div>
     </div>
   ) : (
     <div key={p.id} className="detail-open">
@@ -196,8 +203,8 @@ const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) =>
           </li>
         ))}
       </ul>
-      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-        <div className="flex flex-wrap gap-1.5">
+      <div className="mt-3 flex items-center gap-3">
+        <div className="flex min-w-0 flex-1 flex-wrap gap-1.5">
           {p.stack.map((s) => (
             <span
               key={s}
@@ -207,10 +214,35 @@ const Details = ({ p, compact = false }: { p: Project; compact?: boolean }) =>
             </span>
           ))}
         </div>
-        <LinkRow p={p} />
+        <Actions p={p} />
       </div>
     </div>
   )
+
+const RegisterLabel = ({ item, on }: { item: Project; on: boolean }) => (
+  <>
+    <span className="mt-[3px] w-5 shrink-0 font-mono text-[11px] tabular-nums text-terminal-text/60">{item.id}</span>
+    <span className="min-w-0 flex-1">
+      <span className="flex items-center gap-2">
+        <Lamp accent={item.accent} lit={on} />
+        <span
+          className={`truncate font-mono text-sm uppercase tracking-wide transition-colors md:text-[15px] ${
+            on ? 'text-terminal-text' : 'text-terminal-text/70'
+          }`}
+          style={on ? glowStrong : undefined}
+        >
+          {item.name}
+        </span>
+        <span className="ml-auto">
+          <StatusChip status={item.status} />
+        </span>
+      </span>
+      <span className={`mt-0.5 block font-mono text-[12px] leading-snug ${on ? 'text-terminal-text/80' : 'text-terminal-text/70'}`}>
+        {item.tagline}
+      </span>
+    </span>
+  </>
+)
 
 const ProjectRegister = () => {
   const [filter, setFilter] = useState<Filter>('ALL')
@@ -251,6 +283,13 @@ const ProjectRegister = () => {
             </button>
           )
         })}
+        <a
+          href={CASE_PDF}
+          download
+          className="terminal-button ml-auto border border-terminal-green/45 bg-transparent px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-terminal-green hover:bg-terminal-green hover:text-black"
+        >
+          Case studies (PDF)
+        </a>
       </div>
 
       <div className="grid min-h-0 flex-1 grid-cols-1 md:grid-cols-[minmax(0,380px)_1fr]">
@@ -292,28 +331,7 @@ const ProjectRegister = () => {
                       background: on ? 'rgba(54,166,137,.07)' : undefined,
                     }}
                   >
-                    <span className="mt-[3px] w-5 shrink-0 font-mono text-[11px] tabular-nums text-terminal-text/60">
-                      {item.id}
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="flex items-center gap-2">
-                        <Lamp accent={item.accent} lit={on} />
-                        <span
-                          className={`truncate font-mono text-sm uppercase tracking-wide transition-colors md:text-[15px] ${
-                            on ? 'text-terminal-text' : 'text-terminal-text/70'
-                          }`}
-                          style={on ? glowStrong : undefined}
-                        >
-                          {item.name}
-                        </span>
-                        <span className="ml-auto">
-                          <StatusChip status={item.status} />
-                        </span>
-                      </span>
-                      <span className={`mt-0.5 block font-mono text-[12px] leading-snug ${on ? 'text-terminal-text/80' : 'text-terminal-text/70'}`}>
-                        {item.tagline}
-                      </span>
-                    </span>
+                    <RegisterLabel item={item} on={on} />
                   </button>
 
                   {on && (
@@ -329,19 +347,32 @@ const ProjectRegister = () => {
             {/* archive lives at the bottom of the register, deliberately quiet */}
             <div className="mt-3 border-t border-terminal-green/15 px-3 pt-2">
               <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.3em] text-terminal-text/60">ARCHIVE</p>
-              {ARCHIVE.map((a) => (
-                <a
-                  key={a.id}
-                  href={a.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-baseline gap-2 py-1 font-mono text-[12px] text-terminal-text/70 transition-colors hover:text-terminal-text/80"
-                >
-                  <span className="uppercase">{a.name}</span>
-                  <span className="text-[11px] text-terminal-text/60">{a.tagline}</span>
-                  <span className="ml-auto text-[11px] tabular-nums text-terminal-text/60">{a.year}</span>
-                </a>
-              ))}
+              {ARCHIVE.map((a) => {
+                const row = (
+                  <>
+                    <span className="uppercase">{a.name}</span>
+                    <span className="min-w-0 text-[11px] text-terminal-text/60">{a.tagline}</span>
+                    <span className="ml-auto shrink-0 text-[11px] tabular-nums text-terminal-text/60">{a.year}</span>
+                  </>
+                )
+                const className =
+                  'flex items-baseline gap-2 py-1 font-mono text-[12px] text-terminal-text/70'
+                return a.url ? (
+                  <a
+                    key={a.id}
+                    href={a.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${className} transition-colors hover:text-terminal-text/80`}
+                  >
+                    {row}
+                  </a>
+                ) : (
+                  <p key={a.id} className={className}>
+                    {row}
+                  </p>
+                )
+              })}
             </div>
           </div>
         </div>

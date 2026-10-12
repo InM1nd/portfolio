@@ -76,6 +76,13 @@ export default function Home() {
             >
               DOWNLOAD CV
             </a>
+            <a
+              href="/Oleksandr_Zabolotnyi_Case_Studies.pdf"
+              download
+              className="terminal-button inline-flex border border-terminal-green/45 bg-transparent px-4 py-2.5 font-mono text-xs uppercase tracking-[0.16em] text-terminal-green hover:bg-terminal-green hover:text-black"
+            >
+              CASE STUDIES (PDF)
+            </a>
             <TransitionLink
               href="/contact"
               className="terminal-button inline-flex border border-terminal-green/45 bg-transparent px-4 py-2.5 font-mono text-xs uppercase tracking-[0.16em] text-terminal-green hover:bg-terminal-green hover:text-black"
